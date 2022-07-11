@@ -1,0 +1,144 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="CTF_show_Web入门_爆破"><meta name="keywords" content=""><meta name="author" content="John Doe"><meta name="copyright" content="John Doe"><title>CTF_show_Web入门_爆破 | luelueking的ctf之路</title><link rel="shortcut icon" href="/melody-favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.9.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.9.0"><meta name="format-detection" content="telephone=no"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  hexoVersion: '6.2.0'
+} </script><meta name="generator" content="Hexo 6.2.0"></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="true"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#CTFshow-WriteUps"><span class="toc-number">1.</span> <span class="toc-text">CTFshow WriteUps</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#WEB%E5%85%A5%E9%97%A8"><span class="toc-number">1.1.</span> <span class="toc-text">WEB入门</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%88%86%E7%A0%B4"><span class="toc-number">1.2.</span> <span class="toc-text">爆破</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#web21"><span class="toc-number">1.2.1.</span> <span class="toc-text">web21</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web22"><span class="toc-number">1.2.2.</span> <span class="toc-text">web22</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web23"><span class="toc-number">1.2.3.</span> <span class="toc-text">web23</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web26"><span class="toc-number">1.2.4.</span> <span class="toc-text">web26</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web27"><span class="toc-number">1.2.5.</span> <span class="toc-text">web27</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web28"><span class="toc-number">1.2.6.</span> <span class="toc-text">web28</span></a></li></ol></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="/img/avatar.png"></div><div class="author-info__name text-center">John Doe</div><div class="author-info__description text-center"></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">3</span></a></div></div></div><div id="content-outer"><div class="no-bg" id="top-container"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">luelueking的ctf之路</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right"></span></div><div id="post-info"><div id="post-title">CTF_show_Web入门_爆破</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2022-07-11</time></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h1 id="CTFshow-WriteUps"><a href="#CTFshow-WriteUps" class="headerlink" title="CTFshow WriteUps"></a>CTFshow WriteUps</h1><hr>
+<h2 id="WEB入门"><a href="#WEB入门" class="headerlink" title="WEB入门"></a>WEB入门</h2><hr>
+<h2 id="爆破"><a href="#爆破" class="headerlink" title="爆破"></a>爆破</h2><h3 id="web21"><a href="#web21" class="headerlink" title="web21"></a>web21</h3><ul>
+<li><p>非常经典的爆破</p>
+</li>
+<li><p>使用BurpSuite工具</p>
+</li>
+<li><p><img src="https://img-blog.csdnimg.cn/1fb1610cb59d4aea9ad89deefb0bad75.png#pic_center" alt="点提交抓个包先"></p>
+</li>
+<li><p><img src="https://img-blog.csdnimg.cn/841473255fb0440d971ea45cbc144b84.png#pic_center" alt="对选择区域发到decoder里面发现是base64编码"></p>
+</li>
+<li><p>send to intruder准备爆破</p>
+</li>
+<li><p><img src="https://img-blog.csdnimg.cn/c0acad17193840a6b0dcad2ee03970a4.png#pic_center" alt="选择一手自定义迭代器类型的payload"></p>
+</li>
+<li><p><img src="https://img-blog.csdnimg.cn/2daa0d82e07e424f97b8a28e63bed4a5.png#pic_center" alt="第一个位置admin"></p>
+</li>
+<li><p><img src="https://img-blog.csdnimg.cn/74252d156c6840e289a274d6d8353551.png#pic_center" alt="第二个位置："></p>
+</li>
+<li><p><img src="https://img-blog.csdnimg.cn/22eb07eb81404610ab7c0bea1b98c2dc.png#pic_center" alt="第3个位置为下载得到的密码txt"></p>
+</li>
+<li><p><img src="https://img-blog.csdnimg.cn/3a67cf857e2b43cc845162d2262c69ad.png#pic_center" alt="选择编码base64和取消下面的url编码"></p>
+</li>
+<li><p><img src="https://img-blog.csdnimg.cn/7a5a7a3840a54281a88b0364b76915ca.png#pic_center" alt="爆破拿旗"></p>
+</li>
+</ul>
+<h3 id="web22"><a href="#web22" class="headerlink" title="web22"></a>web22</h3><ul>
+<li>它说域名失效了，让我直接交flag，那好吧😄</li>
+</ul>
+<h3 id="web23"><a href="#web23" class="headerlink" title="web23"></a>web23</h3><ul>
+<li><p><img src="https://img-blog.csdnimg.cn/db461b2d96a743d79e0f0781497d717c.png" alt="打开题目就是源码"></p>
+</li>
+<li><p>条件有点多啊，有点不想用bp，决定尝试用脚本</p>
+</li>
+<li><p>在看一眼题目，这不就是要👴找个token嘛，后面逻辑直接cv，没学php嗯写</p>
+</li>
+<li><pre><code class="php">&lt;?php
+for ($i=0;$i&lt;10000;$i=$i+1)&#123;
+    $token=md5($i);
+    if(substr($token, 1,1)===substr($token, 14,1) &amp;&amp; substr($token, 14,1) ===substr($token, 17,1))&#123;
+        if((intval(substr($token, 1,1))+intval(substr($token, 14,1))+substr($token, 17,1))/substr($token, 1,1)===intval(substr($token, 31,1)))&#123;
+            echo $i;
+        &#125;
+    &#125;
+&#125;;
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 运行结果得到token为422</span><br><span class="line">- ![在这里插入图片描述](https://img-blog.csdnimg.cn/ef94884278044c54bebd1fcb955d194c.png)</span><br><span class="line"></span><br><span class="line">### web24</span><br><span class="line"></span><br><span class="line">- ![打开题目康一康，又是php，没学过，无所谓，冷静分析一下](https://img-blog.csdnimg.cn/f6097a645d154cf3ae590a86edf32ad4.png)</span><br><span class="line"></span><br><span class="line">- mt_srand这名字一看就是随机数，那我种子一样是不是结果就一样（毕竟没有真正的随机）</span><br><span class="line"></span><br><span class="line">- ![来吧脚本小子](https://img-blog.csdnimg.cn/a85e3eb2be1f4a1fb9adf2959b711e13.png)</span><br><span class="line"></span><br><span class="line">- ![无敌是多么。。。](https://img-blog.csdnimg.cn/f46751b46e85406488a89394ded938e5.png)</span><br><span class="line"></span><br><span class="line">### web25</span><br><span class="line"></span><br><span class="line">```php</span><br><span class="line">&lt;?php</span><br><span class="line">error_reporting(0);</span><br><span class="line">include(&quot;flag.php&quot;);</span><br><span class="line">if(isset($_GET[&#x27;r&#x27;]))&#123;</span><br><span class="line">    $r = $_GET[&#x27;r&#x27;];</span><br><span class="line">    mt_srand(hexdec(substr(md5($flag), 0,8)));#对flag里面的东西substr一下还要hexdec十六进制转十进制才得到的种子？这么骚？</span><br><span class="line">    $rand = intval($r)-intval(mt_rand());#rand=r-第一个随机值</span><br><span class="line">    if((!$rand))&#123;#要求rand==0也就是说r传的值就是第一个随机值</span><br><span class="line">        if($_COOKIE[&#x27;token&#x27;]==(mt_rand()+mt_rand()))&#123;#token==第二个随机值+第三个随机值</span><br><span class="line">            echo $flag;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        echo $rand;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;else&#123;</span><br><span class="line">    highlight_file(__FILE__);</span><br><span class="line">    echo system(&#x27;cat /proc/ersion&#x27;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>心态爆炸</p>
+</li>
+<li><p>看大佬的WP</p>
+</li>
+<li><p>加载中。。。</p>
+</li>
+<li><p>😯当我r&#x3D;0时可以得到第一个随机值也就是-rand本题我得到的是<strong>783167475</strong>（每人都不一样！）</p>
+</li>
+<li><p>然后可以根据第一个随机值回推种子</p>
+</li>
+<li><p>怎么回推？借助工具：<a target="_blank" rel="noopener" href="https://github.com/Al1ex/php_mt_seed">https://github.com/Al1ex/php_mt_seed</a></p>
+</li>
+<li><p>👴反正是第一次见到</p>
+</li>
+<li><p><img src="https://img-blog.csdnimg.cn/5bdc3a294142464987b671fa1d5c2188.png" alt="php版本不同还不一样，我草了，不过👴盲猜是后面的，直接手动试错了mlgb"></p>
+</li>
+<li><p><img src="https://img-blog.csdnimg.cn/8f6bdaad826e4a8cb593f3a804759241.png" alt="1371411132就决定是你了"></p>
+</li>
+<li><p><img src="https://img-blog.csdnimg.cn/f46ba476b3234529a3aeccc0f55d5119.png" alt="传一下r和token拿🇺🇳"></p>
+</li>
+</ul>
+<h3 id="web26"><a href="#web26" class="headerlink" title="web26"></a>web26</h3><ul>
+<li><p><img src="https://img-blog.csdnimg.cn/7644ae5c35ef4b9891a6124087b51dbb.png" alt="打开题目"></p>
+</li>
+<li><p><img src="https://img-blog.csdnimg.cn/161db37d70c84c77b681522d9e4f5c67.png" alt="抓个包试试，随便发一下，我的fuck"></p>
+</li>
+<li><p>我不管我就是拿到flag了👋我是秀儿</p>
+</li>
+</ul>
+<h3 id="web27"><a href="#web27" class="headerlink" title="web27"></a>web27</h3><ul>
+<li><p><img src="https://img-blog.csdnimg.cn/1e02406883e342e8b83445abf99e2bab.png" alt="先欣赏一波界面😄"></p>
+</li>
+<li><p><img src="https://img-blog.csdnimg.cn/e01420a4cf7e434cab1561caa74675d6.png" alt="点开录取名单"></p>
+</li>
+<li><p><img src="https://img-blog.csdnimg.cn/604f94a8d126442e8d755513c598aea9.png" alt="点开学生学籍查询系统"></p>
+</li>
+<li><p>思路出现：爆破出学生身份证号</p>
+</li>
+<li><p>Burp Suite爆破</p>
+</li>
+<li><p>观察：身份证号缺失的那几位是出生日期</p>
+</li>
+<li><p><img src="https://img-blog.csdnimg.cn/24e8cffc165a4e4c92a1076d0c654236.png" alt="对‘高先伊’同学进行一手抓包"></p>
+</li>
+<li><p><img src="https://img-blog.csdnimg.cn/f13bc760f5a24a2497291a37c30cefa0.png" alt="选参数"></p>
+</li>
+<li><p><img src="https://img-blog.csdnimg.cn/1598787fd01142c8b55444eef5e22418.png" alt="找到msg✌️"></p>
+</li>
+<li><p><img src="https://img-blog.csdnimg.cn/9eb4a4aa2a01495f91b446f7ec22c434.png" alt="翻译一下"></p>
+</li>
+<li><p><img src="https://img-blog.csdnimg.cn/40a37be3aba6477095b62b0879097055.png" alt="get it！"></p>
+</li>
+</ul>
+<h3 id="web28"><a href="#web28" class="headerlink" title="web28"></a>web28</h3><ul>
+<li><p>提示：通过暴力剖解目录&#x2F;0-100&#x2F;0-100看返回数据包</p>
+</li>
+<li><p>我的Burp Suite是社区版所以很慢，索性当脚本小子</p>
+</li>
+<li><pre><code class="python">import requests
+
+for i in range(100):
+    for j in range(100):
+        url = f&quot;http://3eed592c-7498-44a9-897c-ee8ef5484300.challenge.ctf.show/&#123;i&#125;/&#123;j&#125;/&quot;
+        headers = &#123;
+        &#39;Host&#39;: &#39;3eed592c-7498-44a9-897c-ee8ef5484300.challenge.ctf.show&#39;,
+        &#39;User-Agent&#39;: &#39;Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0&#39;,
+        &#39;Accept&#39;: &#39;text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8&#39;,
+        &#39;Accept-Language&#39;: &#39;en-US,en;q=0.5&#39;,
+        &#39;Accept-Encoding&#39;: &#39;gzip, deflate&#39;,
+        &#39;Connection&#39;: &#39;close&#39;,
+        &#125;
+        print(url)
+        req = requests.get(url,headers)
+        print(req.status_code)
+</code></pre>
+</li>
+<li><p>爆出来是72 和 20</p>
+</li>
+<li><p><img src="https://img-blog.csdnimg.cn/9ece5333c7c04d6bb053827e22092d92.png" alt="访问一下得🇺🇳"></p>
+</li>
+</ul>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">John Doe</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://example.com/2022/07/11/CTF_show_Web入门_爆破/">http://example.com/2022/07/11/CTF_show_Web入门_爆破/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"></div><nav id="pagination"><div class="next-post pull-right"><a href="/2022/07/10/CTF-show-Web%E5%85%A5%E9%97%A8-%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86/"><span>CTF_show_Web入门_信息搜集</span><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2013 - 2022 By John Doe</div><div class="framework-info"><span>Driven - </span><a target="_blank" rel="noopener" href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.9.0"></script><script src="/js/fancybox.js?version=1.9.0"></script><script src="/js/sidebar.js?version=1.9.0"></script><script src="/js/copy.js?version=1.9.0"></script><script src="/js/fireworks.js?version=1.9.0"></script><script src="/js/transition.js?version=1.9.0"></script><script src="/js/scroll.js?version=1.9.0"></script><script src="/js/head.js?version=1.9.0"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+  $('#top-container').addClass('is-mobile')
+}</script></body></html>
