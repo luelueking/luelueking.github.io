@@ -16,15 +16,15 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="汇编  i++ 1234xor eax, eaxmov eax, 10mov ebx, eaxinc eax  ++i 1234xor eax, eaxmov eax, 10inc eaxmov ebx, eax    call jmp ret sub剪 lea 取 &amp;    &#96;&#96;&#96;cint show(int a, int b) {if (a &gt; b) ret">
+    <meta name="description" content="汇编  i++ xor eax, eax mov eax, 10 mov ebx, eax inc eax  ++i xor eax, eax mov eax, 10 inc eax mov ebx, eax    call jmp ret sub剪 lea 取 &amp;    &#96;&#96;&#96;cint show(int a, int b) {if (a &gt; b) retur">
 <meta property="og:type" content="article">
 <meta property="og:title" content="luelueking的ctf之路">
 <meta property="og:url" content="http://example.com/2022/07/30/%E6%B1%87%E7%BC%96/index.html">
 <meta property="og:site_name" content="luelueking的ctf之路">
-<meta property="og:description" content="汇编  i++ 1234xor eax, eaxmov eax, 10mov ebx, eaxinc eax  ++i 1234xor eax, eaxmov eax, 10inc eaxmov ebx, eax    call jmp ret sub剪 lea 取 &amp;    &#96;&#96;&#96;cint show(int a, int b) {if (a &gt; b) ret">
+<meta property="og:description" content="汇编  i++ xor eax, eax mov eax, 10 mov ebx, eax inc eax  ++i xor eax, eax mov eax, 10 inc eax mov ebx, eax    call jmp ret sub剪 lea 取 &amp;    &#96;&#96;&#96;cint show(int a, int b) {if (a &gt; b) retur">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-07-30T08:53:11.482Z">
-<meta property="article:modified_time" content="2022-07-30T08:53:11.482Z">
+<meta property="article:modified_time" content="2022-08-10T11:42:40.095Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -218,7 +218,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          410 字
+          355 字
         
       </span>
     
@@ -229,7 +229,7 @@
         
         
         
-          4 分钟
+          3 分钟
         
       </span>
     
@@ -275,10 +275,16 @@
                 <h1 id="汇编"><a href="#汇编" class="headerlink" title="汇编"></a>汇编</h1><hr>
 <ul>
 <li><p>i++</p>
-<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs x86asm"><span class="hljs-keyword">xor</span> <span class="hljs-built_in">eax</span>, <span class="hljs-built_in">eax</span><br><span class="hljs-keyword">mov</span> <span class="hljs-built_in">eax</span>, <span class="hljs-number">10</span><br><span class="hljs-keyword">mov</span> <span class="hljs-built_in">ebx</span>, <span class="hljs-built_in">eax</span><br><span class="hljs-keyword">inc</span> <span class="hljs-built_in">eax</span><br></code></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre><code class="hljs x86asm"><span class="hljs-keyword">xor</span> <span class="hljs-built_in">eax</span>, <span class="hljs-built_in">eax</span>
+<span class="hljs-keyword">mov</span> <span class="hljs-built_in">eax</span>, <span class="hljs-number">10</span>
+<span class="hljs-keyword">mov</span> <span class="hljs-built_in">ebx</span>, <span class="hljs-built_in">eax</span>
+<span class="hljs-keyword">inc</span> <span class="hljs-built_in">eax</span></code></pre></div>
 </li>
 <li><p>++i</p>
-<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs x86asm"><span class="hljs-keyword">xor</span> <span class="hljs-built_in">eax</span>, <span class="hljs-built_in">eax</span><br><span class="hljs-keyword">mov</span> <span class="hljs-built_in">eax</span>, <span class="hljs-number">10</span><br><span class="hljs-keyword">inc</span> <span class="hljs-built_in">eax</span><br><span class="hljs-keyword">mov</span> <span class="hljs-built_in">ebx</span>, <span class="hljs-built_in">eax</span><br></code></pre></td></tr></table></figure></li>
+<div class="code-wrapper"><pre><code class="hljs x86asm"><span class="hljs-keyword">xor</span> <span class="hljs-built_in">eax</span>, <span class="hljs-built_in">eax</span>
+<span class="hljs-keyword">mov</span> <span class="hljs-built_in">eax</span>, <span class="hljs-number">10</span>
+<span class="hljs-keyword">inc</span> <span class="hljs-built_in">eax</span>
+<span class="hljs-keyword">mov</span> <span class="hljs-built_in">ebx</span>, <span class="hljs-built_in">eax</span></code></pre></div></li>
 </ul>
 <hr>
 <ul>
@@ -290,7 +296,34 @@
 </ul>
 <hr>
 <ul>
-<li>&#96;&#96;&#96;c<br>int show(int a, int b) {<br>if (a &gt; b) return 10;<br>else return 20;<br>}<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs x86asm"><br>- <span class="hljs-string">```</span><br><span class="hljs-symbol">  show:</span><br>  	<span class="hljs-keyword">push</span> <span class="hljs-built_in">ebp</span><br>  	<span class="hljs-keyword">mov</span> <span class="hljs-built_in">ebp</span>, <span class="hljs-built_in">esp</span>     <span class="hljs-comment">;开辟栈帧</span><br>  	<br>  	<span class="hljs-comment">;这二行代码之间，寄存器可以随便用</span><br>  	<span class="hljs-keyword">push</span> <span class="hljs-built_in">si</span><br>  	<br>  	<span class="hljs-comment">;怎么取到传入的参数</span><br>  	<span class="hljs-keyword">mov</span> <span class="hljs-built_in">bx</span>, [<span class="hljs-built_in">bp</span>+<span class="hljs-number">2</span>*<span class="hljs-number">3</span>]	<span class="hljs-comment">;第二个参数</span><br>  	<span class="hljs-keyword">mov</span> <span class="hljs-built_in">ax</span>, [ap+<span class="hljs-number">2</span>*<span class="hljs-number">2</span>]	<span class="hljs-comment">;第一个参数</span><br>  	<br>  	<span class="hljs-keyword">cmp</span> <span class="hljs-built_in">ax</span>, <span class="hljs-built_in">bx</span><br>  	<span class="hljs-keyword">jg</span> .greather<br><span class="hljs-symbol">  	</span><br><span class="hljs-symbol">  	</span><br><span class="hljs-symbol">  .greather:</span><br>  	<span class="hljs-keyword">mov</span> <span class="hljs-built_in">eax</span>, <span class="hljs-number">10</span><br><span class="hljs-symbol">  	</span><br><span class="hljs-symbol">  </span><br><span class="hljs-symbol">  .return:</span>	<br>  	<span class="hljs-keyword">pop</span> <span class="hljs-built_in">si</span><br>  	<br>  	<span class="hljs-keyword">mov</span> <span class="hljs-built_in">esp</span>, <span class="hljs-built_in">ebp</span><br>  	<span class="hljs-keyword">pop</span> <span class="hljs-built_in">ebp</span>					<span class="hljs-comment">;这二句等同于leave</span><br>  	<br>  	<span class="hljs-keyword">ret</span><br></code></pre></td></tr></table></figure></li>
+<li>&#96;&#96;&#96;c<br>int show(int a, int b) {<br>if (a &gt; b) return 10;<br>else return 20;<br>}<div class="code-wrapper"><pre><code class="hljs x86asm">
+- <span class="hljs-string">```</span>
+<span class="hljs-symbol">  show:</span>
+  	<span class="hljs-keyword">push</span> <span class="hljs-built_in">ebp</span>
+  	<span class="hljs-keyword">mov</span> <span class="hljs-built_in">ebp</span>, <span class="hljs-built_in">esp</span>     <span class="hljs-comment">;开辟栈帧</span>
+  	
+  	<span class="hljs-comment">;这二行代码之间，寄存器可以随便用</span>
+  	<span class="hljs-keyword">push</span> <span class="hljs-built_in">si</span>
+  	
+  	<span class="hljs-comment">;怎么取到传入的参数</span>
+  	<span class="hljs-keyword">mov</span> <span class="hljs-built_in">bx</span>, [<span class="hljs-built_in">bp</span>+<span class="hljs-number">2</span>*<span class="hljs-number">3</span>]	<span class="hljs-comment">;第二个参数</span>
+  	<span class="hljs-keyword">mov</span> <span class="hljs-built_in">ax</span>, [ap+<span class="hljs-number">2</span>*<span class="hljs-number">2</span>]	<span class="hljs-comment">;第一个参数</span>
+  	
+  	<span class="hljs-keyword">cmp</span> <span class="hljs-built_in">ax</span>, <span class="hljs-built_in">bx</span>
+  	<span class="hljs-keyword">jg</span> .greather
+<span class="hljs-symbol">  	</span>
+<span class="hljs-symbol">  	</span>
+<span class="hljs-symbol">  .greather:</span>
+  	<span class="hljs-keyword">mov</span> <span class="hljs-built_in">eax</span>, <span class="hljs-number">10</span>
+<span class="hljs-symbol">  	</span>
+<span class="hljs-symbol">  </span>
+<span class="hljs-symbol">  .return:</span>	
+  	<span class="hljs-keyword">pop</span> <span class="hljs-built_in">si</span>
+  	
+  	<span class="hljs-keyword">mov</span> <span class="hljs-built_in">esp</span>, <span class="hljs-built_in">ebp</span>
+  	<span class="hljs-keyword">pop</span> <span class="hljs-built_in">ebp</span>					<span class="hljs-comment">;这二句等同于leave</span>
+  	
+  	<span class="hljs-keyword">ret</span></code></pre></div></li>
 </ul>
 
                 
@@ -374,6 +407,31 @@
             </div>
 
             
+  <article id="comments" lazyload>
+    
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'http://example.com/2022/07/30/%E6%B1%87%E7%BC%96/';
+          this.page.identifier = '/2022/07/30/%E6%B1%87%E7%BC%96/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+  </article>
+
+
           </article>
         </div>
       </div>

