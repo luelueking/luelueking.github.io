@@ -4,6 +4,38 @@
   
   
   <entry>
+    <title></title>
+    <link href="/2022/08/10/CTF_show_Web%E5%85%A5%E9%97%A8_phpCVE/"/>
+    <url>/2022/08/10/CTF_show_Web%E5%85%A5%E9%97%A8_phpCVE/</url>
+    
+    <content type="html"><![CDATA[]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Nmap使用姿势</title>
+    <link href="/2022/08/10/nmap%E4%BD%BF%E7%94%A8%E5%A7%BF%E5%8A%BF/"/>
+    <url>/2022/08/10/nmap%E4%BD%BF%E7%94%A8%E5%A7%BF%E5%8A%BF/</url>
+    
+    <content type="html"><![CDATA[<h1 id="Nmap使用姿势"><a href="#Nmap使用姿势" class="headerlink" title="Nmap使用姿势"></a>Nmap使用姿势</h1><h3 id="列举远程机器开放的端口"><a href="#列举远程机器开放的端口" class="headerlink" title="列举远程机器开放的端口"></a>列举远程机器开放的端口</h3><ul><li><p>例：<code>nmap scanme.nmap.org</code>（扫描）</p></li><li><p>例：<code>nmap --dns-servers 8.8.8.8 scanme.nmap.org</code>（–dns-server指定dns服务器进行解析）</p></li><li><p>例：<code>nmap Pn scanme.nmap.org</code>（-Pn参数来停止探测之前的ICMP请求，防止防火墙突破）</p></li><li><p>例：<code>nmap -p 1-1000 scanme.nmap.org</code>（-p m-n 指定端口范围为m到n）</p></li><li><div class="code-wrapper"><pre><code class="hljs">端口状态：- Open 开放- Closed 关闭- Filtered 过滤无法收到返回的probe状态- UnFiltered 端口收到返回的probe，但无法确认</code></pre></div></li></ul><h3 id="识别服务指纹"><a href="#识别服务指纹" class="headerlink" title="识别服务指纹"></a>识别服务指纹</h3><ul><li>识别机器的服务信息: <code>nmap -sV IP地址</code></li><li>侵略性探测: <code>nmap -A -v -T4 IP地址</code></li><li>侵略性探测: <code>nmap  -sC -sV -O IP地址</code><ul><li>-sC：使用脚本探测</li><li>-sV：探测目标机器的服务信息</li><li>-O：探测目标机器的操作系统信息</li></ul></li></ul><h3 id="发现局域网中存活主机"><a href="#发现局域网中存活主机" class="headerlink" title="发现局域网中存活主机"></a>发现局域网中存活主机</h3><ul><li><p>对网络中所有主机进行ping扫描，以探测主机存活性</p><ul><li><code>nmap -sP CIDR </code></li><li><code>nmap -sn CIDR</code></li></ul></li><li><p>nmap -sn CIDR -oX test.xml    结果输出到test.xml</p></li></ul><h3 id="端口探测技巧"><a href="#端口探测技巧" class="headerlink" title="端口探测技巧"></a>端口探测技巧</h3><ul><li><p>对某个端口进行探测</p><ul><li><code>nmap -p80 scanme.nmap.org</code></li><li><code>nmap -p80,135 scaneme.nmap.org</code></li></ul></li><li><p>对某个范围端口进行探测</p><ul><li><code>nmap -p 1-100 scanme.nmap.org</code></li></ul></li><li><p>指定协议探测端口</p><ul><li><code>nmap -p T:25,U:53 scanme.nmap.org</code>（T：TCP，U：UDP）</li></ul></li><li><p>通过协议名扫描端口</p><ul><li><code>nmap -p smtp scanme.nmap.org</code></li></ul></li><li><p>通过名称范围扫描</p><ul><li><code>nmap -p s* scanme.nmap.org</code></li></ul></li><li><p>扫描注册在nmap中的端口</p><ul><li><code>nmap -p [1-65535] scanme.nmap.org</code></li></ul></li></ul><h3 id="NSE脚本"><a href="#NSE脚本" class="headerlink" title="NSE脚本"></a>NSE脚本</h3><ul><li><p>使用 –script参数来指定调用的脚本,并且将脚本存储在Nmap安装路径下的script文件夹下面，对于kali linux存储在&#x2F;usr&#x2F;share&#x2F;nmap&#x2F;script&#x2F;下</p><ul><li><code>nmap --script http-headers scanme.nmap.org </code>（探测http请求头）</li><li><code>nmap -sV --script vuln 目标</code>（使用nmap中漏洞分类脚本对目标进行探测）</li><li><code>nmap -sV --script=&quot;version, discovery&quot; 目标</code>（使用nmap中发现和版本信息分类进行探测）</li><li><code>nmap -sV --script=&quot;not exploit&quot; 目标</code>（使用nmap中除了exploit分类之外的其他分类进行探测）</li></ul></li><li><p><strong>NSE调试功能使用</strong></p><ul><li><code>nmap -sV --script exploit -d 3 --script-trace 目标</code>（使用nmap中的expolit，但是同时开启调试模式）<ul><li>-d(debug范围0～9)</li></ul></li></ul></li><li><p><code>nmap -sV --script http-title --script-args http.useragent=&quot;Mozilla 999&quot; 目标</code>（使用nmap的http-title脚本，并且指定使用的User-Agent）</p></li><li><p><strong>NSE更新</strong><code>nmap -script-updatedb</code></p></li><li><p><strong>NSE脚本分类</strong> <a href="https://nmap.org/nsedoc/">https://nmap.org/nsedoc/</a></p></li></ul><h3 id="使用特定网卡进行探测"><a href="#使用特定网卡进行探测" class="headerlink" title="使用特定网卡进行探测"></a>使用特定网卡进行探测</h3><ul><li><code>nmap -e 网卡(interface) 目标</code></li></ul><h3 id="对比探测结果"><a href="#对比探测结果" class="headerlink" title="对比探测结果"></a>对比探测结果</h3><ul><li>利用ndiff工具</li><li><code>ndiff file1 file2</code></li><li>例子：<code>ndiff kali.xml kali2.xml</code></li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>ctfshow</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>CTF_show_Web入门_nodejs</title>
     <link href="/2022/07/31/CTF_show_Web%E5%85%A5%E9%97%A8_nodejs/"/>
     <url>/2022/07/31/CTF_show_Web%E5%85%A5%E9%97%A8_nodejs/</url>
