@@ -4,6 +4,44 @@
   
   
   <entry>
+    <title>设计模式</title>
+    <link href="/2022/08/14/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    <url>/2022/08/14/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</url>
+    
+    <content type="html"><![CDATA[<h1 id="设计模式（updating）"><a href="#设计模式（updating）" class="headerlink" title="设计模式（updating）"></a>设计模式（updating）</h1><p>[TOC]</p><h2 id="1-工厂模式"><a href="#1-工厂模式" class="headerlink" title="1.工厂模式"></a>1.工厂模式</h2><h2 id="2-单例模式"><a href="#2-单例模式" class="headerlink" title="2.单例模式"></a>2.单例模式</h2><h2 id="3-原型模式"><a href="#3-原型模式" class="headerlink" title="3.原型模式"></a>3.原型模式</h2><h2 id="4-代理模式"><a href="#4-代理模式" class="headerlink" title="4.代理模式"></a>4.代理模式</h2><h2 id="5-委派模式"><a href="#5-委派模式" class="headerlink" title="5. 委派模式"></a>5. 委派模式</h2><h2 id="6-策略模式"><a href="#6-策略模式" class="headerlink" title="6.策略模式"></a>6.策略模式</h2><h2 id="7-模版模式"><a href="#7-模版模式" class="headerlink" title="7.模版模式"></a>7.模版模式</h2><h2 id="8-适配器模式"><a href="#8-适配器模式" class="headerlink" title="8.适配器模式"></a>8.适配器模式</h2><h2 id="9-装饰者模式"><a href="#9-装饰者模式" class="headerlink" title="9.装饰者模式"></a>9.装饰者模式</h2><h2 id="10-观察者模式"><a href="#10-观察者模式" class="headerlink" title="10.观察者模式"></a>10.观察者模式</h2>]]></content>
+    
+    
+    <categories>
+      
+      <category>开发</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>软件架构设计原则迅速回忆</title>
+    <link href="/2022/08/13/%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%9B/"/>
+    <url>/2022/08/13/%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%9B/</url>
+    
+    <content type="html"><![CDATA[<h1 id="软件架构设计原则"><a href="#软件架构设计原则" class="headerlink" title="软件架构设计原则"></a>软件架构设计原则</h1><h2 id="1-开闭原则"><a href="#1-开闭原则" class="headerlink" title="1.开闭原则"></a>1.开闭原则</h2><ul><li><p>是什么：开闭原则就是指一个软件实体应该对库欧战开放,对修改关闭。</p></li><li><p>为什么：提高软件系统的可复合性及可维护性。指导我们如何建立稳定、灵活的系统。</p></li><li><p>怎么做：</p><ul><li><p>例如版本更新，我们应尽可能不修改源代码，但是可以新增功能</p></li><li><p>稍微具体的例子：类实现了接口，那么我们想扩展其功能的时候，作一个实现了接口的类的子类就是个不错的方式。</p></li></ul></li></ul><h2 id="2-依赖倒置原则"><a href="#2-依赖倒置原则" class="headerlink" title="2.依赖倒置原则"></a>2.依赖倒置原则</h2><ul><li>是什么：细节依赖抽象</li><li>简单来说就是面向接口编程，先顶层再细节设计代码结构</li></ul><h2 id="3-单一职责原则"><a href="#3-单一职责原则" class="headerlink" title="3.单一职责原则"></a>3.单一职责原则</h2><ul><li>是什么：不要存在多于一个导致类变更的原因。</li><li>为什么：解藕</li></ul><h2 id="4-接口隔离原则"><a href="#4-接口隔离原则" class="headerlink" title="4.接口隔离原则"></a>4.接口隔离原则</h2><ul><li>是什么：用多个专门的接口，客户端不应该依赖它不需要的接口</li><li>怎么做：<ul><li>一个类对应另一个类的依赖应该建立在最小的接口之上</li><li>建立单一接口，不要建立庞大臃肿的接口</li><li>尽量细化接口，接口中的方法尽量少，不是越少越好</li></ul></li></ul><h2 id="5-迪米特原则（最少知道原则）"><a href="#5-迪米特原则（最少知道原则）" class="headerlink" title="5.迪米特原则（最少知道原则）"></a>5.迪米特原则（最少知道原则）</h2><ul><li>是什么：一个对象应该对其他对象保持最少的了解</li><li>为什么：降低耦合</li><li>强调：只和朋友交流，不和陌生人说话。出现在成员变量、方法的输入、输出参数中的类都可以称之为朋友类，反之不是。</li></ul><h2 id="6-里氏替换原则"><a href="#6-里氏替换原则" class="headerlink" title="6.里氏替换原则"></a>6.里氏替换原则</h2><ul><li>一句话：子类可以扩展父类的功能，但不能改变父类的原有功能</li><li>为什么：约束继承泛滥，加强程序健壮性</li><li>怎么做：<ul><li>子类可以实现父类的抽象方法，但不能覆盖父类的非抽象方法。</li><li>子类可以增加自己特有的方法。</li><li>当子类的方法重载父类的方法时，方法的前置条件（方法的输入&#x2F;参数）要比父类方法的输入参数更宽松</li><li>当子类实现父类方法时，方法的后置条件（方法的输出&#x2F;返回值）要比父类更严格或与父类一样</li></ul></li></ul><h2 id="7-合成复用原则"><a href="#7-合成复用原则" class="headerlink" title="7.合成复用原则"></a>7.合成复用原则</h2><ul><li><p>是什么：尽量使用对象组合&#x2F;聚合而不是继承关系达到软件复用的目的。</p></li><li><p>为什么：可以使系统更加灵活</p></li><li><p>怎么做：来个例子（以数据库为例）</p><ul><li><div class="code-wrapper"><pre><code class="java">public class DBConnection&#123;    public String getConnection()&#123;    return &quot;Mysql数据库连接&quot;;  &#125;&#125;<pre><code class="hljs csharp">- ```java  <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ProductDao</span>&#123;    <span class="hljs-keyword">private</span> DBConnection dbConnection;<span class="hljs-comment">//这里就体现了合成复用原则</span>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setDbConnection</span>(<span class="hljs-params">DBConnection dbConnection</span>)</span>&#123;      <span class="hljs-keyword">this</span>.dbConnection = dbConnection;    &#125;    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">addProduct</span>()</span>&#123;      String conn = dbConnection.getConnection();      System.<span class="hljs-keyword">out</span>.println(<span class="hljs-string">&quot;使用&quot;</span>+cnn+<span class="hljs-string">&quot;增加产品&quot;</span>);    &#125;  &#125;</code></pre></div></code></pre></li><li><p>当然有些违背了其他原则，但为了突出合成复用原则，这里不做扩展。实际开发过程中，也不必刻意追求完美，学会平衡取舍，写出优雅。</p></li></ul></li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>开发</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title></title>
     <link href="/2022/08/10/CTF_show_Web%E5%85%A5%E9%97%A8_phpCVE/"/>
     <url>/2022/08/10/CTF_show_Web%E5%85%A5%E9%97%A8_phpCVE/</url>
