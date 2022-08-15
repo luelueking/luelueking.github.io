@@ -331,7 +331,7 @@
     return &quot;Mysql数据库连接&quot;;
   &#125;
 &#125;
-<div class="code-wrapper"><pre><code class="hljs csharp">
+<pre><code class="hljs csharp">
 - ```java
   <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ProductDao</span>&#123;
     <span class="hljs-keyword">private</span> DBConnection dbConnection;<span class="hljs-comment">//这里就体现了合成复用原则</span>
@@ -342,7 +342,7 @@
       String conn = dbConnection.getConnection();
       System.<span class="hljs-keyword">out</span>.println(<span class="hljs-string">&quot;使用&quot;</span>+cnn+<span class="hljs-string">&quot;增加产品&quot;</span>);
     &#125;
-  &#125;</code></pre></div></div>
+  &#125;</code></pre></div>
 </code></pre>
 </li>
 <li><p>当然有些违背了其他原则，但为了突出合成复用原则，这里不做扩展。实际开发过程中，也不必刻意追求完美，学会平衡取舍，写出优雅。</p>
