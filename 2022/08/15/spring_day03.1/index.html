@@ -16,21 +16,21 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="软件架构设计原则1.开闭原则 是什么：开闭原则就是指一个软件实体应该对库欧战开放,对修改关闭。  为什么：提高软件系统的可复合性及可维护性。指导我们如何建立稳定、灵活的系统。  怎么做：  例如版本更新，我们应尽可能不修改源代码，但是可以新增功能  稍微具体的例子：类实现了接口，那么我们想扩展其功能的时候，作一个实现了接口的类的子类就是个不错的方式。     2.依赖倒置原则 是什么：细节依赖抽象">
+    <meta name="description" content="Day03下午—Spring 完成DI思路 入口：getBean()方法  ApplicationContext中定义好IoC容器  BeanWrapper保存到Map中  所以设计两个Map  factoryBeanObjectCache：保存单例对象的缓存 factoryBeanInstanceCache：保存BeanWrapper的缓存  public class MyApplication">
 <meta property="og:type" content="article">
-<meta property="og:title" content="软件架构设计原则迅速回忆">
-<meta property="og:url" content="http://example.com/2022/08/13/%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%9B/index.html">
+<meta property="og:title" content="暑假最后几天！肝爆（手写）一个Spring之Day3下午">
+<meta property="og:url" content="http://example.com/2022/08/15/spring_day03.1/index.html">
 <meta property="og:site_name" content="luelueking的ctf之路">
-<meta property="og:description" content="软件架构设计原则1.开闭原则 是什么：开闭原则就是指一个软件实体应该对库欧战开放,对修改关闭。  为什么：提高软件系统的可复合性及可维护性。指导我们如何建立稳定、灵活的系统。  怎么做：  例如版本更新，我们应尽可能不修改源代码，但是可以新增功能  稍微具体的例子：类实现了接口，那么我们想扩展其功能的时候，作一个实现了接口的类的子类就是个不错的方式。     2.依赖倒置原则 是什么：细节依赖抽象">
+<meta property="og:description" content="Day03下午—Spring 完成DI思路 入口：getBean()方法  ApplicationContext中定义好IoC容器  BeanWrapper保存到Map中  所以设计两个Map  factoryBeanObjectCache：保存单例对象的缓存 factoryBeanInstanceCache：保存BeanWrapper的缓存  public class MyApplication">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-08-13T11:34:59.000Z">
-<meta property="article:modified_time" content="2022-08-13T11:39:53.705Z">
+<meta property="article:published_time" content="2022-08-15T15:26:59.000Z">
+<meta property="article:modified_time" content="2022-08-15T14:28:25.135Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>软件架构设计原则迅速回忆 - luelueking的ctf之路</title>
+  <title>暑假最后几天！肝爆（手写）一个Spring之Day3下午 - luelueking的ctf之路</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -195,7 +195,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="软件架构设计原则迅速回忆"></span>
+            <span id="subtitle" data-typed-text="暑假最后几天！肝爆（手写）一个Spring之Day3下午"></span>
           
         </div>
 
@@ -206,8 +206,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-08-13 19:34" pubdate>
-          2022年8月13日 晚上
+        <time datetime="2022-08-15 23:26" pubdate>
+          2022年8月15日 晚上
         </time>
       </span>
     
@@ -218,7 +218,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.2k 字
+          3.1k 字
         
       </span>
     
@@ -229,7 +229,7 @@
         
         
         
-          10 分钟
+          26 分钟
         
       </span>
     
@@ -267,88 +267,133 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">软件架构设计原则迅速回忆</h1>
+            <h1 style="display: none">暑假最后几天！肝爆（手写）一个Spring之Day3下午</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="软件架构设计原则"><a href="#软件架构设计原则" class="headerlink" title="软件架构设计原则"></a>软件架构设计原则</h1><h2 id="1-开闭原则"><a href="#1-开闭原则" class="headerlink" title="1.开闭原则"></a>1.开闭原则</h2><ul>
-<li><p>是什么：开闭原则就是指一个软件实体应该对库欧战开放,对修改关闭。</p>
+                <h1 id="Day03下午—Spring-完成DI"><a href="#Day03下午—Spring-完成DI" class="headerlink" title="Day03下午—Spring 完成DI"></a>Day03下午—Spring 完成DI</h1><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><ul>
+<li><p>入口：getBean()方法</p>
 </li>
-<li><p>为什么：提高软件系统的可复合性及可维护性。指导我们如何建立稳定、灵活的系统。</p>
+<li><p>ApplicationContext中定义好IoC容器</p>
 </li>
-<li><p>怎么做：</p>
+<li><p>BeanWrapper保存到Map中</p>
+</li>
+<li><p>所以设计两个Map</p>
 <ul>
-<li><p>例如版本更新，我们应尽可能不修改源代码，但是可以新增功能</p>
-</li>
-<li><p>稍微具体的例子：类实现了接口，那么我们想扩展其功能的时候，作一个实现了接口的类的子类就是个不错的方式。</p>
-</li>
+<li>factoryBeanObjectCache：保存单例对象的缓存</li>
+<li>factoryBeanInstanceCache：保存BeanWrapper的缓存</li>
 </ul>
-</li>
+<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyApplicationContext</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">MyDefaultListableBeanFactory</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">MyBeanFactory</span> &#123;
+
+		...
+      
+    <span class="hljs-comment">//用来保证注册式单例的容器</span>
+    <span class="hljs-keyword">private</span> Map&lt;String,Object&gt; factoryBeanObjectCache = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+
+    <span class="hljs-comment">//用来存储所有的被代理过的对象</span>
+    <span class="hljs-keyword">private</span> Map&lt;String,MyBeanWrapper&gt; factoryBeanInstanceCache = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ConcurrentHashMap</span>&lt;&gt;();
+  
+   ...</code></pre></div></li>
 </ul>
-<h2 id="2-依赖倒置原则"><a href="#2-依赖倒置原则" class="headerlink" title="2.依赖倒置原则"></a>2.依赖倒置原则</h2><ul>
-<li>是什么：细节依赖抽象</li>
-<li>简单来说就是面向接口编程，先顶层再细节设计代码结构</li>
-</ul>
-<h2 id="3-单一职责原则"><a href="#3-单一职责原则" class="headerlink" title="3.单一职责原则"></a>3.单一职责原则</h2><ul>
-<li>是什么：不要存在多于一个导致类变更的原因。</li>
-<li>为什么：解藕</li>
-</ul>
-<h2 id="4-接口隔离原则"><a href="#4-接口隔离原则" class="headerlink" title="4.接口隔离原则"></a>4.接口隔离原则</h2><ul>
-<li>是什么：用多个专门的接口，客户端不应该依赖它不需要的接口</li>
-<li>怎么做：<ul>
-<li>一个类对应另一个类的依赖应该建立在最小的接口之上</li>
-<li>建立单一接口，不要建立庞大臃肿的接口</li>
-<li>尽量细化接口，接口中的方法尽量少，不是越少越好</li>
-</ul>
-</li>
-</ul>
-<h2 id="5-迪米特原则（最少知道原则）"><a href="#5-迪米特原则（最少知道原则）" class="headerlink" title="5.迪米特原则（最少知道原则）"></a>5.迪米特原则（最少知道原则）</h2><ul>
-<li>是什么：一个对象应该对其他对象保持最少的了解</li>
-<li>为什么：降低耦合</li>
-<li>强调：只和朋友交流，不和陌生人说话。出现在成员变量、方法的输入、输出参数中的类都可以称之为朋友类，反之不是。</li>
-</ul>
-<h2 id="6-里氏替换原则"><a href="#6-里氏替换原则" class="headerlink" title="6.里氏替换原则"></a>6.里氏替换原则</h2><ul>
-<li>一句话：子类可以扩展父类的功能，但不能改变父类的原有功能</li>
-<li>为什么：约束继承泛滥，加强程序健壮性</li>
-<li>怎么做：<ul>
-<li>子类可以实现父类的抽象方法，但不能覆盖父类的非抽象方法。</li>
-<li>子类可以增加自己特有的方法。</li>
-<li>当子类的方法重载父类的方法时，方法的前置条件（方法的输入&#x2F;参数）要比父类方法的输入参数更宽松</li>
-<li>当子类实现父类方法时，方法的后置条件（方法的输出&#x2F;返回值）要比父类更严格或与父类一样</li>
-</ul>
-</li>
-</ul>
-<h2 id="7-合成复用原则"><a href="#7-合成复用原则" class="headerlink" title="7.合成复用原则"></a>7.合成复用原则</h2><ul>
-<li><p>是什么：尽量使用对象组合&#x2F;聚合而不是继承关系达到软件复用的目的。</p>
-</li>
-<li><p>为什么：可以使系统更加灵活</p>
-</li>
-<li><p>怎么做：来个例子（以数据库为例）</p>
-<ul>
-<li><div class="code-wrapper"><pre><code class="java">public class DBConnection&#123;
-    public String getConnection()&#123;
-    return &quot;Mysql数据库连接&quot;;
-  &#125;
-&#125;
-<pre><code class="hljs csharp">
-- ```java
-  <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ProductDao</span>&#123;
-    <span class="hljs-keyword">private</span> DBConnection dbConnection;<span class="hljs-comment">//这里就体现了合成复用原则</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setDbConnection</span>(<span class="hljs-params">DBConnection dbConnection</span>)</span>&#123;
-      <span class="hljs-keyword">this</span>.dbConnection = dbConnection;
+<h2 id="完善getBean"><a href="#完善getBean" class="headerlink" title="完善getBean()"></a>完善getBean()</h2><ul>
+<li><p>BeanPostProcessor：我们知道它是原生spring中为对象初始化事件设置的一种回调机制。暂时只做声明，没做具体实现。</p>
+<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.czh.spring.framework.beans.config;
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyBeanPostProcessor</span> &#123;
+    <span class="hljs-comment">//TODO 为在Bean的初始化之前提供回调接口</span>
+    <span class="hljs-keyword">public</span> Object <span class="hljs-title function_">postProcessBeforeInitialization</span><span class="hljs-params">(Object bean,String beanName)</span><span class="hljs-keyword">throws</span> Exception&#123;
+        <span class="hljs-keyword">return</span> bean;
     &#125;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">addProduct</span>()</span>&#123;
-      String conn = dbConnection.getConnection();
-      System.<span class="hljs-keyword">out</span>.println(<span class="hljs-string">&quot;使用&quot;</span>+cnn+<span class="hljs-string">&quot;增加产品&quot;</span>);
+
+    <span class="hljs-comment">//TODO 为在Bean的初始化之后提供回调接口</span>
+    <span class="hljs-keyword">public</span> Object <span class="hljs-title function_">postProcessAfterInitialization</span><span class="hljs-params">(Object bean,String beanName)</span><span class="hljs-keyword">throws</span> Exception&#123;
+        <span class="hljs-keyword">return</span> bean;
     &#125;
-  &#125;</code></pre></div>
-</code></pre>
+&#125;</code></pre></div>
 </li>
-<li><p>当然有些违背了其他原则，但为了突出合成复用原则，这里不做扩展。实际开发过程中，也不必刻意追求完美，学会平衡取舍，写出优雅。</p>
+<li><p>在MyApplicationContext完善代码</p>
 </li>
-</ul>
+<li><p>大体流程</p>
+<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-meta">@Override</span>
+<span class="hljs-keyword">public</span> Object <span class="hljs-title function_">getBean</span><span class="hljs-params">(String beanName)</span> <span class="hljs-keyword">throws</span> Exception &#123;
+    <span class="hljs-type">MyBeanDefinition</span> <span class="hljs-variable">beanDefinition</span> <span class="hljs-operator">=</span> <span class="hljs-built_in">super</span>.beanDefinitionMap.get(beanName);
+    <span class="hljs-comment">//生成通知事件</span>
+    <span class="hljs-type">MyBeanPostProcessor</span> <span class="hljs-variable">beanPostProcessor</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MyBeanPostProcessor</span>();
+  
+    <span class="hljs-type">Object</span> <span class="hljs-variable">instance</span> <span class="hljs-operator">=</span> instantiateBean(beanDefinition);
+    <span class="hljs-keyword">if</span>(<span class="hljs-literal">null</span> == instance)<span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
+  
+    <span class="hljs-comment">//在实例初始化以前调用一次</span>
+    beanPostProcessor.postProcessBeforeInitialization(instance,beanName);
+  
+    <span class="hljs-type">MyBeanWrapper</span> <span class="hljs-variable">beanWrapper</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MyBeanWrapper</span>(instance);
+  
+    <span class="hljs-built_in">this</span>.factoryBeanInstanceCache.put(beanName,beanWrapper);
+  
+    <span class="hljs-comment">//在是实例初始化以后再调用一次</span>
+    beanPostProcessor.postProcessAfterInitialization(instance,beanName);
+  
+    populateBean(beanName,instance);
+    
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.factoryBeanInstanceCache.get(beanName).getWrappedInstance();
+&#125;</code></pre></div>
 </li>
+<li><p>instantiateBean方法：返回一个实例Bean</p>
+<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">private</span> Object <span class="hljs-title function_">instantiateBean</span><span class="hljs-params">(MyBeanDefinition beanDefinition)</span> &#123;
+    <span class="hljs-type">Object</span> <span class="hljs-variable">instance</span> <span class="hljs-operator">=</span> <span class="hljs-literal">null</span>;
+    <span class="hljs-type">String</span> <span class="hljs-variable">beanClassName</span> <span class="hljs-operator">=</span> beanDefinition.getBeanClassName();
+  
+    <span class="hljs-keyword">try</span> &#123;
+        <span class="hljs-comment">//因为根据Class才能确定一个类是否有实例</span>
+        <span class="hljs-keyword">if</span>(<span class="hljs-built_in">this</span>.factoryBeanObjectCache.containsKey(beanClassName))&#123;
+            instance = <span class="hljs-built_in">this</span>.factoryBeanObjectCache.get(beanClassName);
+        &#125;<span class="hljs-keyword">else</span> &#123;
+            Class&lt;?&gt; clazz = Class.forName(beanClassName);
+            instance = clazz.newInstance();
+            <span class="hljs-built_in">this</span>.factoryBeanObjectCache.put(beanDefinition.getFactoryBeanName(),instance);
+        &#125;
+        <span class="hljs-keyword">return</span> instance;
+    &#125; <span class="hljs-keyword">catch</span> (ClassNotFoundException e) &#123;
+        e.printStackTrace();
+    &#125; <span class="hljs-keyword">catch</span> (InstantiationException e) &#123;
+        e.printStackTrace();
+    &#125; <span class="hljs-keyword">catch</span> (IllegalAccessException e) &#123;
+        e.printStackTrace();
+    &#125;
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
+&#125;</code></pre></div>
+</li>
+<li><p>populateBean方法</p>
+<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">populateBean</span><span class="hljs-params">(String beanName, Object instance)</span> &#123;
+      Class&lt;?&gt; clazz = instance.getClass();
+      
+      <span class="hljs-keyword">if</span> (!(clazz.isAnnotationPresent(MyController.class) || clazz.isAnnotationPresent(MyService.class)))&#123;
+          <span class="hljs-keyword">return</span>;
+      &#125;
+  
+      Field[] fields = clazz.getDeclaredFields();
+      <span class="hljs-keyword">for</span> (Field field : fields) &#123;
+          <span class="hljs-keyword">if</span>(!field.isAnnotationPresent(MyAutowired.class))<span class="hljs-keyword">continue</span>;
+  
+          <span class="hljs-type">MyAutowired</span> <span class="hljs-variable">autowired</span> <span class="hljs-operator">=</span> field.getAnnotation(MyAutowired.class);
+          
+          <span class="hljs-type">String</span> <span class="hljs-variable">autowiredBeanName</span> <span class="hljs-operator">=</span> autowired.value().trim();
+          
+          <span class="hljs-comment">//没有指定beanName就采用默认类名作为beanName</span>
+          <span class="hljs-keyword">if</span>(<span class="hljs-string">&quot;&quot;</span>.equals(autowiredBeanName))&#123;
+              autowiredBeanName = field.getType().getName();
+          &#125;
+          
+          field.setAccessible(<span class="hljs-literal">true</span>);
+  
+          <span class="hljs-keyword">try</span> &#123;
+              field.set(instance,<span class="hljs-built_in">this</span>.factoryBeanInstanceCache.get(autowiredBeanName).getWrappedInstance());
+          &#125; <span class="hljs-keyword">catch</span> (IllegalAccessException e) &#123;
+              e.printStackTrace();
+          &#125;
+      &#125;
+  &#125;</code></pre></div></li>
 </ul>
 
                 
@@ -368,7 +413,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E5%BC%80%E5%8F%91/" class="category-chain-item">开发</a>
+  <a href="/categories/%E6%89%8B%E5%86%99spring/" class="category-chain-item">手写spring</a>
   
   
 
@@ -388,8 +433,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>软件架构设计原则迅速回忆</div>
-      <div>http://example.com/2022/08/13/软件架构设计原创/</div>
+      <div>暑假最后几天！肝爆（手写）一个Spring之Day3下午</div>
+      <div>http://example.com/2022/08/15/spring_day03.1/</div>
     </div>
     <div class="license-meta">
       
@@ -401,7 +446,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年8月13日</div>
+          <div>2022年8月15日</div>
         </div>
       
       
@@ -431,9 +476,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/08/13/spring_day01/" title="暑假最后几天！肝爆（手写）一个Spring之Day1">
+                      <a href="/2022/08/15/spring_day03/" title="暑假最后几天！肝爆（手写）一个Spring之Day3上午">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">暑假最后几天！肝爆（手写）一个Spring之Day1</span>
+                        <span class="hidden-mobile">暑假最后几天！肝爆（手写）一个Spring之Day3上午</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -441,8 +486,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/08/10/CTF_show_Web%E5%85%A5%E9%97%A8_phpCVE/" title="">
-                        <span class="hidden-mobile"></span>
+                      <a href="/2022/08/14/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" title="设计模式">
+                        <span class="hidden-mobile">设计模式</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -460,8 +505,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'http://example.com/2022/08/13/%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%9B/';
-          this.page.identifier = '/2022/08/13/%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%9B/';
+          this.page.url = 'http://example.com/2022/08/15/spring_day03.1/';
+          this.page.identifier = '/2022/08/15/spring_day03.1/';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');

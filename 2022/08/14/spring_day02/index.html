@@ -1,0 +1,1652 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Day02—Spring开撸前之环境准备基础配置 一开始肯定多少是有点懵b的，但是咱冷静一下整理思路。。。  新建一个Maven web项目，不会看教程：http:&#x2F;&#x2F;t.csdn.cn&#x2F;YugX1，后面怎么启动就是打war包在tomcat上运行  用application.properties代替application.xml（网上常见做法）    pom.xml配置 &lt;?xml vers">
+<meta property="og:type" content="article">
+<meta property="og:title" content="暑假最后几天！肝爆（手写）一个Spring之Day2">
+<meta property="og:url" content="http://example.com/2022/08/14/spring_day02/index.html">
+<meta property="og:site_name" content="luelueking的ctf之路">
+<meta property="og:description" content="Day02—Spring开撸前之环境准备基础配置 一开始肯定多少是有点懵b的，但是咱冷静一下整理思路。。。  新建一个Maven web项目，不会看教程：http:&#x2F;&#x2F;t.csdn.cn&#x2F;YugX1，后面怎么启动就是打war包在tomcat上运行  用application.properties代替application.xml（网上常见做法）    pom.xml配置 &lt;?xml vers">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/7de80e859c1e4b1aa177b9a737b4dfff.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/c9bd1fdd6f874383a92427b052f3f3ce.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/0c4c6f4ba43d4f27a0faae18ffa0170c.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/9e063cb390b94866ba886c40317ccfc3.png">
+<meta property="article:published_time" content="2022-08-14T05:26:59.000Z">
+<meta property="article:modified_time" content="2022-08-16T02:04:36.775Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/7de80e859c1e4b1aa177b9a737b4dfff.png">
+  
+  
+  
+  <title>暑假最后几天！肝爆（手写）一个Spring之Day2 - luelueking的ctf之路</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>略略king的blogs</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="暑假最后几天！肝爆（手写）一个Spring之Day2"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-08-14 13:26" pubdate>
+          2022年8月14日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          29k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          241 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">暑假最后几天！肝爆（手写）一个Spring之Day2</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="Day02—Spring开撸前之环境准备"><a href="#Day02—Spring开撸前之环境准备" class="headerlink" title="Day02—Spring开撸前之环境准备"></a>Day02—Spring开撸前之环境准备</h1><h2 id="基础配置"><a href="#基础配置" class="headerlink" title="基础配置"></a>基础配置</h2><ul>
+<li><p>一开始肯定多少是有点懵b的，但是咱冷静一下整理思路。。。</p>
+</li>
+<li><p>新建一个Maven web项目，不会看教程：<a target="_blank" rel="noopener" href="http://t.csdn.cn/YugX1%EF%BC%8C%E5%90%8E%E9%9D%A2%E6%80%8E%E4%B9%88%E5%90%AF%E5%8A%A8%E5%B0%B1%E6%98%AF%E6%89%93war%E5%8C%85%E5%9C%A8tomcat%E4%B8%8A%E8%BF%90%E8%A1%8C">http://t.csdn.cn/YugX1，后面怎么启动就是打war包在tomcat上运行</a></p>
+</li>
+<li><p>用application.properties代替application.xml（网上常见做法）</p>
+</li>
+<li><p><img src="https://img-blog.csdnimg.cn/7de80e859c1e4b1aa177b9a737b4dfff.png" srcset="/img/loading.gif" lazyload alt="请添加图片描述"></p>
+</li>
+<li><p>pom.xml配置</p>
+<div class="code-wrapper"><pre><code class="hljs xml"><span class="hljs-meta">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;UTF-8&quot;</span>?&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">project</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;http://maven.apache.org/POM/4.0.0&quot;</span></span>
+<span class="hljs-tag">         <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span>
+<span class="hljs-tag">         <span class="hljs-attr">xsi:schemaLocation</span>=<span class="hljs-string">&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">modelVersion</span>&gt;</span>4.0.0<span class="hljs-tag">&lt;/<span class="hljs-name">modelVersion</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>com.czh<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>luelueking_Spring_Source<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>1.0-SNAPSHOT<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">packaging</span>&gt;</span>war<span class="hljs-tag">&lt;/<span class="hljs-name">packaging</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">properties</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">maven.compiler.source</span>&gt;</span>8<span class="hljs-tag">&lt;/<span class="hljs-name">maven.compiler.source</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">maven.compiler.target</span>&gt;</span>8<span class="hljs-tag">&lt;/<span class="hljs-name">maven.compiler.target</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">servlet.api.version</span>&gt;</span>2.4<span class="hljs-tag">&lt;/<span class="hljs-name">servlet.api.version</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">properties</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">dependencies</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>javax.servlet<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>servlet-api<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>$&#123;servlet.api.version&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+
+        <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.projectlombok<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>lombok<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>1.18.24<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+
+        <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.slf4j<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>slf4j-api<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>1.7.36<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+
+        <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>ch.qos.logback<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>logback-classic<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>1.2.11<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">dependencies</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">project</span>&gt;</span></code></pre></div>
+</li>
+<li><p>配置web.xml</p>
+<div class="code-wrapper"><pre><code class="hljs xml"><span class="hljs-meta">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;UTF-8&quot;</span>?&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">web-app</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;http://xmlns.jcp.org/xml/ns/javaee&quot;</span></span>
+<span class="hljs-tag">         <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span>
+<span class="hljs-tag">         <span class="hljs-attr">xsi:schemaLocation</span>=<span class="hljs-string">&quot;http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd&quot;</span></span>
+<span class="hljs-tag">         <span class="hljs-attr">version</span>=<span class="hljs-string">&quot;4.0&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">display-name</span>&gt;</span>luelueking Spring Application<span class="hljs-tag">&lt;/<span class="hljs-name">display-name</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">servlet</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>mymvc<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-class</span>&gt;</span>com.czh.spring.framework.webmvc.servlet.MyDispatcherServlet<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-class</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">init-param</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">param-name</span>&gt;</span>contextConfigLocation<span class="hljs-tag">&lt;/<span class="hljs-name">param-name</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">param-value</span>&gt;</span>classpath:application.properties<span class="hljs-tag">&lt;/<span class="hljs-name">param-value</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">init-param</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">load-on-startup</span>&gt;</span>1<span class="hljs-tag">&lt;/<span class="hljs-name">load-on-startup</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">servlet</span>&gt;</span>
+    
+    <span class="hljs-tag">&lt;<span class="hljs-name">servlet-mapping</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>mymvc<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">url-pattern</span>&gt;</span>/*<span class="hljs-tag">&lt;/<span class="hljs-name">url-pattern</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">servlet-mapping</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">web-app</span>&gt;</span></code></pre></div>
+</li>
+<li><p>创建servlet作为MVC的入口</p>
+<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.czh.spring.framework.webmvc.servlet;
+
+<span class="hljs-keyword">import</span> javax.servlet.ServletConfig;
+<span class="hljs-keyword">import</span> javax.servlet.ServletException;
+<span class="hljs-keyword">import</span> javax.servlet.http.HttpServlet;
+<span class="hljs-keyword">import</span> javax.servlet.http.HttpServletRequest;
+<span class="hljs-keyword">import</span> javax.servlet.http.HttpServletResponse;
+<span class="hljs-keyword">import</span> java.io.IOException;
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyDispatcherServlet</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">HttpServlet</span> &#123;
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">doGet</span><span class="hljs-params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="hljs-keyword">throws</span> ServletException, IOException &#123;
+        <span class="hljs-built_in">super</span>.doGet(req, resp);
+    &#125;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">doPost</span><span class="hljs-params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="hljs-keyword">throws</span> ServletException, IOException &#123;
+        <span class="hljs-built_in">super</span>.doPost(req, resp);
+    &#125;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">init</span><span class="hljs-params">(ServletConfig config)</span> <span class="hljs-keyword">throws</span> ServletException &#123;
+        <span class="hljs-built_in">super</span>.init(config);
+    &#125;
+&#125;</code></pre></div>
+</li>
+<li><p>在来点注解（注意Target作用域）</p>
+<p><img src="https://img-blog.csdnimg.cn/c9bd1fdd6f874383a92427b052f3f3ce.png" srcset="/img/loading.gif" lazyload alt="请添加图片描述"></p>
+<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-meta">@Target(&#123;ElementType.FIELD&#125;)</span>
+<span class="hljs-meta">@Retention(RetentionPolicy.RUNTIME)</span>
+<span class="hljs-meta">@Documented</span>
+<span class="hljs-keyword">public</span> <span class="hljs-meta">@interface</span> MyAutowired &#123;
+	String <span class="hljs-title function_">value</span><span class="hljs-params">()</span> <span class="hljs-keyword">default</span> <span class="hljs-string">&quot;&quot;</span>;
+&#125;
+
+<span class="hljs-meta">@Target(&#123;ElementType.TYPE&#125;)</span>
+<span class="hljs-meta">@Retention(RetentionPolicy.RUNTIME)</span>
+<span class="hljs-meta">@Documented</span>
+<span class="hljs-keyword">public</span> <span class="hljs-meta">@interface</span> MyController &#123;
+	String <span class="hljs-title function_">value</span><span class="hljs-params">()</span> <span class="hljs-keyword">default</span> <span class="hljs-string">&quot;&quot;</span>;
+&#125;
+
+<span class="hljs-meta">@Target(&#123;ElementType.METHOD,ElementType.TYPE&#125;)</span>
+<span class="hljs-meta">@Retention(RetentionPolicy.RUNTIME)</span>
+<span class="hljs-meta">@Documented</span>
+<span class="hljs-keyword">public</span> <span class="hljs-meta">@interface</span> MyRequestMapping &#123;
+	String <span class="hljs-title function_">value</span><span class="hljs-params">()</span> <span class="hljs-keyword">default</span> <span class="hljs-string">&quot;&quot;</span>;
+&#125;
+
+<span class="hljs-meta">@Target(ElementType.PARAMETER)</span>
+<span class="hljs-meta">@Retention(RetentionPolicy.RUNTIME)</span>
+<span class="hljs-meta">@Documented</span>
+<span class="hljs-keyword">public</span> <span class="hljs-meta">@interface</span> MyRequestParam &#123;
+	String <span class="hljs-title function_">value</span><span class="hljs-params">()</span> <span class="hljs-keyword">default</span> <span class="hljs-string">&quot;&quot;</span>;
+	<span class="hljs-type">boolean</span> <span class="hljs-title function_">required</span><span class="hljs-params">()</span> <span class="hljs-keyword">default</span> <span class="hljs-literal">true</span>;
+&#125;
+
+<span class="hljs-meta">@Target(&#123;ElementType.TYPE&#125;)</span>
+<span class="hljs-meta">@Retention(RetentionPolicy.RUNTIME)</span>
+<span class="hljs-meta">@Documented</span>
+<span class="hljs-keyword">public</span> <span class="hljs-meta">@interface</span> MyService &#123;
+	String <span class="hljs-title function_">value</span><span class="hljs-params">()</span> <span class="hljs-keyword">default</span> <span class="hljs-string">&quot;&quot;</span>;
+&#125;</code></pre></div></li>
+</ul>
+<h2 id="业务代码"><a href="#业务代码" class="headerlink" title="业务代码"></a>业务代码</h2><ul>
+<li><p>整个查询业务</p>
+<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.czh.spring.demo.service;
+
+<span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * 查询业务</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">QueryService</span> &#123;
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * 查询</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">query</span><span class="hljs-params">(String name)</span>;
+&#125;</code></pre></div>
+
+<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.czh.spring.demo.service.impl;
+
+<span class="hljs-keyword">import</span> com.czh.spring.demo.service.QueryService;
+<span class="hljs-keyword">import</span> com.czh.spring.framework.annotation.MyService;
+<span class="hljs-keyword">import</span> lombok.extern.slf4j.Slf4j;
+
+<span class="hljs-keyword">import</span> java.text.SimpleDateFormat;
+<span class="hljs-keyword">import</span> java.util.Date;
+
+<span class="hljs-meta">@Slf4j</span>
+<span class="hljs-meta">@MyService</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">QueryServiceImpl</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">QueryService</span> &#123;
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * 查询</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">query</span><span class="hljs-params">(String name)</span> &#123;
+        <span class="hljs-type">SimpleDateFormat</span> <span class="hljs-variable">sdf</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">SimpleDateFormat</span>(<span class="hljs-string">&quot;yyyy-MM-dd HH:mm:ss&quot;</span>);
+        <span class="hljs-type">String</span> <span class="hljs-variable">time</span> <span class="hljs-operator">=</span> sdf.format(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>());
+        <span class="hljs-type">String</span> <span class="hljs-variable">json</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;&#123;name:\&quot;&quot;</span> + name + <span class="hljs-string">&quot;\&quot;,time:\&quot;&quot;</span> + time + <span class="hljs-string">&quot;\&quot;&#125;&quot;</span>;
+        log.info(<span class="hljs-string">&quot;这是在业务方法中打印的：&quot;</span> + json);
+        <span class="hljs-keyword">return</span> json;
+    &#125;
+&#125;</code></pre></div>
+</li>
+<li><p>CURD都补上</p>
+<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.czh.spring.demo.service;
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">ModifyService</span> &#123;
+
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * 增加</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">add</span><span class="hljs-params">(String name, String addr)</span> <span class="hljs-keyword">throws</span> Exception;
+
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * 修改</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">edit</span><span class="hljs-params">(Integer id, String name)</span>;
+
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * 删除</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">remove</span><span class="hljs-params">(Integer id)</span>;
+&#125;
+</code></pre></div>
+
+<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.czh.spring.demo.service.impl;
+
+<span class="hljs-keyword">import</span> com.czh.spring.demo.service.ModifyService;
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ModifyServiceImpl</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">ModifyService</span> &#123;
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * 增加</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">add</span><span class="hljs-params">(String name, String addr)</span> <span class="hljs-keyword">throws</span> Exception &#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;modifyService add,name=&quot;</span> + name + <span class="hljs-string">&quot;,addr=&quot;</span> + addr;
+    &#125;
+
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * 修改</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">edit</span><span class="hljs-params">(Integer id, String name)</span> &#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;modifyService edit,id=&quot;</span> + id + <span class="hljs-string">&quot;,name=&quot;</span> + name;
+    &#125;
+
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * 删除</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">remove</span><span class="hljs-params">(Integer id)</span> &#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;modifyService id=&quot;</span> + id;
+    &#125;
+
+&#125;</code></pre></div>
+</li>
+<li><p>整个Controller整合CRUD</p>
+<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.czh.spring.demo.controller;
+
+<span class="hljs-keyword">import</span> com.czh.spring.demo.service.ModifyService;
+<span class="hljs-keyword">import</span> com.czh.spring.demo.service.QueryService;
+<span class="hljs-keyword">import</span> com.czh.spring.framework.annotation.*;
+<span class="hljs-keyword">import</span> com.czh.spring.framework.webmvc.MyModelAndView;
+
+
+<span class="hljs-keyword">import</span> javax.servlet.http.HttpServletRequest;
+<span class="hljs-keyword">import</span> javax.servlet.http.HttpServletResponse;
+<span class="hljs-keyword">import</span> java.io.IOException;
+<span class="hljs-keyword">import</span> java.util.Arrays;
+<span class="hljs-keyword">import</span> java.util.HashMap;
+<span class="hljs-keyword">import</span> java.util.Map;
+
+<span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * 公布接口url</span>
+<span class="hljs-comment"> *</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-meta">@MyController</span>
+<span class="hljs-meta">@MyRequestMapping(&quot;/web&quot;)</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CRUDController</span> &#123;
+
+	<span class="hljs-meta">@MyAutowired</span>
+	QueryService queryService;
+	<span class="hljs-meta">@MyAutowired</span>
+	ModifyService modifyService;
+
+	<span class="hljs-meta">@MyRequestMapping(&quot;/query.json&quot;)</span>
+	<span class="hljs-keyword">public</span> MyModelAndView <span class="hljs-title function_">query</span><span class="hljs-params">(HttpServletRequest request, HttpServletResponse response,</span>
+<span class="hljs-params">								<span class="hljs-meta">@MyRequestParam(&quot;name&quot;)</span> String name)</span>&#123;
+		<span class="hljs-type">String</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> queryService.query(name);
+		<span class="hljs-keyword">return</span> out(response,result);
+	&#125;
+	
+	<span class="hljs-meta">@MyRequestMapping(&quot;/add.json&quot;)</span>
+	<span class="hljs-keyword">public</span> MyModelAndView <span class="hljs-title function_">add</span><span class="hljs-params">(HttpServletRequest request,HttpServletResponse response,</span>
+<span class="hljs-params">			   <span class="hljs-meta">@MyRequestParam(&quot;name&quot;)</span> String name,<span class="hljs-meta">@MyRequestParam(&quot;address&quot;)</span> String address)</span>&#123;
+		<span class="hljs-type">String</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> <span class="hljs-literal">null</span>;
+		<span class="hljs-keyword">try</span> &#123;
+			result = modifyService.add(name,address);
+			<span class="hljs-keyword">return</span> out(response,result);
+		&#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;
+<span class="hljs-comment">//			e.printStackTrace();</span>
+			Map&lt;String,Object&gt; model = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;String,Object&gt;();
+			model.put(<span class="hljs-string">&quot;detail&quot;</span>,e.getCause().getMessage());
+<span class="hljs-comment">//			System.out.println(Arrays.toString(e.getStackTrace()).replaceAll(&quot;\\[|\\]&quot;,&quot;&quot;));</span>
+			model.put(<span class="hljs-string">&quot;stackTrace&quot;</span>, Arrays.toString(e.getStackTrace()).replaceAll(<span class="hljs-string">&quot;\\[|\\]&quot;</span>,<span class="hljs-string">&quot;&quot;</span>));
+			<span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MyModelAndView</span>(<span class="hljs-string">&quot;500&quot;</span>,model);
+		&#125;
+
+	&#125;
+	
+	<span class="hljs-meta">@MyRequestMapping(&quot;/remove.json&quot;)</span>
+	<span class="hljs-keyword">public</span> MyModelAndView <span class="hljs-title function_">remove</span><span class="hljs-params">(HttpServletRequest request,HttpServletResponse response,</span>
+<span class="hljs-params">		   <span class="hljs-meta">@MyRequestParam(&quot;id&quot;)</span> Integer id)</span>&#123;
+		<span class="hljs-type">String</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> modifyService.remove(id);
+		<span class="hljs-keyword">return</span> out(response,result);
+	&#125;
+	
+	<span class="hljs-meta">@MyRequestMapping(&quot;/edit.json&quot;)</span>
+	<span class="hljs-keyword">public</span> MyModelAndView <span class="hljs-title function_">edit</span><span class="hljs-params">(HttpServletRequest request,HttpServletResponse response,</span>
+<span class="hljs-params">			<span class="hljs-meta">@MyRequestParam(&quot;id&quot;)</span> Integer id,</span>
+<span class="hljs-params">			<span class="hljs-meta">@MyRequestParam(&quot;name&quot;)</span> String name)</span>&#123;
+		<span class="hljs-type">String</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> modifyService.edit(id,name);
+		<span class="hljs-keyword">return</span> out(response,result);
+	&#125;
+	
+	
+	
+	<span class="hljs-keyword">private</span> MyModelAndView <span class="hljs-title function_">out</span><span class="hljs-params">(HttpServletResponse resp,String str)</span>&#123;
+		<span class="hljs-keyword">try</span> &#123;
+			resp.getWriter().write(str);
+		&#125; <span class="hljs-keyword">catch</span> (IOException e) &#123;
+			e.printStackTrace();
+		&#125;
+		<span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
+	&#125;
+
+&#125;
+</code></pre></div>
+</li>
+<li><p>整个pageController用来测试模版渲染</p>
+<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.czh.spring.demo.controller;
+
+<span class="hljs-keyword">import</span> com.czh.spring.demo.service.QueryService;
+<span class="hljs-keyword">import</span> com.czh.spring.framework.annotation.MyAutowired;
+<span class="hljs-keyword">import</span> com.czh.spring.framework.annotation.MyController;
+<span class="hljs-keyword">import</span> com.czh.spring.framework.annotation.MyRequestMapping;
+<span class="hljs-keyword">import</span> com.czh.spring.framework.annotation.MyRequestParam;
+<span class="hljs-keyword">import</span> com.czh.spring.framework.webmvc.MyModelAndView;
+
+<span class="hljs-keyword">import</span> java.util.HashMap;
+<span class="hljs-keyword">import</span> java.util.Map;
+
+<span class="hljs-meta">@MyController</span>
+<span class="hljs-meta">@MyRequestMapping(&quot;/&quot;)</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">PageController</span> &#123;
+    <span class="hljs-meta">@MyAutowired</span>
+    QueryService queryService;
+
+    <span class="hljs-meta">@MyRequestMapping(&quot;/first.html&quot;)</span>
+    <span class="hljs-keyword">public</span> MyModelAndView <span class="hljs-title function_">query</span><span class="hljs-params">(<span class="hljs-meta">@MyRequestParam(&quot;name&quot;)</span> String name)</span> &#123;
+        <span class="hljs-type">String</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> queryService.query(name);
+        Map&lt;String, Object&gt; model = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+        model.put(<span class="hljs-string">&quot;name&quot;</span>, name);
+        model.put(<span class="hljs-string">&quot;hobby&quot;</span>,<span class="hljs-string">&quot;吃屎&quot;</span>);
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MyModelAndView</span>(<span class="hljs-string">&quot;first.html&quot;</span>, model);
+    &#125;
+&#125;</code></pre></div>
+</li>
+<li><p>概览</p>
+<p><img src="https://img-blog.csdnimg.cn/0c4c6f4ba43d4f27a0faae18ffa0170c.png" srcset="/img/loading.gif" lazyload alt="请添加图片描述"></p>
+</li>
+</ul>
+<h2 id="layouts整合前端资源测试"><a href="#layouts整合前端资源测试" class="headerlink" title="layouts整合前端资源测试"></a>layouts整合前端资源测试</h2><ul>
+<li><p>我用的比较骚的404.html</p>
+<div class="code-wrapper"><pre><code class="hljs html">
+<span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">html</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">&quot;UTF-8&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>404<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">http-equiv</span>=<span class="hljs-string">&quot;X-UA-Compatible&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;IE=edge,chrome=1&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">http-equiv</span>=<span class="hljs-string">&quot;Access-Control-Allow-Origin&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;*&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;viewport&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;width=device-width, initial-scale=1, maximum-scale=1&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;apple-mobile-web-app-status-bar-style&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;black&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;apple-mobile-web-app-capable&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;yes&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;format-detection&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;telephone=no&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">&quot;stylesheet&quot;</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;/lib/layui/css/layui.css&quot;</span> <span class="hljs-attr">media</span>=<span class="hljs-string">&quot;all&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span>
+        html&#123;background: #fff;&#125;
+        .error .clip .shadow &#123;height:180px;&#125;
+        .error .clip:nth-of-type(2) .shadow &#123;width:130px;&#125;
+        .error .clip:nth-of-type(1) .shadow,.error .clip:nth-of-type(3) .shadow &#123;width:250px;&#125;
+        .error .digit &#123;width:150px;height:150px;line-height:150px;font-size:120px;font-weight:bold;&#125;
+        .error h2 &#123;font-size:32px;&#125;
+        .error .msg &#123;top:-190px;left:30%;width:80px;height:80px;line-height:80px;font-size:32px;&#125;
+        .error span.triangle &#123;top:70%;right:0%;border-left:20px solid #535353;border-top:15px solid transparent;border-bottom:15px solid transparent;&#125;
+        .error .container-error-404 &#123;top: 50%;margin-top: 250px;position:relative;height:250px;padding-top:40px;&#125;
+        .error .container-error-404 .clip &#123;display:inline-block;transform:skew(-45deg);&#125;
+        .error .clip .shadow &#123;overflow:hidden;&#125;
+        .error .clip:nth-of-type(2) .shadow &#123;overflow:hidden;position:relative;box-shadow:inset 20px 0px 20px -15px rgba(150,150,150,0.8),20px 0px 20px -15px rgba(150,150,150,0.8);&#125;
+        .error .clip:nth-of-type(3) .shadow:after,.error .clip:nth-of-type(1) .shadow:after &#123;content:&quot;&quot;;position:absolute;right:-8px;bottom:0px;z-index:9999;height:100%;width:10px;background:linear-gradient(90deg,transparent,rgba(173,173,173,0.8),transparent);border-radius:50%;&#125;
+        .error .clip:nth-of-type(3) .shadow:after &#123;left:-8px;&#125;
+        .error .digit &#123;position:relative;top:8%;color:white;background:#1aa094;border-radius:50%;display:inline-block;transform:skew(45deg);&#125;
+        .error .clip:nth-of-type(2) .digit &#123;left:-10%;&#125;
+        .error .clip:nth-of-type(1) .digit &#123;right:-20%;&#125;
+        .error .clip:nth-of-type(3) .digit &#123;left:-20%;&#125;
+        .error h2 &#123;font-size:24px;color:#A2A2A2;font-weight:bold;padding-bottom:20px;&#125;
+        .error .tohome &#123;font-size:16px;color:#07B3F9;&#125;
+        .error .msg &#123;position:relative;z-index:9999;display:block;background:#535353;color:#A2A2A2;border-radius:50%;font-style:italic;&#125;
+        .error .triangle &#123;position:absolute;z-index:999;transform:rotate(45deg);content:&quot;&quot;;width:0;height:0;&#125;
+        @media(max-width:767px) &#123;.error .clip .shadow &#123;height:100px;&#125;
+            .error .clip:nth-of-type(2) .shadow &#123;width:80px;&#125;
+            .error .clip:nth-of-type(1) .shadow,.error .clip:nth-of-type(3) .shadow &#123;width:100px;&#125;
+            .error .digit &#123;width:80px;height:80px;line-height:80px;font-size:52px;&#125;
+            .error h2 &#123;font-size:18px;&#125;
+            .error .msg &#123;top:-110px;left:15%;width:40px;height:40px;line-height:40px;font-size:18px;&#125;
+            .error span.triangle &#123;top:70%;right:-3%;border-left:10px solid #535353;border-top:8px solid transparent;border-bottom:8px solid transparent;&#125;
+            .error .container-error-404 &#123;height:150px;&#125;
+        &#125;
+    <span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;error&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;container-floud&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;text-align: center&quot;</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;container-error-404&quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;clip&quot;</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;shadow&quot;</span>&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;digit thirdDigit&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+                    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+                <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;clip&quot;</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;shadow&quot;</span>&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;digit secondDigit&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+                    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+                <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;clip&quot;</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;shadow&quot;</span>&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;digit firstDigit&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+                    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+                <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;msg&quot;</span>&gt;</span>OH!
+                    <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;triangle&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+                <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">h2</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;h1&quot;</span>&gt;</span>很抱歉，你访问的页面找不到了<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;/lib/layui/layui.js&quot;</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">&quot;utf-8&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span>
+<span class="language-javascript">    <span class="hljs-keyword">function</span> <span class="hljs-title function_">randomNum</span>(<span class="hljs-params"></span>) &#123;</span>
+<span class="language-javascript">        <span class="hljs-keyword">return</span> <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">floor</span>(<span class="hljs-title class_">Math</span>.<span class="hljs-title function_">random</span>() * <span class="hljs-number">9</span>) + <span class="hljs-number">1</span>;</span>
+<span class="language-javascript">    &#125;</span>
+<span class="language-javascript"></span>
+<span class="language-javascript">    <span class="hljs-keyword">var</span> loop1, loop2, loop3, time = <span class="hljs-number">30</span>, i = <span class="hljs-number">0</span>, number;</span>
+<span class="language-javascript">    loop3 = <span class="hljs-built_in">setInterval</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;</span>
+<span class="language-javascript">        <span class="hljs-keyword">if</span> (i &gt; <span class="hljs-number">40</span>) &#123;</span>
+<span class="language-javascript">            <span class="hljs-built_in">clearInterval</span>(loop3);</span>
+<span class="language-javascript">            <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&#x27;.thirdDigit&#x27;</span>).<span class="hljs-property">textContent</span> = <span class="hljs-number">4</span>;</span>
+<span class="language-javascript">        &#125; <span class="hljs-keyword">else</span> &#123;</span>
+<span class="language-javascript">            <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&#x27;.thirdDigit&#x27;</span>).<span class="hljs-property">textContent</span> = <span class="hljs-title function_">randomNum</span>();</span>
+<span class="language-javascript">            i++;</span>
+<span class="language-javascript">        &#125;</span>
+<span class="language-javascript">    &#125;, time);</span>
+<span class="language-javascript">    loop2 = <span class="hljs-built_in">setInterval</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;</span>
+<span class="language-javascript">        <span class="hljs-keyword">if</span> (i &gt; <span class="hljs-number">80</span>) &#123;</span>
+<span class="language-javascript">            <span class="hljs-built_in">clearInterval</span>(loop2);</span>
+<span class="language-javascript">            <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&#x27;.secondDigit&#x27;</span>).<span class="hljs-property">textContent</span> = <span class="hljs-number">0</span>;</span>
+<span class="language-javascript">        &#125; <span class="hljs-keyword">else</span> &#123;</span>
+<span class="language-javascript">            <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&#x27;.secondDigit&#x27;</span>).<span class="hljs-property">textContent</span> = <span class="hljs-title function_">randomNum</span>();</span>
+<span class="language-javascript">            i++;</span>
+<span class="language-javascript">        &#125;</span>
+<span class="language-javascript">    &#125;, time);</span>
+<span class="language-javascript">    loop1 = <span class="hljs-built_in">setInterval</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;</span>
+<span class="language-javascript">        <span class="hljs-keyword">if</span> (i &gt; <span class="hljs-number">100</span>) &#123;</span>
+<span class="language-javascript">            <span class="hljs-built_in">clearInterval</span>(loop1);</span>
+<span class="language-javascript">            <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&#x27;.firstDigit&#x27;</span>).<span class="hljs-property">textContent</span> = <span class="hljs-number">4</span>;</span>
+<span class="language-javascript">        &#125; <span class="hljs-keyword">else</span> &#123;</span>
+<span class="language-javascript">            <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&#x27;.firstDigit&#x27;</span>).<span class="hljs-property">textContent</span> = <span class="hljs-title function_">randomNum</span>();</span>
+<span class="language-javascript">            i++;</span>
+<span class="language-javascript">        &#125;</span>
+<span class="language-javascript">    &#125;, time);</span>
+<span class="language-javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span></code></pre></div>
+</li>
+<li><p>我用的比较骚的500.html</p>
+<div class="code-wrapper"><pre><code class="hljs html">
+<span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">html</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">&quot;UTF-8&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>404<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">http-equiv</span>=<span class="hljs-string">&quot;X-UA-Compatible&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;IE=edge,chrome=1&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">http-equiv</span>=<span class="hljs-string">&quot;Access-Control-Allow-Origin&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;*&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;viewport&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;width=device-width, initial-scale=1, maximum-scale=1&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;apple-mobile-web-app-status-bar-style&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;black&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;apple-mobile-web-app-capable&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;yes&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;format-detection&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;telephone=no&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">&quot;stylesheet&quot;</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;/lib/layui/css/layui.css&quot;</span> <span class="hljs-attr">media</span>=<span class="hljs-string">&quot;all&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span>
+        html&#123;background: #fff;&#125;
+        .error .clip .shadow &#123;height:180px;&#125;
+        .error .clip:nth-of-type(2) .shadow &#123;width:130px;&#125;
+        .error .clip:nth-of-type(1) .shadow,.error .clip:nth-of-type(3) .shadow &#123;width:250px;&#125;
+        .error .digit &#123;width:150px;height:150px;line-height:150px;font-size:120px;font-weight:bold;&#125;
+        .error h2 &#123;font-size:32px;&#125;
+        .error .msg &#123;top:-190px;left:30%;width:80px;height:80px;line-height:80px;font-size:32px;&#125;
+        .error span.triangle &#123;top:70%;right:0%;border-left:20px solid #535353;border-top:15px solid transparent;border-bottom:15px solid transparent;&#125;
+        .error .container-error-404 &#123;top: 50%;margin-top: 250px;position:relative;height:250px;padding-top:40px;&#125;
+        .error .container-error-404 .clip &#123;display:inline-block;transform:skew(-45deg);&#125;
+        .error .clip .shadow &#123;overflow:hidden;&#125;
+        .error .clip:nth-of-type(2) .shadow &#123;overflow:hidden;position:relative;box-shadow:inset 20px 0px 20px -15px rgba(150,150,150,0.8),20px 0px 20px -15px rgba(150,150,150,0.8);&#125;
+        .error .clip:nth-of-type(3) .shadow:after,.error .clip:nth-of-type(1) .shadow:after &#123;content:&quot;&quot;;position:absolute;right:-8px;bottom:0px;z-index:9999;height:100%;width:10px;background:linear-gradient(90deg,transparent,rgba(173,173,173,0.8),transparent);border-radius:50%;&#125;
+        .error .clip:nth-of-type(3) .shadow:after &#123;left:-8px;&#125;
+        .error .digit &#123;position:relative;top:8%;color:white;background:#1aa094;border-radius:50%;display:inline-block;transform:skew(45deg);&#125;
+        .error .clip:nth-of-type(2) .digit &#123;left:-10%;&#125;
+        .error .clip:nth-of-type(1) .digit &#123;right:-20%;&#125;
+        .error .clip:nth-of-type(3) .digit &#123;left:-20%;&#125;
+        .error h2 &#123;font-size:24px;color:#A2A2A2;font-weight:bold;padding-bottom:20px;&#125;
+        .error .tohome &#123;font-size:16px;color:#07B3F9;&#125;
+        .error .msg &#123;position:relative;z-index:9999;display:block;background:#535353;color:#A2A2A2;border-radius:50%;font-style:italic;&#125;
+        .error .triangle &#123;position:absolute;z-index:999;transform:rotate(45deg);content:&quot;&quot;;width:0;height:0;&#125;
+        @media(max-width:767px) &#123;.error .clip .shadow &#123;height:100px;&#125;
+            .error .clip:nth-of-type(2) .shadow &#123;width:80px;&#125;
+            .error .clip:nth-of-type(1) .shadow,.error .clip:nth-of-type(3) .shadow &#123;width:100px;&#125;
+            .error .digit &#123;width:80px;height:80px;line-height:80px;font-size:52px;&#125;
+            .error h2 &#123;font-size:18px;&#125;
+            .error .msg &#123;top:-110px;left:15%;width:40px;height:40px;line-height:40px;font-size:18px;&#125;
+            .error span.triangle &#123;top:70%;right:-3%;border-left:10px solid #535353;border-top:8px solid transparent;border-bottom:8px solid transparent;&#125;
+            .error .container-error-404 &#123;height:150px;&#125;
+        &#125;
+    <span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;error&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;container-floud&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;text-align: center&quot;</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;container-error-404&quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;clip&quot;</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;shadow&quot;</span>&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;digit thirdDigit&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+                    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+                <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;clip&quot;</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;shadow&quot;</span>&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;digit secondDigit&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+                    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+                <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;clip&quot;</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;shadow&quot;</span>&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;digit firstDigit&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+                    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+                <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;msg&quot;</span>&gt;</span>OH!
+                    <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;triangle&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+                <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">h2</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;h1&quot;</span>&gt;</span>o(╥﹏╥)o很抱歉，系统错误咯~~ 赶紧联系管理员吧<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">h2</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;h1&quot;</span>&gt;</span>Message:￥&#123;detail&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">h2</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;h1&quot;</span>&gt;</span>StackTrace:￥&#123;stackTrace&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">h2</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;h1&quot;</span>&gt;</span>Copyright@luelueking<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;/lib/layui/layui.js&quot;</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">&quot;utf-8&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span>
+<span class="language-javascript">    <span class="hljs-keyword">function</span> <span class="hljs-title function_">randomNum</span>(<span class="hljs-params"></span>) &#123;</span>
+<span class="language-javascript">        <span class="hljs-keyword">return</span> <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">floor</span>(<span class="hljs-title class_">Math</span>.<span class="hljs-title function_">random</span>() * <span class="hljs-number">9</span>) + <span class="hljs-number">1</span>;</span>
+<span class="language-javascript">    &#125;</span>
+<span class="language-javascript"></span>
+<span class="language-javascript">    <span class="hljs-keyword">var</span> loop1, loop2, loop3, time = <span class="hljs-number">30</span>, i = <span class="hljs-number">0</span>, number;</span>
+<span class="language-javascript">    loop3 = <span class="hljs-built_in">setInterval</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;</span>
+<span class="language-javascript">        <span class="hljs-keyword">if</span> (i &gt; <span class="hljs-number">40</span>) &#123;</span>
+<span class="language-javascript">            <span class="hljs-built_in">clearInterval</span>(loop3);</span>
+<span class="language-javascript">            <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&#x27;.thirdDigit&#x27;</span>).<span class="hljs-property">textContent</span> = <span class="hljs-number">5</span>;</span>
+<span class="language-javascript">        &#125; <span class="hljs-keyword">else</span> &#123;</span>
+<span class="language-javascript">            <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&#x27;.thirdDigit&#x27;</span>).<span class="hljs-property">textContent</span> = <span class="hljs-title function_">randomNum</span>();</span>
+<span class="language-javascript">            i++;</span>
+<span class="language-javascript">        &#125;</span>
+<span class="language-javascript">    &#125;, time);</span>
+<span class="language-javascript">    loop2 = <span class="hljs-built_in">setInterval</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;</span>
+<span class="language-javascript">        <span class="hljs-keyword">if</span> (i &gt; <span class="hljs-number">80</span>) &#123;</span>
+<span class="language-javascript">            <span class="hljs-built_in">clearInterval</span>(loop2);</span>
+<span class="language-javascript">            <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&#x27;.secondDigit&#x27;</span>).<span class="hljs-property">textContent</span> = <span class="hljs-number">0</span>;</span>
+<span class="language-javascript">        &#125; <span class="hljs-keyword">else</span> &#123;</span>
+<span class="language-javascript">            <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&#x27;.secondDigit&#x27;</span>).<span class="hljs-property">textContent</span> = <span class="hljs-title function_">randomNum</span>();</span>
+<span class="language-javascript">            i++;</span>
+<span class="language-javascript">        &#125;</span>
+<span class="language-javascript">    &#125;, time);</span>
+<span class="language-javascript">    loop1 = <span class="hljs-built_in">setInterval</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;</span>
+<span class="language-javascript">        <span class="hljs-keyword">if</span> (i &gt; <span class="hljs-number">100</span>) &#123;</span>
+<span class="language-javascript">            <span class="hljs-built_in">clearInterval</span>(loop1);</span>
+<span class="language-javascript">            <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&#x27;.firstDigit&#x27;</span>).<span class="hljs-property">textContent</span> = <span class="hljs-number">0</span>;</span>
+<span class="language-javascript">        &#125; <span class="hljs-keyword">else</span> &#123;</span>
+<span class="language-javascript">            <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&#x27;.firstDigit&#x27;</span>).<span class="hljs-property">textContent</span> = <span class="hljs-title function_">randomNum</span>();</span>
+<span class="language-javascript">            i++;</span>
+<span class="language-javascript">        &#125;</span>
+<span class="language-javascript">    &#125;, time);</span>
+<span class="language-javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span></code></pre></div>
+</li>
+<li><p>我用的比较骚的用来测试模版渲染的first.html</p>
+<p>注意模版为¥{}的类型</p>
+<div class="code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">http-equiv</span>=<span class="hljs-string">&quot;Content-Type&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;text/html; charset=UTF-8&quot;</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">http-equiv</span>=<span class="hljs-string">&quot;Content-Type&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;text/html; charset=UTF-8&quot;</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>springMVC模版渲染测试用例<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;viewport&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-comment">&lt;!--	注意这里的¥&#123;&#125;--&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>I&#x27;m ￥&#123;name&#125;,I like ￥&#123;hobby&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;loader&quot;</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;track&quot;</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;mouse&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;face&quot;</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;ears-container&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;eyes-container&quot;</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;eye&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;eye&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+		<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;phiz&quot;</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;nose&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;lip&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;mouth&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+		<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="language-css"></span>
+<span class="language-css">	<span class="hljs-keyword">@import</span> url(<span class="hljs-string">&quot;https://fonts.googleapis.com/css?family=Cabin+Sketch:400,700&quot;</span>);</span>
+<span class="language-css">	<span class="hljs-keyword">@import</span> url(<span class="hljs-string">&quot;https://fonts.googleapis.com/css?family=Cabin+Sketch:400,700|Open+Sans|Oswald&quot;</span>);</span>
+<span class="language-css">	<span class="hljs-selector-class">.title-box</span> &#123;</span>
+<span class="language-css">		<span class="hljs-attribute">position</span>: relative;</span>
+<span class="language-css">		<span class="hljs-attribute">margin</span>: auto;</span>
+<span class="language-css">		<span class="hljs-attribute">display</span>: block;</span>
+<span class="language-css">		<span class="hljs-attribute">width</span>: <span class="hljs-number">400px</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">margin-top</span>: <span class="hljs-number">10%</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">background</span>: none;</span>
+<span class="language-css">		<span class="hljs-attribute">z-index</span>:<span class="hljs-number">999</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">border-bottom-color</span>: transparent;</span>
+<span class="language-css">	&#125;</span>
+<span class="language-css">	<span class="hljs-selector-class">.btn-bubble</span> &#123;</span>
+<span class="language-css">		<span class="hljs-attribute">color</span>: white;</span>
+<span class="language-css">		<span class="hljs-attribute">background-color</span>: <span class="hljs-number">#6da0e0</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">background-repeat</span>: no-repeat;</span>
+<span class="language-css">	&#125;</span>
+<span class="language-css">	<span class="hljs-selector-class">.btn-bubble</span><span class="hljs-selector-pseudo">:hover</span>,</span>
+<span class="language-css">	<span class="hljs-selector-class">.btn-bubble</span><span class="hljs-selector-pseudo">:focus</span> &#123;</span>
+<span class="language-css">		-webkit-<span class="hljs-attribute">animation</span>: bubbles <span class="hljs-number">1s</span> forwards ease-out;</span>
+<span class="language-css">		<span class="hljs-attribute">animation</span>: bubbles <span class="hljs-number">1s</span> forwards ease-out;</span>
+<span class="language-css">		<span class="hljs-attribute">background</span>: <span class="hljs-built_in">radial-gradient</span>(circle at center, <span class="hljs-built_in">rgba</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>) <span class="hljs-number">30%</span>, <span class="hljs-number">#eeeeff</span> <span class="hljs-number">60%</span>, <span class="hljs-number">#eeeeff</span> <span class="hljs-number">65%</span>, <span class="hljs-built_in">rgba</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>) <span class="hljs-number">70%</span>) <span class="hljs-number">52%</span> <span class="hljs-number">125%</span> / <span class="hljs-number">1.2em</span> <span class="hljs-number">1.2em</span>, <span class="hljs-built_in">radial-gradient</span>(circle at center, <span class="hljs-built_in">rgba</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>) <span class="hljs-number">30%</span>, <span class="hljs-number">#eeeeff</span> <span class="hljs-number">60%</span>, <span class="hljs-number">#eeeeff</span> <span class="hljs-number">65%</span>, <span class="hljs-built_in">rgba</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>) <span class="hljs-number">70%</span>) <span class="hljs-number">67%</span> <span class="hljs-number">133%</span> / <span class="hljs-number">0.66em</span> <span class="hljs-number">0.66em</span>, <span class="hljs-built_in">radial-gradient</span>(circle at center, <span class="hljs-built_in">rgba</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>) <span class="hljs-number">30%</span>, <span class="hljs-number">#eeeeff</span> <span class="hljs-number">60%</span>, <span class="hljs-number">#eeeeff</span> <span class="hljs-number">65%</span>, <span class="hljs-built_in">rgba</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>) <span class="hljs-number">70%</span>) <span class="hljs-number">64%</span> <span class="hljs-number">93%</span> / <span class="hljs-number">1.17em</span> <span class="hljs-number">1.17em</span>, <span class="hljs-built_in">radial-gradient</span>(circle at center, <span class="hljs-built_in">rgba</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>) <span class="hljs-number">30%</span>, <span class="hljs-number">#eeeeff</span> <span class="hljs-number">60%</span>, <span class="hljs-number">#eeeeff</span> <span class="hljs-number">65%</span>, <span class="hljs-built_in">rgba</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>) <span class="hljs-number">70%</span>) <span class="hljs-number">22%</span> <span class="hljs-number">88%</span> / <span class="hljs-number">1.04em</span> <span class="hljs-number">1.04em</span>, <span class="hljs-built_in">radial-gradient</span>(circle at center, <span class="hljs-built_in">rgba</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>) <span class="hljs-number">30%</span>, <span class="hljs-number">#eeeeff</span> <span class="hljs-number">60%</span>, <span class="hljs-number">#eeeeff</span> <span class="hljs-number">65%</span>, <span class="hljs-built_in">rgba</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>) <span class="hljs-number">70%</span>) <span class="hljs-number">43%</span> <span class="hljs-number">95%</span> / <span class="hljs-number">0.87em</span> <span class="hljs-number">0.87em</span>, <span class="hljs-built_in">radial-gradient</span>(circle at center, <span class="hljs-built_in">rgba</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>) <span class="hljs-number">30%</span>, <span class="hljs-number">#eeeeff</span> <span class="hljs-number">60%</span>, <span class="hljs-number">#eeeeff</span> <span class="hljs-number">65%</span>, <span class="hljs-built_in">rgba</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>) <span class="hljs-number">70%</span>) <span class="hljs-number">97%</span> <span class="hljs-number">116%</span> / <span class="hljs-number">0.62em</span> <span class="hljs-number">0.62em</span>, <span class="hljs-built_in">radial-gradient</span>(circle at center, <span class="hljs-built_in">rgba</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>) <span class="hljs-number">30%</span>, <span class="hljs-number">#eeeeff</span> <span class="hljs-number">60%</span>, <span class="hljs-number">#eeeeff</span> <span class="hljs-number">65%</span>, <span class="hljs-built_in">rgba</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>) <span class="hljs-number">70%</span>) <span class="hljs-number">62%</span> <span class="hljs-number">97%</span> / <span class="hljs-number">0.64em</span> <span class="hljs-number">0.64em</span>, <span class="hljs-built_in">radial-gradient</span>(circle at center, <span class="hljs-built_in">rgba</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>) <span class="hljs-number">30%</span>, <span class="hljs-number">#eeeeff</span> <span class="hljs-number">60%</span>, <span class="hljs-number">#eeeeff</span> <span class="hljs-number">65%</span>, <span class="hljs-built_in">rgba</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>) <span class="hljs-number">70%</span>) <span class="hljs-number">87%</span> <span class="hljs-number">135%</span> / <span class="hljs-number">0.68em</span> <span class="hljs-number">0.68em</span>, <span class="hljs-built_in">radial-gradient</span>(circle at center, <span class="hljs-built_in">rgba</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>) <span class="hljs-number">30%</span>, <span class="hljs-number">#eeeeff</span> <span class="hljs-number">60%</span>, <span class="hljs-number">#eeeeff</span> <span class="hljs-number">65%</span>, <span class="hljs-built_in">rgba</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>) <span class="hljs-number">70%</span>) -<span class="hljs-number">4%</span> <span class="hljs-number">89%</span> / <span class="hljs-number">0.57em</span> <span class="hljs-number">0.57em</span>, <span class="hljs-built_in">radial-gradient</span>(circle at center, <span class="hljs-built_in">rgba</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>) <span class="hljs-number">30%</span>, <span class="hljs-number">#eeeeff</span> <span class="hljs-number">60%</span>, <span class="hljs-number">#eeeeff</span> <span class="hljs-number">65%</span>, <span class="hljs-built_in">rgba</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>) <span class="hljs-number">70%</span>) <span class="hljs-number">89%</span> <span class="hljs-number">88%</span> / <span class="hljs-number">0.65em</span> <span class="hljs-number">0.65em</span>, <span class="hljs-built_in">radial-gradient</span>(circle at center, <span class="hljs-built_in">rgba</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>) <span class="hljs-number">30%</span>, <span class="hljs-number">#eeeeff</span> <span class="hljs-number">60%</span>, <span class="hljs-number">#eeeeff</span> <span class="hljs-number">65%</span>, <span class="hljs-built_in">rgba</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>) <span class="hljs-number">70%</span>) <span class="hljs-number">6%</span> <span class="hljs-number">144%</span> / <span class="hljs-number">0.77em</span> <span class="hljs-number">0.77em</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">background-color</span>: <span class="hljs-number">#6da0e0</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">background-repeat</span>: no-repeat;</span>
+<span class="language-css">	&#125;</span>
+<span class="language-css">	<span class="hljs-keyword">@-webkit-keyframes</span> bubbles &#123;</span>
+<span class="language-css">		<span class="hljs-number">100%</span> &#123;</span>
+<span class="language-css">			<span class="hljs-attribute">background-position</span>: <span class="hljs-number">45%</span> -<span class="hljs-number">182%</span>, <span class="hljs-number">61%</span> -<span class="hljs-number">215%</span>, <span class="hljs-number">62%</span> -<span class="hljs-number">196%</span>, <span class="hljs-number">18%</span> -<span class="hljs-number">318%</span>, <span class="hljs-number">51%</span> -<span class="hljs-number">86%</span>, <span class="hljs-number">88%</span> -<span class="hljs-number">292%</span>, <span class="hljs-number">66%</span> -<span class="hljs-number">244%</span>, <span class="hljs-number">89%</span> -<span class="hljs-number">313%</span>, -<span class="hljs-number">9%</span> <span class="hljs-number">9%</span>, <span class="hljs-number">99%</span> -<span class="hljs-number">107%</span>, <span class="hljs-number">16%</span> -<span class="hljs-number">282%</span>;</span>
+<span class="language-css">			<span class="hljs-attribute">box-shadow</span>: inset <span class="hljs-number">0</span> -<span class="hljs-number">6.5em</span> <span class="hljs-number">0</span> <span class="hljs-number">#0072c4</span>;</span>
+<span class="language-css">		&#125;</span>
+<span class="language-css">	&#125;</span>
+<span class="language-css">	<span class="hljs-keyword">@keyframes</span> bubbles &#123;</span>
+<span class="language-css">		<span class="hljs-number">100%</span> &#123;</span>
+<span class="language-css">			<span class="hljs-attribute">background-position</span>: <span class="hljs-number">45%</span> -<span class="hljs-number">182%</span>, <span class="hljs-number">61%</span> -<span class="hljs-number">215%</span>, <span class="hljs-number">62%</span> -<span class="hljs-number">196%</span>, <span class="hljs-number">18%</span> -<span class="hljs-number">318%</span>, <span class="hljs-number">51%</span> -<span class="hljs-number">86%</span>, <span class="hljs-number">88%</span> -<span class="hljs-number">292%</span>, <span class="hljs-number">66%</span> -<span class="hljs-number">244%</span>, <span class="hljs-number">89%</span> -<span class="hljs-number">313%</span>, -<span class="hljs-number">9%</span> <span class="hljs-number">9%</span>, <span class="hljs-number">99%</span> -<span class="hljs-number">107%</span>, <span class="hljs-number">16%</span> -<span class="hljs-number">282%</span>;</span>
+<span class="language-css">			<span class="hljs-attribute">box-shadow</span>: inset <span class="hljs-number">0</span> -<span class="hljs-number">6.5em</span> <span class="hljs-number">0</span> <span class="hljs-number">#0072c4</span>;</span>
+<span class="language-css">		&#125;</span>
+<span class="language-css">	&#125;</span>
+<span class="language-css">	<span class="hljs-selector-tag">body</span> &#123;</span>
+<span class="language-css">		<span class="hljs-attribute">background</span>: <span class="hljs-number">#10192d</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">display</span>: flex;</span>
+<span class="language-css">		<span class="hljs-attribute">min-height</span>: <span class="hljs-number">100vh</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">justify-content</span>: center;</span>
+<span class="language-css">		<span class="hljs-attribute">align-content</span>: center;</span>
+<span class="language-css">		<span class="hljs-attribute">align-items</span>: center;</span>
+<span class="language-css">	&#125;</span>
+<span class="language-css">	<span class="hljs-selector-class">.btn</span> &#123;</span>
+<span class="language-css">		<span class="hljs-attribute">text-decoration</span>: none;</span>
+<span class="language-css">		<span class="hljs-attribute">padding</span>: <span class="hljs-number">1em</span> <span class="hljs-number">2em</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">display</span>: block;</span>
+<span class="language-css">		<span class="hljs-attribute">text-decoration</span>: none;</span>
+<span class="language-css">		<span class="hljs-attribute">padding</span>: <span class="hljs-number">1em</span> <span class="hljs-number">2em</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span> auto;</span>
+<span class="language-css">		<span class="hljs-attribute">text-align</span>: center;</span>
+<span class="language-css">	&#125;</span>
+<span class="language-css"></span>
+<span class="language-css">	<span class="hljs-selector-tag">h1</span> &#123;</span>
+<span class="language-css">		<span class="hljs-attribute">text-align</span>: center;</span>
+<span class="language-css">		<span class="hljs-attribute">font-family</span>: <span class="hljs-string">&#x27;Cabin Sketch&#x27;</span>, cursive;</span>
+<span class="language-css">		<span class="hljs-attribute">font-size</span>: <span class="hljs-number">90px</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">margin-top</span>: <span class="hljs-number">0px</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">color</span>: <span class="hljs-number">#333</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">margin-bottom</span>: <span class="hljs-number">20px</span>;</span>
+<span class="language-css">	&#125;</span>
+<span class="language-css">	<span class="hljs-keyword">@-webkit-keyframes</span> rotate &#123;</span>
+<span class="language-css">		<span class="hljs-number">0%</span> &#123;</span>
+<span class="language-css">			<span class="hljs-attribute">transform</span>: <span class="hljs-built_in">rotate</span>(-<span class="hljs-number">0.08turn</span>);</span>
+<span class="language-css">		&#125;</span>
+<span class="language-css">		<span class="hljs-number">100%</span> &#123;</span>
+<span class="language-css">			<span class="hljs-attribute">transform</span>: <span class="hljs-built_in">rotate</span>(-<span class="hljs-number">1.08turn</span>);</span>
+<span class="language-css">		&#125;</span>
+<span class="language-css">	&#125;</span>
+<span class="language-css">	<span class="hljs-keyword">@-moz-keyframes</span> rotate &#123;</span>
+<span class="language-css">		<span class="hljs-number">0%</span> &#123;</span>
+<span class="language-css">			<span class="hljs-attribute">transform</span>: <span class="hljs-built_in">rotate</span>(-<span class="hljs-number">0.08turn</span>);</span>
+<span class="language-css">		&#125;</span>
+<span class="language-css">		<span class="hljs-number">100%</span> &#123;</span>
+<span class="language-css">			<span class="hljs-attribute">transform</span>: <span class="hljs-built_in">rotate</span>(-<span class="hljs-number">1.08turn</span>);</span>
+<span class="language-css">		&#125;</span>
+<span class="language-css">	&#125;</span>
+<span class="language-css">	<span class="hljs-keyword">@-o-keyframes</span> rotate &#123;</span>
+<span class="language-css">		<span class="hljs-number">0%</span> &#123;</span>
+<span class="language-css">			<span class="hljs-attribute">transform</span>: <span class="hljs-built_in">rotate</span>(-<span class="hljs-number">0.08turn</span>);</span>
+<span class="language-css">		&#125;</span>
+<span class="language-css">		<span class="hljs-number">100%</span> &#123;</span>
+<span class="language-css">			<span class="hljs-attribute">transform</span>: <span class="hljs-built_in">rotate</span>(-<span class="hljs-number">1.08turn</span>);</span>
+<span class="language-css">		&#125;</span>
+<span class="language-css">	&#125;</span>
+<span class="language-css">	<span class="hljs-keyword">@keyframes</span> rotate &#123;</span>
+<span class="language-css">		<span class="hljs-number">0%</span> &#123;</span>
+<span class="language-css">			<span class="hljs-attribute">transform</span>: <span class="hljs-built_in">rotate</span>(-<span class="hljs-number">0.08turn</span>);</span>
+<span class="language-css">		&#125;</span>
+<span class="language-css">		<span class="hljs-number">100%</span> &#123;</span>
+<span class="language-css">			<span class="hljs-attribute">transform</span>: <span class="hljs-built_in">rotate</span>(-<span class="hljs-number">1.08turn</span>);</span>
+<span class="language-css">		&#125;</span>
+<span class="language-css">	&#125;</span>
+<span class="language-css">	<span class="hljs-keyword">@-webkit-keyframes</span> hideEye &#123;</span>
+<span class="language-css">		<span class="hljs-number">0%</span>, <span class="hljs-number">10%</span>, <span class="hljs-number">85%</span> &#123;</span>
+<span class="language-css">			<span class="hljs-attribute">margin-top</span>: <span class="hljs-number">0</span>;</span>
+<span class="language-css">			<span class="hljs-attribute">height</span>: <span class="hljs-number">50px</span>;</span>
+<span class="language-css">		&#125;</span>
+<span class="language-css">		<span class="hljs-number">30%</span>,</span>
+<span class="language-css">		<span class="hljs-number">65%</span> &#123;</span>
+<span class="language-css">			<span class="hljs-attribute">margin-top</span>: <span class="hljs-number">20px</span>;</span>
+<span class="language-css">			<span class="hljs-attribute">height</span>: <span class="hljs-number">30px</span>;</span>
+<span class="language-css">		&#125;</span>
+<span class="language-css">	&#125;</span>
+<span class="language-css">	<span class="hljs-keyword">@-moz-keyframes</span> hideEye &#123;</span>
+<span class="language-css">		<span class="hljs-number">0%</span>, <span class="hljs-number">10%</span>, <span class="hljs-number">85%</span> &#123;</span>
+<span class="language-css">			<span class="hljs-attribute">margin-top</span>: <span class="hljs-number">0</span>;</span>
+<span class="language-css">			<span class="hljs-attribute">height</span>: <span class="hljs-number">50px</span>;</span>
+<span class="language-css">		&#125;</span>
+<span class="language-css">		<span class="hljs-number">30%</span>,</span>
+<span class="language-css">		<span class="hljs-number">65%</span> &#123;</span>
+<span class="language-css">			<span class="hljs-attribute">margin-top</span>: <span class="hljs-number">20px</span>;</span>
+<span class="language-css">			<span class="hljs-attribute">height</span>: <span class="hljs-number">30px</span>;</span>
+<span class="language-css">		&#125;</span>
+<span class="language-css">	&#125;</span>
+<span class="language-css">	<span class="hljs-keyword">@-o-keyframes</span> hideEye &#123;</span>
+<span class="language-css">		<span class="hljs-number">0%</span>, <span class="hljs-number">10%</span>, <span class="hljs-number">85%</span> &#123;</span>
+<span class="language-css">			<span class="hljs-attribute">margin-top</span>: <span class="hljs-number">0</span>;</span>
+<span class="language-css">			<span class="hljs-attribute">height</span>: <span class="hljs-number">50px</span>;</span>
+<span class="language-css">		&#125;</span>
+<span class="language-css">		<span class="hljs-number">30%</span>,</span>
+<span class="language-css">		<span class="hljs-number">65%</span> &#123;</span>
+<span class="language-css">			<span class="hljs-attribute">margin-top</span>: <span class="hljs-number">20px</span>;</span>
+<span class="language-css">			<span class="hljs-attribute">height</span>: <span class="hljs-number">30px</span>;</span>
+<span class="language-css">		&#125;</span>
+<span class="language-css">	&#125;</span>
+<span class="language-css">	<span class="hljs-keyword">@keyframes</span> hideEye &#123;</span>
+<span class="language-css">		<span class="hljs-number">0%</span>, <span class="hljs-number">10%</span>, <span class="hljs-number">85%</span> &#123;</span>
+<span class="language-css">			<span class="hljs-attribute">margin-top</span>: <span class="hljs-number">0</span>;</span>
+<span class="language-css">			<span class="hljs-attribute">height</span>: <span class="hljs-number">50px</span>;</span>
+<span class="language-css">		&#125;</span>
+<span class="language-css">		<span class="hljs-number">30%</span>,</span>
+<span class="language-css">		<span class="hljs-number">65%</span> &#123;</span>
+<span class="language-css">			<span class="hljs-attribute">margin-top</span>: <span class="hljs-number">20px</span>;</span>
+<span class="language-css">			<span class="hljs-attribute">height</span>: <span class="hljs-number">30px</span>;</span>
+<span class="language-css">		&#125;</span>
+<span class="language-css">	&#125;</span>
+<span class="language-css">	<span class="hljs-keyword">@-webkit-keyframes</span> blink &#123;</span>
+<span class="language-css">		<span class="hljs-number">0%</span>, <span class="hljs-number">10%</span>, <span class="hljs-number">85%</span> &#123;</span>
+<span class="language-css">			<span class="hljs-attribute">bottom</span>: <span class="hljs-number">0</span>;</span>
+<span class="language-css">		&#125;</span>
+<span class="language-css">		<span class="hljs-number">30%</span>,</span>
+<span class="language-css">		<span class="hljs-number">65%</span> &#123;</span>
+<span class="language-css">			<span class="hljs-attribute">bottom</span>: <span class="hljs-number">20px</span>;</span>
+<span class="language-css">		&#125;</span>
+<span class="language-css">		<span class="hljs-number">0%</span> &#123;</span>
+<span class="language-css">			<span class="hljs-attribute">transform</span>: <span class="hljs-built_in">rotate</span>(-<span class="hljs-number">0.08turn</span>);</span>
+<span class="language-css">		&#125;</span>
+<span class="language-css">		<span class="hljs-number">100%</span> &#123;</span>
+<span class="language-css">			<span class="hljs-attribute">transform</span>: <span class="hljs-built_in">rotate</span>(-<span class="hljs-number">1.08turn</span>);</span>
+<span class="language-css">		&#125;</span>
+<span class="language-css">	&#125;</span>
+<span class="language-css">	<span class="hljs-keyword">@-moz-keyframes</span> blink &#123;</span>
+<span class="language-css">		<span class="hljs-number">0%</span>, <span class="hljs-number">10%</span>, <span class="hljs-number">85%</span> &#123;</span>
+<span class="language-css">			<span class="hljs-attribute">bottom</span>: <span class="hljs-number">0</span>;</span>
+<span class="language-css">		&#125;</span>
+<span class="language-css">		<span class="hljs-number">30%</span>,</span>
+<span class="language-css">		<span class="hljs-number">65%</span> &#123;</span>
+<span class="language-css">			<span class="hljs-attribute">bottom</span>: <span class="hljs-number">20px</span>;</span>
+<span class="language-css">		&#125;</span>
+<span class="language-css">		<span class="hljs-number">0%</span> &#123;</span>
+<span class="language-css">			<span class="hljs-attribute">transform</span>: <span class="hljs-built_in">rotate</span>(-<span class="hljs-number">0.08turn</span>);</span>
+<span class="language-css">		&#125;</span>
+<span class="language-css">		<span class="hljs-number">100%</span> &#123;</span>
+<span class="language-css">			<span class="hljs-attribute">transform</span>: <span class="hljs-built_in">rotate</span>(-<span class="hljs-number">1.08turn</span>);</span>
+<span class="language-css">		&#125;</span>
+<span class="language-css">	&#125;</span>
+<span class="language-css">	<span class="hljs-keyword">@-o-keyframes</span> blink &#123;</span>
+<span class="language-css">		<span class="hljs-number">0%</span>, <span class="hljs-number">10%</span>, <span class="hljs-number">85%</span> &#123;</span>
+<span class="language-css">			<span class="hljs-attribute">bottom</span>: <span class="hljs-number">0</span>;</span>
+<span class="language-css">		&#125;</span>
+<span class="language-css">		<span class="hljs-number">30%</span>,</span>
+<span class="language-css">		<span class="hljs-number">65%</span> &#123;</span>
+<span class="language-css">			<span class="hljs-attribute">bottom</span>: <span class="hljs-number">20px</span>;</span>
+<span class="language-css">		&#125;</span>
+<span class="language-css">		<span class="hljs-number">0%</span> &#123;</span>
+<span class="language-css">			<span class="hljs-attribute">transform</span>: <span class="hljs-built_in">rotate</span>(-<span class="hljs-number">0.08turn</span>);</span>
+<span class="language-css">		&#125;</span>
+<span class="language-css">		<span class="hljs-number">100%</span> &#123;</span>
+<span class="language-css">			<span class="hljs-attribute">transform</span>: <span class="hljs-built_in">rotate</span>(-<span class="hljs-number">1.08turn</span>);</span>
+<span class="language-css">		&#125;</span>
+<span class="language-css">	&#125;</span>
+<span class="language-css">	<span class="hljs-keyword">@keyframes</span> blink &#123;</span>
+<span class="language-css">		<span class="hljs-number">0%</span>, <span class="hljs-number">10%</span>, <span class="hljs-number">85%</span> &#123;</span>
+<span class="language-css">			<span class="hljs-attribute">bottom</span>: <span class="hljs-number">0</span>;</span>
+<span class="language-css">		&#125;</span>
+<span class="language-css">		<span class="hljs-number">30%</span>,</span>
+<span class="language-css">		<span class="hljs-number">65%</span> &#123;</span>
+<span class="language-css">			<span class="hljs-attribute">bottom</span>: <span class="hljs-number">20px</span>;</span>
+<span class="language-css">		&#125;</span>
+<span class="language-css">		<span class="hljs-number">0%</span> &#123;</span>
+<span class="language-css">			<span class="hljs-attribute">transform</span>: <span class="hljs-built_in">rotate</span>(-<span class="hljs-number">0.08turn</span>);</span>
+<span class="language-css">		&#125;</span>
+<span class="language-css">		<span class="hljs-number">100%</span> &#123;</span>
+<span class="language-css">			<span class="hljs-attribute">transform</span>: <span class="hljs-built_in">rotate</span>(-<span class="hljs-number">1.08turn</span>);</span>
+<span class="language-css">		&#125;</span>
+<span class="language-css">	&#125;</span>
+<span class="language-css">	<span class="hljs-selector-tag">body</span> &#123;</span>
+<span class="language-css">		<span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">background</span>: <span class="hljs-number">#5e4674</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">overflow</span>: hidden;</span>
+<span class="language-css">	&#125;</span>
+<span class="language-css">	<span class="hljs-selector-tag">body</span> <span class="hljs-selector-class">.loader</span> &#123;</span>
+<span class="language-css">		<span class="hljs-attribute">position</span>: absolute;</span>
+<span class="language-css">		<span class="hljs-attribute">left</span>: <span class="hljs-number">50%</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">bottom</span>: <span class="hljs-number">8%</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">width</span>: <span class="hljs-number">260px</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">height</span>: <span class="hljs-number">260px</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">margin-left</span>: -<span class="hljs-number">130px</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">margin-top</span>: -<span class="hljs-number">130px</span>;</span>
+<span class="language-css">	&#125;</span>
+<span class="language-css">	<span class="hljs-selector-tag">body</span> <span class="hljs-selector-class">.loader</span> <span class="hljs-selector-class">.track</span> &#123;</span>
+<span class="language-css">		<span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">height</span>: <span class="hljs-number">100%</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">border</span>: solid <span class="hljs-number">#251c1c</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">border-width</span>: <span class="hljs-number">5px</span> <span class="hljs-number">5px</span> <span class="hljs-number">3px</span> <span class="hljs-number">0</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">border-top-color</span>: transparent;</span>
+<span class="language-css">		<span class="hljs-attribute">border-radius</span>: <span class="hljs-number">50%</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">margin-left</span>: -<span class="hljs-number">3px</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">margin-top</span>: -<span class="hljs-number">3px</span>;</span>
+<span class="language-css">		-webkit-<span class="hljs-attribute">animation</span>: rotate <span class="hljs-number">3s</span> infinite linear;</span>
+<span class="language-css">		-moz-<span class="hljs-attribute">animation</span>: rotate <span class="hljs-number">3s</span> infinite linear;</span>
+<span class="language-css">		-o-<span class="hljs-attribute">animation</span>: rotate <span class="hljs-number">3s</span> infinite linear;</span>
+<span class="language-css">		<span class="hljs-attribute">animation</span>: rotate <span class="hljs-number">3s</span> infinite linear;</span>
+<span class="language-css">	&#125;</span>
+<span class="language-css">	<span class="hljs-selector-tag">body</span> <span class="hljs-selector-class">.loader</span> <span class="hljs-selector-class">.track</span> <span class="hljs-selector-class">.mouse</span> &#123;</span>
+<span class="language-css">		<span class="hljs-attribute">position</span>: absolute;</span>
+<span class="language-css">		<span class="hljs-attribute">right</span>: <span class="hljs-number">31px</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">top</span>: <span class="hljs-number">18px</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">width</span>: <span class="hljs-number">25px</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">height</span>: <span class="hljs-number">25px</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">background</span>: <span class="hljs-number">#251c1c</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">border-radius</span>: <span class="hljs-number">80%</span> <span class="hljs-number">0</span> <span class="hljs-number">55%</span> <span class="hljs-number">50%</span> / <span class="hljs-number">55%</span> <span class="hljs-number">0</span> <span class="hljs-number">80%</span> <span class="hljs-number">50%</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">transform</span>: <span class="hljs-built_in">rotate</span>(-<span class="hljs-number">95deg</span>);</span>
+<span class="language-css">	&#125;</span>
+<span class="language-css">	<span class="hljs-selector-tag">body</span> <span class="hljs-selector-class">.loader</span> <span class="hljs-selector-class">.track</span> <span class="hljs-selector-class">.mouse</span><span class="hljs-selector-pseudo">:before</span>,</span>
+<span class="language-css">	<span class="hljs-selector-tag">body</span> <span class="hljs-selector-class">.loader</span> <span class="hljs-selector-class">.track</span> <span class="hljs-selector-class">.mouse</span><span class="hljs-selector-pseudo">:after</span> &#123;</span>
+<span class="language-css">		<span class="hljs-attribute">position</span>: absolute;</span>
+<span class="language-css">		<span class="hljs-attribute">content</span>: <span class="hljs-string">&#x27;&#x27;</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">width</span>: <span class="hljs-number">9px</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">height</span>: <span class="hljs-number">9px</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">border-radius</span>: <span class="hljs-number">50%</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">background</span>: inherit;</span>
+<span class="language-css">	&#125;</span>
+<span class="language-css">	<span class="hljs-selector-tag">body</span> <span class="hljs-selector-class">.loader</span> <span class="hljs-selector-class">.track</span> <span class="hljs-selector-class">.mouse</span><span class="hljs-selector-pseudo">:before</span> &#123;</span>
+<span class="language-css">		<span class="hljs-attribute">left</span>: <span class="hljs-number">5px</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">top</span>: -<span class="hljs-number">4px</span>;</span>
+<span class="language-css">	&#125;</span>
+<span class="language-css">	<span class="hljs-selector-tag">body</span> <span class="hljs-selector-class">.loader</span> <span class="hljs-selector-class">.track</span> <span class="hljs-selector-class">.mouse</span><span class="hljs-selector-pseudo">:after</span> &#123;</span>
+<span class="language-css">		<span class="hljs-attribute">left</span>: <span class="hljs-number">20px</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">top</span>: <span class="hljs-number">11px</span>;</span>
+<span class="language-css">	&#125;</span>
+<span class="language-css">	<span class="hljs-selector-tag">body</span> <span class="hljs-selector-class">.loader</span> <span class="hljs-selector-class">.face</span> &#123;</span>
+<span class="language-css">		<span class="hljs-attribute">position</span>: absolute;</span>
+<span class="language-css">		<span class="hljs-attribute">left</span>: <span class="hljs-number">50%</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">top</span>: <span class="hljs-number">50%</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">width</span>: <span class="hljs-number">130px</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">height</span>: <span class="hljs-number">130px</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">margin-left</span>: -<span class="hljs-number">65px</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">margin-top</span>: -<span class="hljs-number">65px</span>;</span>
+<span class="language-css">	&#125;</span>
+<span class="language-css">	<span class="hljs-selector-tag">body</span> <span class="hljs-selector-class">.loader</span> <span class="hljs-selector-class">.face</span><span class="hljs-selector-pseudo">:before</span>,</span>
+<span class="language-css">	<span class="hljs-selector-tag">body</span> <span class="hljs-selector-class">.loader</span> <span class="hljs-selector-class">.face</span><span class="hljs-selector-pseudo">:after</span> &#123;</span>
+<span class="language-css">		<span class="hljs-attribute">position</span>: absolute;</span>
+<span class="language-css">		<span class="hljs-attribute">content</span>: <span class="hljs-string">&#x27;&#x27;</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">width</span>: <span class="hljs-number">50%</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">height</span>: <span class="hljs-number">100%</span>;</span>
+<span class="language-css">	&#125;</span>
+<span class="language-css">	<span class="hljs-selector-tag">body</span> <span class="hljs-selector-class">.loader</span> <span class="hljs-selector-class">.face</span><span class="hljs-selector-pseudo">:before</span> &#123;</span>
+<span class="language-css">		<span class="hljs-attribute">background</span>: <span class="hljs-number">#c8c6c9</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">border-top-left-radius</span>: <span class="hljs-number">65px</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">border-bottom-left-radius</span>: <span class="hljs-number">55px</span>;</span>
+<span class="language-css">	&#125;</span>
+<span class="language-css">	<span class="hljs-selector-tag">body</span> <span class="hljs-selector-class">.loader</span> <span class="hljs-selector-class">.face</span><span class="hljs-selector-pseudo">:after</span> &#123;</span>
+<span class="language-css">		<span class="hljs-attribute">left</span>: <span class="hljs-number">50%</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">background</span>: <span class="hljs-number">#d0ced1</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">border-top-right-radius</span>: <span class="hljs-number">65px</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">border-bottom-right-radius</span>: <span class="hljs-number">55px</span>;</span>
+<span class="language-css">	&#125;</span>
+<span class="language-css">	<span class="hljs-selector-tag">body</span> <span class="hljs-selector-class">.loader</span> <span class="hljs-selector-class">.face</span> <span class="hljs-selector-class">.ears-container</span> &#123;</span>
+<span class="language-css">		<span class="hljs-attribute">position</span>: absolute;</span>
+<span class="language-css">		<span class="hljs-attribute">top</span>: -<span class="hljs-number">8px</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">width</span>: <span class="hljs-number">130px</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">height</span>: <span class="hljs-number">50px</span>;</span>
+<span class="language-css">	&#125;</span>
+<span class="language-css">	<span class="hljs-selector-tag">body</span> <span class="hljs-selector-class">.loader</span> <span class="hljs-selector-class">.face</span> <span class="hljs-selector-class">.ears-container</span><span class="hljs-selector-pseudo">:before</span>,</span>
+<span class="language-css">	<span class="hljs-selector-tag">body</span> <span class="hljs-selector-class">.loader</span> <span class="hljs-selector-class">.face</span> <span class="hljs-selector-class">.ears-container</span><span class="hljs-selector-pseudo">:after</span> &#123;</span>
+<span class="language-css">		<span class="hljs-attribute">position</span>: absolute;</span>
+<span class="language-css">		<span class="hljs-attribute">content</span>: <span class="hljs-string">&#x27;&#x27;</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">width</span>: <span class="hljs-number">0</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">height</span>: <span class="hljs-number">0</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">border-top</span>: <span class="hljs-number">35px</span> solid transparent;</span>
+<span class="language-css">		<span class="hljs-attribute">border-bottom</span>: <span class="hljs-number">35px</span> solid transparent;</span>
+<span class="language-css">	&#125;</span>
+<span class="language-css">	<span class="hljs-selector-tag">body</span> <span class="hljs-selector-class">.loader</span> <span class="hljs-selector-class">.face</span> <span class="hljs-selector-class">.ears-container</span><span class="hljs-selector-pseudo">:before</span> &#123;</span>
+<span class="language-css">		<span class="hljs-attribute">border-left</span>: <span class="hljs-number">35px</span> solid <span class="hljs-number">#c8c6c9</span>;</span>
+<span class="language-css">	&#125;</span>
+<span class="language-css">	<span class="hljs-selector-tag">body</span> <span class="hljs-selector-class">.loader</span> <span class="hljs-selector-class">.face</span> <span class="hljs-selector-class">.ears-container</span><span class="hljs-selector-pseudo">:after</span> &#123;</span>
+<span class="language-css">		<span class="hljs-attribute">right</span>: <span class="hljs-number">0</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">border-right</span>: <span class="hljs-number">35px</span> solid <span class="hljs-number">#c8c6c9</span>;</span>
+<span class="language-css">	&#125;</span>
+<span class="language-css">	<span class="hljs-selector-tag">body</span> <span class="hljs-selector-class">.loader</span> <span class="hljs-selector-class">.face</span> <span class="hljs-selector-class">.eyes-container</span> &#123;</span>
+<span class="language-css">		<span class="hljs-attribute">position</span>: absolute;</span>
+<span class="language-css">		<span class="hljs-attribute">overflow</span>: hidden;</span>
+<span class="language-css">		<span class="hljs-attribute">left</span>: <span class="hljs-number">50%</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">top</span>: <span class="hljs-number">30px</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">width</span>: <span class="hljs-number">106px</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">height</span>: <span class="hljs-number">50px</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">margin-left</span>: -<span class="hljs-number">53px</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">z-index</span>: <span class="hljs-number">1</span>;</span>
+<span class="language-css">		-webkit-<span class="hljs-attribute">animation</span>: hideEye <span class="hljs-number">3s</span> infinite linear;</span>
+<span class="language-css">		-moz-<span class="hljs-attribute">animation</span>: hideEye <span class="hljs-number">3s</span> infinite linear;</span>
+<span class="language-css">		-o-<span class="hljs-attribute">animation</span>: hideEye <span class="hljs-number">3s</span> infinite linear;</span>
+<span class="language-css">		<span class="hljs-attribute">animation</span>: hideEye <span class="hljs-number">3s</span> infinite linear;</span>
+<span class="language-css">	&#125;</span>
+<span class="language-css">	<span class="hljs-selector-tag">body</span> <span class="hljs-selector-class">.loader</span> <span class="hljs-selector-class">.face</span> <span class="hljs-selector-class">.eyes-container</span> <span class="hljs-selector-class">.eye</span> &#123;</span>
+<span class="language-css">		<span class="hljs-attribute">position</span>: relative;</span>
+<span class="language-css">		<span class="hljs-attribute">bottom</span>: <span class="hljs-number">0</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">float</span>: left;</span>
+<span class="language-css">		<span class="hljs-attribute">width</span>: <span class="hljs-number">50px</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">height</span>: <span class="hljs-number">50px</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">border-radius</span>: <span class="hljs-number">50%</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">color</span>: <span class="hljs-number">#c8c6c9</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">background</span>: white;</span>
+<span class="language-css">		-webkit-<span class="hljs-attribute">animation</span>: blink <span class="hljs-number">3s</span> infinite linear;</span>
+<span class="language-css">		-moz-<span class="hljs-attribute">animation</span>: blink <span class="hljs-number">3s</span> infinite linear;</span>
+<span class="language-css">		-o-<span class="hljs-attribute">animation</span>: blink <span class="hljs-number">3s</span> infinite linear;</span>
+<span class="language-css">		<span class="hljs-attribute">animation</span>: blink <span class="hljs-number">3s</span> infinite linear;</span>
+<span class="language-css">	&#125;</span>
+<span class="language-css">	<span class="hljs-selector-tag">body</span> <span class="hljs-selector-class">.loader</span> <span class="hljs-selector-class">.face</span> <span class="hljs-selector-class">.eyes-container</span> <span class="hljs-selector-class">.eye</span><span class="hljs-selector-pseudo">:after</span> &#123;</span>
+<span class="language-css">		<span class="hljs-attribute">position</span>: absolute;</span>
+<span class="language-css">		<span class="hljs-attribute">content</span>: <span class="hljs-string">&#x27;&#x27;</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">top</span>: <span class="hljs-number">4px</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">right</span>: <span class="hljs-number">14px</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">width</span>: <span class="hljs-number">12px</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">height</span>: <span class="hljs-number">12px</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">border-radius</span>: inherit;</span>
+<span class="language-css">		<span class="hljs-attribute">background</span>: <span class="hljs-number">#838091</span>;</span>
+<span class="language-css">	&#125;</span>
+<span class="language-css">	<span class="hljs-selector-tag">body</span> <span class="hljs-selector-class">.loader</span> <span class="hljs-selector-class">.face</span> <span class="hljs-selector-class">.eyes-container</span> <span class="hljs-selector-class">.eye</span><span class="hljs-selector-pseudo">:last-child</span> &#123;</span>
+<span class="language-css">		<span class="hljs-attribute">float</span>: right;</span>
+<span class="language-css">		<span class="hljs-attribute">color</span>: <span class="hljs-number">#d0ced1</span>;</span>
+<span class="language-css">	&#125;</span>
+<span class="language-css">	<span class="hljs-selector-tag">body</span> <span class="hljs-selector-class">.loader</span> <span class="hljs-selector-class">.face</span> <span class="hljs-selector-class">.phiz</span> &#123;</span>
+<span class="language-css">		<span class="hljs-attribute">position</span>: absolute;</span>
+<span class="language-css">		<span class="hljs-attribute">left</span>: <span class="hljs-number">50%</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">top</span>: <span class="hljs-number">66px</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">width</span>: <span class="hljs-number">32px</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">height</span>: <span class="hljs-number">48px</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">margin-left</span>: -<span class="hljs-number">16px</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">z-index</span>: <span class="hljs-number">1</span>;</span>
+<span class="language-css">	&#125;</span>
+<span class="language-css">	<span class="hljs-selector-tag">body</span> <span class="hljs-selector-class">.loader</span> <span class="hljs-selector-class">.face</span> <span class="hljs-selector-class">.phiz</span> <span class="hljs-selector-class">.nose</span> &#123;</span>
+<span class="language-css">		<span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">height</span>: <span class="hljs-number">15px</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">border-top-left-radius</span>: <span class="hljs-number">5px</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">border-top-right-radius</span>: <span class="hljs-number">5px</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">border-bottom-left-radius</span>: <span class="hljs-number">25px</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">border-bottom-right-radius</span>: <span class="hljs-number">25px</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">background</span>: <span class="hljs-number">#838091</span>;</span>
+<span class="language-css">	&#125;</span>
+<span class="language-css">	<span class="hljs-selector-tag">body</span> <span class="hljs-selector-class">.loader</span> <span class="hljs-selector-class">.face</span> <span class="hljs-selector-class">.phiz</span> <span class="hljs-selector-class">.lip</span> &#123;</span>
+<span class="language-css">		<span class="hljs-attribute">position</span>: relative;</span>
+<span class="language-css">		<span class="hljs-attribute">left</span>: <span class="hljs-number">50%</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">width</span>: <span class="hljs-number">4px</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">height</span>: <span class="hljs-number">12px</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">margin-left</span>: -<span class="hljs-number">2px</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">background</span>: <span class="hljs-number">#838091</span>;</span>
+<span class="language-css">	&#125;</span>
+<span class="language-css">	<span class="hljs-selector-tag">body</span> <span class="hljs-selector-class">.loader</span> <span class="hljs-selector-class">.face</span> <span class="hljs-selector-class">.phiz</span> <span class="hljs-selector-class">.lip</span><span class="hljs-selector-pseudo">:before</span> &#123;</span>
+<span class="language-css">		<span class="hljs-attribute">position</span>: absolute;</span>
+<span class="language-css">		<span class="hljs-attribute">content</span>: <span class="hljs-string">&#x27;&#x27;</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">height</span>: <span class="hljs-number">5px</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">background</span>: <span class="hljs-number">#767385</span>;</span>
+<span class="language-css">	&#125;</span>
+<span class="language-css">	<span class="hljs-selector-tag">body</span> <span class="hljs-selector-class">.loader</span> <span class="hljs-selector-class">.face</span> <span class="hljs-selector-class">.phiz</span> <span class="hljs-selector-class">.mouth</span> &#123;</span>
+<span class="language-css">		<span class="hljs-attribute">position</span>: relative;</span>
+<span class="language-css">		<span class="hljs-attribute">left</span>: <span class="hljs-number">50%</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">width</span>: <span class="hljs-number">20px</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">height</span>: <span class="hljs-number">6px</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">margin-left</span>: -<span class="hljs-number">13px</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">background</span>: white;</span>
+<span class="language-css">		<span class="hljs-attribute">border</span>: <span class="hljs-number">3px</span> solid <span class="hljs-number">#838091</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">border-bottom-right-radius</span>: <span class="hljs-number">12px</span>;</span>
+<span class="language-css">		<span class="hljs-attribute">border-bottom-left-radius</span>: <span class="hljs-number">12px</span>;</span>
+<span class="language-css">	&#125;</span>
+<span class="language-css">	<span class="hljs-keyword">@media</span> screen <span class="hljs-keyword">and</span> (<span class="hljs-attribute">max-width</span>: <span class="hljs-number">900px</span>)&#123;</span>
+<span class="language-css">		<span class="hljs-selector-tag">h1</span> &#123;<span class="hljs-attribute">font-size</span>: <span class="hljs-number">100px</span>;&#125;</span>
+<span class="language-css">		<span class="hljs-selector-class">.btn</span> &#123;<span class="hljs-attribute">width</span>: <span class="hljs-number">50%</span>;&#125;</span>
+<span class="language-css"></span>
+<span class="language-css">	&#125;</span>
+<span class="language-css"></span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span></code></pre></div>
+</li>
+<li><p>概览</p>
+<p><img src="https://img-blog.csdnimg.cn/9e063cb390b94866ba886c40317ccfc3.png" srcset="/img/loading.gif" lazyload alt="请添加图片描述"></p>
+</li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%89%8B%E5%86%99spring/" class="category-chain-item">手写spring</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>暑假最后几天！肝爆（手写）一个Spring之Day2</div>
+      <div>http://example.com/2022/08/14/spring_day02/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>John Doe</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年8月14日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/08/14/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" title="设计模式">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">设计模式</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/08/13/spring_day01/" title="暑假最后几天！肝爆（手写）一个Spring之Day1">
+                        <span class="hidden-mobile">暑假最后几天！肝爆（手写）一个Spring之Day1</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'http://example.com/2022/08/14/spring_day02/';
+          this.page.identifier = '/2022/08/14/spring_day02/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
