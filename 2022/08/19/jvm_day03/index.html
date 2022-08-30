@@ -13,23 +13,23 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="author" content="John Doe">
+  <meta name="author" content="czh">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Day01—让jvm输出HelloWorld 先来张图，可以参考参考   前置知识 网上讲的很多，这里不说了  入口搭建 首先我们修改一下Main类也就是main方法所在的类 main方法的描述符我们先暂时用jclasslib得到  package com.czh.jvm.jdk;  import com.czh.jvm.hotspot.src.share.vm.classfile.BootCla">
+    <meta name="description" content="Day03—让jvm输出HelloWorld 先来张图，可以参考参考   前置知识 网上讲的很多，这里不说了  入口搭建 首先我们修改一下Main类也就是main方法所在的类 main方法的描述符我们先暂时用jclasslib得到  package com.czh.jvm.jdk;  import com.czh.jvm.hotspot.src.share.vm.classfile.BootCla">
 <meta property="og:type" content="article">
 <meta property="og:title" content="不逼自己怎么知道写不出个迷你jvm之day02">
 <meta property="og:url" content="http://example.com/2022/08/19/jvm_day03/index.html">
 <meta property="og:site_name" content="luelueking的ctf之路">
-<meta property="og:description" content="Day01—让jvm输出HelloWorld 先来张图，可以参考参考   前置知识 网上讲的很多，这里不说了  入口搭建 首先我们修改一下Main类也就是main方法所在的类 main方法的描述符我们先暂时用jclasslib得到  package com.czh.jvm.jdk;  import com.czh.jvm.hotspot.src.share.vm.classfile.BootCla">
+<meta property="og:description" content="Day03—让jvm输出HelloWorld 先来张图，可以参考参考   前置知识 网上讲的很多，这里不说了  入口搭建 首先我们修改一下Main类也就是main方法所在的类 main方法的描述符我们先暂时用jclasslib得到  package com.czh.jvm.jdk;  import com.czh.jvm.hotspot.src.share.vm.classfile.BootCla">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/2179815/1596509567131-06914878-4b73-44b8-8aab-e16c18db0400.png?x-oss-process=image/resize,w_1500,limit_0">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/642976ab49ba4bbe898570be6b983db9.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/c0037af7ad0a4966a2a8751fd6587fb0.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/8aca1d400e7340f7af95d2bdbef82a10.png">
 <meta property="article:published_time" content="2022-08-19T15:26:59.000Z">
-<meta property="article:modified_time" content="2022-08-19T06:58:15.373Z">
-<meta property="article:author" content="John Doe">
+<meta property="article:modified_time" content="2022-08-30T06:42:34.710Z">
+<meta property="article:author" content="czh">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2020/png/2179815/1596509567131-06914878-4b73-44b8-8aab-e16c18db0400.png?x-oss-process=image/resize,w_1500,limit_0">
   
@@ -277,7 +277,7 @@
             
               <div class="markdown-body">
                 
-                <h1 id="Day01—让jvm输出HelloWorld"><a href="#Day01—让jvm输出HelloWorld" class="headerlink" title="Day01—让jvm输出HelloWorld"></a>Day01—让jvm输出HelloWorld</h1><ul>
+                <h1 id="Day03—让jvm输出HelloWorld"><a href="#Day03—让jvm输出HelloWorld" class="headerlink" title="Day03—让jvm输出HelloWorld"></a>Day03—让jvm输出HelloWorld</h1><ul>
 <li>先来张图，可以参考参考</li>
 </ul>
 <p><img src="https://cdn.nlark.com/yuque/0/2020/png/2179815/1596509567131-06914878-4b73-44b8-8aab-e16c18db0400.png?x-oss-process=image/resize,w_1500,limit_0" srcset="/img/loading.gif" lazyload alt="JVM内存模型.png"></p>
@@ -1529,7 +1529,7 @@
       
         <div class="license-meta-item">
           <div>作者</div>
-          <div>John Doe</div>
+          <div>czh</div>
         </div>
       
       
