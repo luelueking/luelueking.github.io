@@ -16,21 +16,21 @@
   <meta name="author" content="czh">
   <meta name="keywords" content="">
   
-    <meta name="description" content="http:&#x2F;&#x2F;118.178.126.49&#x2F;blogs&#x2F;CTF_show_Web入门_SSRF.html">
+    <meta name="description" content="Nmap使用姿势列举远程机器开放的端口 例：nmap scanme.nmap.org（扫描）  例：nmap --dns-servers 8.8.8.8 scanme.nmap.org（–dns-server指定dns服务器进行解析）  例：nmap Pn scanme.nmap.org（-Pn参数来停止探测之前的ICMP请求，防止防火墙突破）  例：nmap -p 1-1000 scanme.n">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CTF_show_Web入门_SSRF">
-<meta property="og:url" content="http://example.com/2022/07/26/CTF_show_Web%E5%85%A5%E9%97%A8_SSRF/index.html">
+<meta property="og:title" content="Nmap使用姿势">
+<meta property="og:url" content="http://example.com/2022/07/26/nmap%E4%BD%BF%E7%94%A8%E5%A7%BF%E5%8A%BF/index.html">
 <meta property="og:site_name" content="luelueking的ctf之路">
-<meta property="og:description" content="http:&#x2F;&#x2F;118.178.126.49&#x2F;blogs&#x2F;CTF_show_Web入门_SSRF.html">
+<meta property="og:description" content="Nmap使用姿势列举远程机器开放的端口 例：nmap scanme.nmap.org（扫描）  例：nmap --dns-servers 8.8.8.8 scanme.nmap.org（–dns-server指定dns服务器进行解析）  例：nmap Pn scanme.nmap.org（-Pn参数来停止探测之前的ICMP请求，防止防火墙突破）  例：nmap -p 1-1000 scanme.n">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-07-26T11:34:59.000Z">
-<meta property="article:modified_time" content="2022-08-16T13:43:11.636Z">
+<meta property="article:modified_time" content="2022-08-30T06:51:35.159Z">
 <meta property="article:author" content="czh">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>CTF_show_Web入门_SSRF - luelueking的ctf之路</title>
+  <title>Nmap使用姿势 - luelueking的ctf之路</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -195,7 +195,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="CTF_show_Web入门_SSRF"></span>
+            <span id="subtitle" data-typed-text="Nmap使用姿势"></span>
           
         </div>
 
@@ -218,7 +218,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          52 字
+          1.4k 字
         
       </span>
     
@@ -229,7 +229,7 @@
         
         
         
-          1 分钟
+          13 分钟
         
       </span>
     
@@ -267,12 +267,113 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">CTF_show_Web入门_SSRF</h1>
+            <h1 style="display: none">Nmap使用姿势</h1>
             
             
               <div class="markdown-body">
                 
-                <p><a target="_blank" rel="noopener" href="http://118.178.126.49/blogs/CTF_show_Web%E5%85%A5%E9%97%A8_SSRF.html">http://118.178.126.49/blogs/CTF_show_Web入门_SSRF.html</a></p>
+                <h1 id="Nmap使用姿势"><a href="#Nmap使用姿势" class="headerlink" title="Nmap使用姿势"></a>Nmap使用姿势</h1><h3 id="列举远程机器开放的端口"><a href="#列举远程机器开放的端口" class="headerlink" title="列举远程机器开放的端口"></a>列举远程机器开放的端口</h3><ul>
+<li><p>例：<code>nmap scanme.nmap.org</code>（扫描）</p>
+</li>
+<li><p>例：<code>nmap --dns-servers 8.8.8.8 scanme.nmap.org</code>（–dns-server指定dns服务器进行解析）</p>
+</li>
+<li><p>例：<code>nmap Pn scanme.nmap.org</code>（-Pn参数来停止探测之前的ICMP请求，防止防火墙突破）</p>
+</li>
+<li><p>例：<code>nmap -p 1-1000 scanme.nmap.org</code>（-p m-n 指定端口范围为m到n）</p>
+</li>
+<li><div class="code-wrapper"><pre><code class="hljs">端口状态：
+- Open 开放
+- Closed 关闭
+- Filtered 过滤无法收到返回的probe状态
+- UnFiltered 端口收到返回的probe，但无法确认
+</code></pre></div>
+</li>
+</ul>
+<h3 id="识别服务指纹"><a href="#识别服务指纹" class="headerlink" title="识别服务指纹"></a>识别服务指纹</h3><ul>
+<li>识别机器的服务信息: <code>nmap -sV IP地址</code></li>
+<li>侵略性探测: <code>nmap -A -v -T4 IP地址</code></li>
+<li>侵略性探测: <code>nmap  -sC -sV -O IP地址</code><ul>
+<li>-sC：使用脚本探测</li>
+<li>-sV：探测目标机器的服务信息</li>
+<li>-O：探测目标机器的操作系统信息</li>
+</ul>
+</li>
+</ul>
+<h3 id="发现局域网中存活主机"><a href="#发现局域网中存活主机" class="headerlink" title="发现局域网中存活主机"></a>发现局域网中存活主机</h3><ul>
+<li><p>对网络中所有主机进行ping扫描，以探测主机存活性</p>
+<ul>
+<li><code>nmap -sP CIDR </code></li>
+<li><code>nmap -sn CIDR</code></li>
+</ul>
+</li>
+<li><p>nmap -sn CIDR -oX test.xml    结果输出到test.xml</p>
+</li>
+</ul>
+<h3 id="端口探测技巧"><a href="#端口探测技巧" class="headerlink" title="端口探测技巧"></a>端口探测技巧</h3><ul>
+<li><p>对某个端口进行探测</p>
+<ul>
+<li><code>nmap -p80 scanme.nmap.org</code></li>
+<li><code>nmap -p80,135 scaneme.nmap.org</code></li>
+</ul>
+</li>
+<li><p>对某个范围端口进行探测</p>
+<ul>
+<li><code>nmap -p 1-100 scanme.nmap.org</code></li>
+</ul>
+</li>
+<li><p>指定协议探测端口</p>
+<ul>
+<li><code>nmap -p T:25,U:53 scanme.nmap.org</code>（T：TCP，U：UDP）</li>
+</ul>
+</li>
+<li><p>通过协议名扫描端口</p>
+<ul>
+<li><code>nmap -p smtp scanme.nmap.org</code></li>
+</ul>
+</li>
+<li><p>通过名称范围扫描</p>
+<ul>
+<li><code>nmap -p s* scanme.nmap.org</code></li>
+</ul>
+</li>
+<li><p>扫描注册在nmap中的端口</p>
+<ul>
+<li><code>nmap -p [1-65535] scanme.nmap.org</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="NSE脚本"><a href="#NSE脚本" class="headerlink" title="NSE脚本"></a>NSE脚本</h3><ul>
+<li><p>使用 –script参数来指定调用的脚本,并且将脚本存储在Nmap安装路径下的script文件夹下面，对于kali linux存储在&#x2F;usr&#x2F;share&#x2F;nmap&#x2F;script&#x2F;下</p>
+<ul>
+<li><code>nmap --script http-headers scanme.nmap.org </code>（探测http请求头）</li>
+<li><code>nmap -sV --script vuln 目标</code>（使用nmap中漏洞分类脚本对目标进行探测）</li>
+<li><code>nmap -sV --script=&quot;version, discovery&quot; 目标</code>（使用nmap中发现和版本信息分类进行探测）</li>
+<li><code>nmap -sV --script=&quot;not exploit&quot; 目标</code>（使用nmap中除了exploit分类之外的其他分类进行探测）</li>
+</ul>
+</li>
+<li><p><strong>NSE调试功能使用</strong></p>
+<ul>
+<li><code>nmap -sV --script exploit -d 3 --script-trace 目标</code>（使用nmap中的expolit，但是同时开启调试模式）<ul>
+<li>-d(debug范围0～9)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code>nmap -sV --script http-title --script-args http.useragent=&quot;Mozilla 999&quot; 目标</code>（使用nmap的http-title脚本，并且指定使用的User-Agent）</p>
+</li>
+<li><p><strong>NSE更新</strong><code>nmap -script-updatedb</code></p>
+</li>
+<li><p><strong>NSE脚本分类</strong> <a target="_blank" rel="noopener" href="https://nmap.org/nsedoc/">https://nmap.org/nsedoc/</a></p>
+</li>
+</ul>
+<h3 id="使用特定网卡进行探测"><a href="#使用特定网卡进行探测" class="headerlink" title="使用特定网卡进行探测"></a>使用特定网卡进行探测</h3><ul>
+<li><code>nmap -e 网卡(interface) 目标</code></li>
+</ul>
+<h3 id="对比探测结果"><a href="#对比探测结果" class="headerlink" title="对比探测结果"></a>对比探测结果</h3><ul>
+<li>利用ndiff工具</li>
+<li><code>ndiff file1 file2</code></li>
+<li>例子：<code>ndiff kali.xml kali2.xml</code></li>
+</ul>
 
                 
               </div>
@@ -311,8 +412,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>CTF_show_Web入门_SSRF</div>
-      <div>http://example.com/2022/07/26/CTF_show_Web入门_SSRF/</div>
+      <div>Nmap使用姿势</div>
+      <div>http://example.com/2022/07/26/nmap使用姿势/</div>
     </div>
     <div class="license-meta">
       
@@ -354,9 +455,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/07/30/Untitled%20Folder/%E6%B1%87%E7%BC%96/" title="">
+                      <a href="/2022/07/26/CTF_show_Web%E5%85%A5%E9%97%A8_SSRF/" title="CTF_show_Web入门_SSRF">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile"></span>
+                        <span class="hidden-mobile">CTF_show_Web入门_SSRF</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -364,8 +465,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/07/26/nmap%E4%BD%BF%E7%94%A8%E5%A7%BF%E5%8A%BF/" title="Nmap使用姿势">
-                        <span class="hidden-mobile">Nmap使用姿势</span>
+                      <a href="/2022/07/24/CTF_show_Web%E5%85%A5%E9%97%A8_XSS/" title="CTF_show_Web入门_XSS">
+                        <span class="hidden-mobile">CTF_show_Web入门_XSS</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -383,8 +484,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'http://example.com/2022/07/26/CTF_show_Web%E5%85%A5%E9%97%A8_SSRF/';
-          this.page.identifier = '/2022/07/26/CTF_show_Web%E5%85%A5%E9%97%A8_SSRF/';
+          this.page.url = 'http://example.com/2022/07/26/nmap%E4%BD%BF%E7%94%A8%E5%A7%BF%E5%8A%BF/';
+          this.page.identifier = '/2022/07/26/nmap%E4%BD%BF%E7%94%A8%E5%A7%BF%E5%8A%BF/';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
